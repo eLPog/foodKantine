@@ -1,0 +1,4 @@
+.allFoodList__container {
+    border-radius: 10px;
+    background-color: var(--second-bgcolor);
+}

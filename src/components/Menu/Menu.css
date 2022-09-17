@@ -1,0 +1,86 @@
+.nav__container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--second-bgcolor);
+}
+a {
+    text-decoration: none;
+    color: var(--second-color);
+    display: block;
+}
+a:hover {
+    color:#ffffff;
+}
+
+
+.nav__container__menu__list {
+    list-style: none;
+    margin:0;
+    padding: 0;
+    display: flex;
+    transition: all 500ms ease-in;
+
+}
+.nav__container__menu__list li {
+    padding: 0 0.5rem;
+}
+.nav__container__menu__list li:hover {
+    background-color: var(--third-color);
+    border-radius: 10px;
+}
+.toggle--button {
+    position: absolute;
+    top:10px;
+    right: 20px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    background-color: var(--second-bgcolor);
+    height: 21px;
+    border:none;
+}
+.toggle--button--bar {
+    color: var(--first-color);
+}
+@media only screen and (max-width: 576px){
+    .toggle--button {
+        display: flex;
+    }
+    .nav__container__menu{
+        width: 100%;
+    }
+
+    .nav__container__menu__list {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap:0.5rem;
+    }
+    .nav__container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav__container__menu__list {
+        align-items: center;
+        height: 0;
+    }
+    .nav__container__menu__list.active {
+        display: flex;
+        height: 5rem;
+        animation: showMenu 500ms ease-in;
+    }
+
+
+}
+@keyframes showMenu {
+    from {
+        height: 0;
+    }
+    to {
+        height: 5rem;
+    }
+}
+
