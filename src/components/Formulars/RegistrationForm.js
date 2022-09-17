@@ -31,7 +31,7 @@ export function RegistrationForm() {
   const loadData = async (e) => {
     e.preventDefault();
     try {
-      const data = await fetch(`${firebaseURL}meals.json`, {
+      const data = await fetch(`${firebaseURL}.json`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

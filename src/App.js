@@ -9,16 +9,19 @@ import AllFoodList from './components/Foods/AllFoodList/AllFoodList';
 import { firebaseURL } from './assets/db/firebaseurl';
 import { Loading } from './components/Assets/Loading/Loading';
 
+import { DetailsFoodElement } from './components/Foods/DetailsFoodElement/DetailsFoodElement';
+
 function App() {
   const [elements, setElements] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchMeals = async () => {
-      setLoading(true);
+      // setLoading(true);
       try {
         const data = await fetch(`${firebaseURL}.json`);
         const res = await data.json();
-        setElements(res['-NBWqw4-lfq7TvejThYl']);
+        console.log(res);
+        setElements(res['-NCAQYq_QqAk59rSL8Bq']);
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -37,12 +40,12 @@ function App() {
       <Header searchDish={searchElement} />
       <BrowserRouter>
         <Menu />
-        {loading ? <Loading /> : (
-          <Routes>
-            <Route path="/" element={<AllFoodList randomElement={elements[0]} elements={elements} />} />
-            <Route path="/signIn" element={<RegistrationForm />} />
-          </Routes>
-        )}
+
+        <Routes>
+          <Route path="/" element={<AllFoodList elements={elements} />} />
+          <Route path="/:dataID" element={<DetailsFoodElement db={elements} />} />
+          <Route path="/signIn" element={<RegistrationForm />} />
+        </Routes>
 
       </BrowserRouter>
     </>

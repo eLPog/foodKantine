@@ -1,19 +1,19 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { db } from '../../../assets/db/db';
 
-export function DetailsFoodElement() {
+export function DetailsFoodElement(props) {
   const { dataID } = useParams();
   const [element, setElement] = useState({});
-  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const findElement = db.find((el) => el.dataID === dataID);
-    setElement(findElement);
-    setLoading(false);
+    const thisElement = props.db.find((el) => el.dataID === dataID);
+    setElement(thisElement);
   }, []);
   return (
     <>
-      {loading ? <p>Loading</p> : element.name}
+      <h1>{element.name}</h1>
+      <h2>{element.description}</h2>
+      {element.specialOffer && <h4>PROMOCJA</h4>}
+      <img src={element.photo} alt="food description" />
     </>
   );
 }

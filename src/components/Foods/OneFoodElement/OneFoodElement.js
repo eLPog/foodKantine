@@ -2,7 +2,6 @@ import './OneFoodElement.css';
 import { Link, useParams } from 'react-router-dom';
 
 export function OneFoodElement(props) {
-  console.log(props.dataID);
   return (
     <div className="d-flex flex-sm-column col-sm-4 col-lg-3 oneFoodElement__container">
       <div className=" d-flex flex-sm-col
