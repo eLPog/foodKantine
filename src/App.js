@@ -16,7 +16,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchMeals = async () => {
-      // setLoading(true);
+      setLoading(true);
       try {
         const data = await fetch(`${firebaseURL}.json`);
         const res = await data.json();
@@ -40,12 +40,13 @@ function App() {
       <Header searchDish={searchElement} />
       <BrowserRouter>
         <Menu />
-
-        <Routes>
-          <Route path="/" element={<AllFoodList elements={elements} />} />
-          <Route path="/:dataID" element={<DetailsFoodElement db={elements} />} />
-          <Route path="/signIn" element={<RegistrationForm />} />
-        </Routes>
+        {loading ? <Loading /> : (
+          <Routes>
+            <Route path="/" element={<AllFoodList elements={elements} />} />
+            <Route path="/:dataID" element={<DetailsFoodElement db={elements} />} />
+            <Route path="/signIn" element={<RegistrationForm />} />
+          </Routes>
+        )}
 
       </BrowserRouter>
     </>

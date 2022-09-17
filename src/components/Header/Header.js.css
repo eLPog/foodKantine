@@ -2,16 +2,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../../assets/photos/Foods/dinner1.jpg");
+    background-image: url("../../assets/photos/Foods/headerPhoto.jpg");
     background-position: center;
-    height: 7em;
+    height: 9em;
     margin-bottom: 1rem;
+    margin-top:1rem;
     border-radius: 0 0 40px 40px;
-    /*filter: grayscale(10%) sepia(10%);*/
+    filter: grayscale(10%) sepia(10%);
 }
 .header__container__input {
     border-radius: 10%;
     padding: 0.1rem;
+}
+.header__container--searchBtn {
+    background-color: white;
+    opacity: 0.8;
+}
+.header__container--searchBtn:hover {
+    opacity: 1;
 }
 @media only screen and (max-width: 576px){
     .header__container {
