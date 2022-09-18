@@ -55,9 +55,9 @@ export function RegistrationForm() {
         <input type="password" onChange={passwordHandler} />
         <button className="btn-primary" onClick={fetchLogin}>Login</button>
       </form>
-      <form>
-        <button className="btn-primary" onClick={loadData}>Wgraj dane</button>
-      </form>
+      {/* <form> */}
+      {/*  <button className="btn-primary" onClick={loadData}>Wgraj dane</button> */}
+      {/* </form> */}
     </div>
   );
 }

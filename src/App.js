@@ -20,7 +20,6 @@ function App() {
       try {
         const data = await fetch(`${firebaseURL}.json`);
         const res = await data.json();
-        console.log(res);
         setElements(res['-NCAQYq_QqAk59rSL8Bq']);
         setLoading(false);
       } catch (err) {

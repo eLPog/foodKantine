@@ -23,7 +23,7 @@ export function Menu() {
     <nav className="nav__container container">
       <div className="nav__container__logo">
         <NavLink to="/">
-          <h1>Ustka City</h1>
+          <h1>Food Kantine</h1>
         </NavLink>
       </div>
       <button className="toggle--button" onClick={hamburgerMenuHandler}>

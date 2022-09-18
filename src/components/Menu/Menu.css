@@ -45,6 +45,14 @@ a:hover {
 .toggle--button--bar {
     color: var(--first-color);
 }
+.nav__container__logo h1 {
+    font-size: 2rem;
+    font-family: Perpetua;
+    text-shadow: 3px 3px 4px var(--second-color);
+    color:white;
+
+}
+
 @media only screen and (max-width: 576px){
     .toggle--button {
         display: flex;
