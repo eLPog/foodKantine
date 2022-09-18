@@ -13,6 +13,7 @@ import { DetailsFoodElement } from './components/Foods/DetailsFoodElement/Detail
 
 function App() {
   const [elements, setElements] = useState([]);
+  const [elementsBeforeSearch, setElementsBeforeSearch] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchMeals = async () => {
@@ -21,6 +22,7 @@ function App() {
         const data = await fetch(`${firebaseURL}.json`);
         const res = await data.json();
         setElements(res['-NCAQYq_QqAk59rSL8Bq']);
+        setElementsBeforeSearch(res['-NCAQYq_QqAk59rSL8Bq']);
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -29,7 +31,7 @@ function App() {
     fetchMeals();
   }, []);
   const searchElement = (value) => {
-    const filteredElements = db.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
+    const filteredElements = elementsBeforeSearch.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
             || el.description.toLowerCase().includes(value.toLowerCase()));
     setElements(filteredElements);
   };
