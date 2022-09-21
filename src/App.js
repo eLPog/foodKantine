@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { Menu } from './components/Menu/Menu';
-import { db } from './assets/db/db';
 import { RegistrationForm } from './components/Formulars/RegistrationForm';
 import AllFoodList from './components/Foods/AllFoodList/AllFoodList';
 import { firebaseURL } from './assets/db/firebaseurl';
@@ -35,6 +34,14 @@ function App() {
             || el.description.toLowerCase().includes(value.toLowerCase()));
     setElements(filteredElements);
   };
+  const searchFoodByCategory = (category) => {
+    if (!category) {
+      setElements(elementsBeforeSearch);
+      return;
+    }
+    const filteredElements = elementsBeforeSearch.filter((el) => el.category === category);
+    setElements(filteredElements);
+  };
 
   return (
     <>
@@ -43,7 +50,7 @@ function App() {
         <Menu />
         {loading ? <Loading /> : (
           <Routes>
-            <Route path="/" element={<AllFoodList elements={elements} />} />
+            <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} />} />
             <Route path="/:dataID" element={<DetailsFoodElement db={elements} />} />
             <Route path="/signIn" element={<RegistrationForm />} />
           </Routes>
