@@ -39,6 +39,11 @@ function App() {
       setElements(elementsBeforeSearch);
       return;
     }
+    if (category === 'sale') {
+      const filteredElements = elementsBeforeSearch.filter((el) => el.specialOffer === true);
+      setElements(filteredElements);
+      return;
+    }
     const filteredElements = elementsBeforeSearch.filter((el) => el.category === category);
     setElements(filteredElements);
   };

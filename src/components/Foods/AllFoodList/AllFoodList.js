@@ -9,6 +9,14 @@ function AllFoodList(props) {
       <div className="container">
         {/* <RandomFoodElement randomElement={props.randomElement} /> */}
         <div className="d-flex flex-column align-items-center flex-sm-row justify-content-center">
+          <button className="btn-secondary food__searchButton--sale" onClick={() => { props.searchFoodByCategory('sale'); }}>
+            <span className="percentSign">
+              {' '}
+              %
+              {' '}
+              Sale
+            </span>
+          </button>
           <button className="btn-secondary food__searchButton" onClick={() => { props.searchFoodByCategory('breakfast'); }}>Breakfast</button>
           <button className="btn-secondary food__searchButton" onClick={() => { props.searchFoodByCategory('lunch'); }}>Lunch</button>
           <button className="btn-secondary food__searchButton" onClick={() => { props.searchFoodByCategory('dinner'); }}>Dinner</button>
