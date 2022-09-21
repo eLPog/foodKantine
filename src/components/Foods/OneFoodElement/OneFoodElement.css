@@ -52,5 +52,11 @@ a:hover .oneFoodElement__container__card__description__title {
     margin:0;
     padding: 0;
 }
+.specialOffer__select {
+border: 2px solid lightpink;
+}
+.specialOffer__select:hover {
+    border: 3px solid pink
+}
 
 

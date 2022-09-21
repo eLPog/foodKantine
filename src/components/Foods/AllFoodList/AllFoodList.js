@@ -32,6 +32,7 @@ function AllFoodList(props) {
               description={el.description}
               dataID={el.dataID}
               key={el.dataID}
+              specialOffer={el.specialOffer}
             />
           ))}
         </div>
