@@ -20,6 +20,14 @@
 .oneFoodElement__container__card__description {
     margin:1rem;
 }
+a:hover .oneFoodElement__container__card__description__title {
+    color:var(--second-color);
+    font-size: 1.1rem;
+}
+.oneFoodElement__container__card__description__title {
+    transition: all 200ms;
+    font-size: 1rem;
+}
 
 
 .oneFoodElement__container__card__photo {

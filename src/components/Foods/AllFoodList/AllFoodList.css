@@ -2,3 +2,6 @@
     border-radius: 10px;
     background-color: var(--second-bgcolor);
 }
+.food__searchButton {
+    margin:0.3rem;
+}

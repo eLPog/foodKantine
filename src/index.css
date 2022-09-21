@@ -52,6 +52,27 @@ body {
     border:1px solid rgba(0,0,0,0.5);
     font-size: 0.8rem;
 }
+.btn-secondary {
+    width: 5rem;
+    height: 2rem;
+    background-color: transparent;
+    border:2px solid rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+    margin:1rem;
+    color:var(--second-color);
+    font-weight: bolder;
+    font-size: 0.7rem;
+    transition: all 100ms ease-in;
+}
+.btn-secondary:hover {
+    /*color:var(--first-color);*/
+    cursor: pointer;
+    opacity: 0.7;
+    border:1px solid rgba(0,0,0,0.5);
+    /*font-size: 0.8rem;*/
+    box-shadow: 0 2px 2px black;
+    transform: translateY(-2px);
+}
 
 @media only screen and (max-width: 576px){
     #root {
