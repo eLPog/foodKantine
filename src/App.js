@@ -1,6 +1,8 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter, Routes, Route,
+} from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { Menu } from './components/Menu/Menu';
 import { RegistrationForm } from './components/Formulars/RegistrationForm/RegistrationForm';
@@ -17,6 +19,9 @@ function App() {
   const [elementsBeforeSearch, setElementsBeforeSearch] = useState([]);
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+  const [idToken, setIdToken] = useState('');
+  const [localId, setLocalId] = useState('');
   useEffect(() => {
     const fetchMeals = async () => {
       setLoading(true);
@@ -32,8 +37,20 @@ function App() {
     };
     fetchMeals();
   }, []);
-  const userLoginHandler = () => {
-    isUserAuthenticated ? setIsUserAuthenticated(false) : setIsUserAuthenticated(true);
+  const userLoginHandler = (isAuth, userData) => {
+    if (!isAuth) {
+      setIsUserAuthenticated(false);
+      setUserEmail('');
+      setLocalId('');
+      setIdToken('');
+      localStorage.removeItem('token-data');
+    } else {
+      setIsUserAuthenticated(true);
+      setUserEmail(userData.email);
+      setLocalId(userData.localId);
+      setIdToken(userData.idToken);
+      localStorage.setItem('token-data', JSON.stringify(userData.idToken));
+    }
   };
   const searchElement = (value) => {
     const filteredElements = elementsBeforeSearch.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
@@ -58,9 +75,11 @@ function App() {
     <>
       <Header searchDish={searchElement} />
       <BrowserRouter>
-        <isAuthenticatedContext.Provider value={{ isUserAuthenticated, userLoginHandler }}>
+        <isAuthenticatedContext.Provider value={{
+          isUserAuthenticated, userEmail, idToken, localId, userLoginHandler,
+        }}
+        >
           <Menu />
-          <h1>{isUserAuthenticated ? 'Zalogowany' : 'Nie zalogowany'}</h1>
           {loading ? <Loading /> : (
             <Routes>
               <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} />} />

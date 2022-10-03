@@ -1,18 +1,18 @@
 import './Menu.css';
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { useContext, useState } from 'react';
+import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
 
 export function Menu() {
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
-  const [auth, setAuth] = useAuth();
+  const { isUserAuthenticated, userLoginHandler, userEmail } = useContext(isAuthenticatedContext);
   const hamburgerMenuHandler = () => {
     showHamburgerMenu ? setShowHamburgerMenu(false) : setShowHamburgerMenu(true);
   };
 
   const menu = (
     <>
-      {auth ? (
+      {isUserAuthenticated ? (
         <>
           {' '}
           <li>
@@ -26,7 +26,7 @@ export function Menu() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/" onClick={setAuth}>
+            <NavLink to="/" onClick={() => userLoginHandler(false)}>
               Logout
             </NavLink>
           </li>
@@ -55,6 +55,7 @@ export function Menu() {
       <div className="nav__container__logo">
         <NavLink to="/">
           <h1>Food Kantine</h1>
+          <h2>{userEmail}</h2>
         </NavLink>
       </div>
       <button className="toggle--button" onClick={hamburgerMenuHandler}>

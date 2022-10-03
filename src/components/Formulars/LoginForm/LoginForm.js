@@ -1,12 +1,13 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { firebaseLoginWithEmail } from '../../../assets/db/firebaseurl';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
-import { useAuth } from '../../../hooks/useAuth';
 
 export function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
+  const { userLoginHandler } = useContext(isAuthenticatedContext);
   const loginHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -28,9 +29,8 @@ export function LoginForm() {
       if (res.error) {
         return;
       }
-      setAuth();
-      localStorage.setItem('token-data', JSON.stringify(res.idToken));
-      console.log(res);
+      userLoginHandler(true, { email: res.email, localId: res.localId, idToken: res.idToken });
+      navigate('/');
     } catch (err) {
       console.log(err);
     }
