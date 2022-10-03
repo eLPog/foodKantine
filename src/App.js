@@ -32,6 +32,9 @@ function App() {
     };
     fetchMeals();
   }, []);
+  const userLoginHandler = () => {
+    isUserAuthenticated ? setIsUserAuthenticated(false) : setIsUserAuthenticated(true);
+  };
   const searchElement = (value) => {
     const filteredElements = elementsBeforeSearch.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
             || el.description.toLowerCase().includes(value.toLowerCase()));
@@ -55,8 +58,9 @@ function App() {
     <>
       <Header searchDish={searchElement} />
       <BrowserRouter>
-        <isAuthenticatedContext.Provider value={isUserAuthenticated}>
+        <isAuthenticatedContext.Provider value={{ isUserAuthenticated, userLoginHandler }}>
           <Menu />
+          <h1>{isUserAuthenticated ? 'Zalogowany' : 'Nie zalogowany'}</h1>
           {loading ? <Loading /> : (
             <Routes>
               <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} />} />

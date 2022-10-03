@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { firebaseLoginWithEmail } from '../../../assets/db/firebaseurl';
+import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 
 export function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { isUserAuthenticated, userLoginHandler } = useContext(isAuthenticatedContext);
   const loginHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -22,6 +24,11 @@ export function LoginForm() {
         body: JSON.stringify({ email, password, returnSecureToken: true }),
       });
       const res = await data.json();
+      if (res.error) {
+        return;
+      }
+      userLoginHandler();
+      localStorage.setItem('token-data', JSON.stringify(res.idToken));
       console.log(res);
     } catch (err) {
       console.log(err);
