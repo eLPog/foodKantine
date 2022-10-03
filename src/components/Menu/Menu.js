@@ -1,21 +1,52 @@
 import './Menu.css';
 import { NavLink } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 
 export function Menu() {
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
-
+  const [auth, setAuth] = useAuth();
   const hamburgerMenuHandler = () => {
     showHamburgerMenu ? setShowHamburgerMenu(false) : setShowHamburgerMenu(true);
   };
 
   const menu = (
     <>
-      <li>
-        <NavLink to="/signIn">
-          Sign In
-        </NavLink>
-      </li>
+      {auth ? (
+        <>
+          {' '}
+          <li>
+            <NavLink to="/signIn">
+              Delete Account
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/signIn">
+              History
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/" onClick={setAuth}>
+              Logout
+            </NavLink>
+          </li>
+        </>
+      ) : (
+        <>
+          {' '}
+          <li>
+            <NavLink to="/signIn">
+              Sign In
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/login">
+              Login
+            </NavLink>
+          </li>
+        </>
+      )}
+
     </>
   );
 
