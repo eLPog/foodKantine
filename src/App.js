@@ -1,5 +1,5 @@
 import './App.css';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { Menu } from './components/Menu/Menu';
@@ -10,10 +10,12 @@ import { Loading } from './components/Assets/Loading/Loading';
 
 import { DetailsFoodElement } from './components/Foods/DetailsFoodElement/DetailsFoodElement';
 import { LoginForm } from './components/Formulars/LoginForm/LoginForm';
+import { isAuthenticatedContext } from './context/isAuthenticatedContext';
 
 function App() {
   const [elements, setElements] = useState([]);
   const [elementsBeforeSearch, setElementsBeforeSearch] = useState([]);
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchMeals = async () => {
@@ -53,16 +55,17 @@ function App() {
     <>
       <Header searchDish={searchElement} />
       <BrowserRouter>
-        <Menu />
-        {loading ? <Loading /> : (
-          <Routes>
-            <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} />} />
-            <Route path="/:dataID" element={<DetailsFoodElement db={elements} />} />
-            <Route path="/signIn" element={<RegistrationForm />} />
-            <Route path="/login" element={<LoginForm />} />
-          </Routes>
-        )}
-
+        <isAuthenticatedContext.Provider value={isUserAuthenticated}>
+          <Menu />
+          {loading ? <Loading /> : (
+            <Routes>
+              <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} />} />
+              <Route path="/:dataID" element={<DetailsFoodElement db={elements} />} />
+              <Route path="/signIn" element={<RegistrationForm />} />
+              <Route path="/login" element={<LoginForm />} />
+            </Routes>
+          )}
+        </isAuthenticatedContext.Provider>
       </BrowserRouter>
     </>
   );
