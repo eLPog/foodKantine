@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { firebaseAddUser, firebaseURL } from '../../assets/db/firebaseurl';
-import { db } from '../../assets/db/db';
+import { firebaseAddUser } from '../../../assets/db/firebaseurl';
 
 export function RegistrationForm() {
   const [email, setEmail] = useState('');
@@ -28,23 +27,6 @@ export function RegistrationForm() {
       console.log(err);
     }
   };
-  const loadData = async (e) => {
-    e.preventDefault();
-    try {
-      const data = await fetch(`${firebaseURL}.json`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(db),
-      });
-      const res = await data.json();
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-  };
   return (
     <div className="container">
       <form>
@@ -55,9 +37,6 @@ export function RegistrationForm() {
         <input type="password" onChange={passwordHandler} />
         <button className="btn-primary" onClick={fetchLogin}>Login</button>
       </form>
-      {/* <form> */}
-      {/*  <button className="btn-primary" onClick={loadData}>Wgraj dane</button> */}
-      {/* </form> */}
     </div>
   );
 }

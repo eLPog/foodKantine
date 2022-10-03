@@ -3,12 +3,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { Menu } from './components/Menu/Menu';
-import { RegistrationForm } from './components/Formulars/RegistrationForm';
+import { RegistrationForm } from './components/Formulars/RegistrationForm/RegistrationForm';
 import AllFoodList from './components/Foods/AllFoodList/AllFoodList';
 import { firebaseURL } from './assets/db/firebaseurl';
 import { Loading } from './components/Assets/Loading/Loading';
 
 import { DetailsFoodElement } from './components/Foods/DetailsFoodElement/DetailsFoodElement';
+import { LoginForm } from './components/Formulars/LoginForm/LoginForm';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -58,6 +59,7 @@ function App() {
             <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} />} />
             <Route path="/:dataID" element={<DetailsFoodElement db={elements} />} />
             <Route path="/signIn" element={<RegistrationForm />} />
+            <Route path="/login" element={<LoginForm />} />
           </Routes>
         )}
 
