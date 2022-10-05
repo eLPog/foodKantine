@@ -13,6 +13,7 @@ import { Loading } from './components/Assets/Loading/Loading';
 import { DetailsFoodElement } from './components/Foods/DetailsFoodElement/DetailsFoodElement';
 import { LoginForm } from './components/Formulars/LoginForm/LoginForm';
 import { isAuthenticatedContext } from './context/isAuthenticatedContext';
+import { Order } from './components/Order/Order';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -22,9 +23,29 @@ function App() {
   const [userEmail, setUserEmail] = useState('');
   const [idToken, setIdToken] = useState('');
   const [localId, setLocalId] = useState('');
+  const [orderBucket, setOrderBucket] = useState([]);
+  const userLoginHandler = (isAuth, userData) => {
+    if (!isAuth) {
+      setIsUserAuthenticated(false);
+      setUserEmail('');
+      setLocalId('');
+      setIdToken('');
+      localStorage.removeItem('user-data');
+    } else {
+      setIsUserAuthenticated(true);
+      setUserEmail(userData.email);
+      setLocalId(userData.localId);
+      setIdToken(userData.idToken);
+      localStorage.setItem('user-data', JSON.stringify(userData));
+    }
+  };
   useEffect(() => {
     const fetchMeals = async () => {
       setLoading(true);
+      const userDataFromLocalStorage = JSON.parse(localStorage.getItem('user-data'));
+      if (userDataFromLocalStorage) {
+        userLoginHandler(true, userDataFromLocalStorage);
+      }
       try {
         const data = await fetch(`${firebaseURL}.json`);
         const res = await data.json();
@@ -37,20 +58,11 @@ function App() {
     };
     fetchMeals();
   }, []);
-  const userLoginHandler = (isAuth, userData) => {
-    if (!isAuth) {
-      setIsUserAuthenticated(false);
-      setUserEmail('');
-      setLocalId('');
-      setIdToken('');
-      localStorage.removeItem('token-data');
-    } else {
-      setIsUserAuthenticated(true);
-      setUserEmail(userData.email);
-      setLocalId(userData.localId);
-      setIdToken(userData.idToken);
-      localStorage.setItem('token-data', JSON.stringify(userData.idToken));
-    }
+  const addMealToOrder = (mealID) => {
+    const meal = elementsBeforeSearch.filter((el) => el.dataID === mealID);
+    console.log(meal);
+    const mealObj = { mealID, name: meal.name, date: '05.10.2022' };
+    setOrderBucket((prevState) => [...prevState, mealObj]);
   };
   const searchElement = (value) => {
     const filteredElements = elementsBeforeSearch.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
@@ -80,12 +92,14 @@ function App() {
         }}
         >
           <Menu />
+          <button onClick={() => addMealToOrder('k3u2ht4j98jg23')}>Add test meal</button>
           {loading ? <Loading /> : (
             <Routes>
               <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} />} />
               <Route path="/:dataID" element={<DetailsFoodElement db={elements} />} />
               <Route path="/signIn" element={<RegistrationForm />} />
               <Route path="/login" element={<LoginForm />} />
+              <Route path="/order" element={<Order orderBucket={orderBucket} />} />
             </Routes>
           )}
         </isAuthenticatedContext.Provider>
