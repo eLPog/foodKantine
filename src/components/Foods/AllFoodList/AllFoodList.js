@@ -33,6 +33,7 @@ function AllFoodList(props) {
               dataID={el.dataID}
               key={el.dataID}
               specialOffer={el.specialOffer}
+              addMealToOrder={props.addMealToOrder}
             />
           ))}
         </div>
