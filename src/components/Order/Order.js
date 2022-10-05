@@ -29,12 +29,9 @@ export function Order(props) {
           <ul>
             {props.orderBucket.map((el) => (
               <li key={el.mealID}>
-                {el.mealID}
-                ,
-                {el.name}
-                ,
-                , data:
-                {el.date}
+                <h4>{el.name}</h4>
+                <p>{el.price}</p>
+                <p>{el.date}</p>
               </li>
             ))}
           </ul>

@@ -17,7 +17,7 @@ export function OneFoodElement(props) {
               <button className="btn-primary">
                 Details
               </button>
-              <button className="btn-primary">
+              <button className="btn-primary" onClick={() => props.addMealToOrder(props.dataID)}>
                 Buy
               </button>
 

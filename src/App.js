@@ -59,9 +59,14 @@ function App() {
     fetchMeals();
   }, []);
   const addMealToOrder = (mealID) => {
-    const meal = elementsBeforeSearch.filter((el) => el.dataID === mealID);
-    console.log(meal);
-    const mealObj = { mealID, name: meal.name, date: '05.10.2022' };
+    const meal = elementsBeforeSearch.find((el) => el.dataID === mealID);
+    let { price } = meal;
+    if (meal.specialOffer) {
+      price *= 0.8;
+    }
+    const mealObj = {
+      mealID, name: meal.name, price, date: '05.10.2022',
+    };
     setOrderBucket((prevState) => [...prevState, mealObj]);
   };
   const searchElement = (value) => {
@@ -92,10 +97,10 @@ function App() {
         }}
         >
           <Menu />
-          <button onClick={() => addMealToOrder('k3u2ht4j98jg23')}>Add test meal</button>
+          {/* <button onClick={() => addMealToOrder('k3u2ht4j98jg23')}>Add test meal</button> */}
           {loading ? <Loading /> : (
             <Routes>
-              <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} />} />
+              <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} />} />
               <Route path="/:dataID" element={<DetailsFoodElement db={elements} />} />
               <Route path="/signIn" element={<RegistrationForm />} />
               <Route path="/login" element={<LoginForm />} />
