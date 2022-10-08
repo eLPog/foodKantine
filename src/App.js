@@ -64,14 +64,29 @@ function App() {
     if (meal.specialOffer) {
       price *= 0.8;
     }
-    const mealObj = {
-      mealID, name: meal.name, price, date: '05.10.2022',
-    };
-    setOrderCart((prevState) => [...prevState, mealObj]);
+    const isItemAlreadyAdded = orderCart.find((el) => el.mealID === mealID);
+    if (isItemAlreadyAdded) {
+      isItemAlreadyAdded.quantity++;
+      const allItems = orderCart.filter((el) => el.mealID !== mealID);
+      setOrderCart([...allItems, isItemAlreadyAdded]);
+    } else {
+      const mealObj = {
+        mealID, name: meal.name, price, date: '05.10.2022', quantity: 1,
+      };
+      setOrderCart((prevState) => [...prevState, mealObj]);
+    }
   };
   const removeMealFromOrder = (mealID) => {
+    const itemToRemove = orderCart.find((el) => el.mealID === mealID);
+    const itemIndex = orderCart.indexOf(itemToRemove);
     const meals = orderCart.filter((el) => el.mealID !== mealID);
-    setOrderCart(meals);
+    if (itemToRemove.quantity > 1) {
+      itemToRemove.quantity--;
+      meals.splice(itemIndex, 0, itemToRemove);
+      setOrderCart(meals);
+    } else {
+      setOrderCart(meals);
+    }
   };
   const searchElement = (value) => {
     const filteredElements = elementsBeforeSearch.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())

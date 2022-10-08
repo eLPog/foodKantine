@@ -1,0 +1,32 @@
+.order__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--first-bgcolor);
+    border-radius: 10px;
+    box-shadow: 15px 10px 5px rgba(0,0,0,0.5);
+    padding-top: 1rem;
+}
+.order__container__header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.order__container__mealsList__oneMealCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--first-bgcolor);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border:0.1rem solid var(--second-bgcolor)
+}
+.order__container__mealsList__oneMealCard:hover {
+    box-shadow: 5px 5px 5px var(--third-color);
+    transform: translateY(-3px);
+
+}
