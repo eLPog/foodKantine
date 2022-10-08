@@ -1,26 +1,26 @@
+import { useEffect, useState } from 'react';
 import { firebaseURL } from '../../assets/db/firebaseurl';
 
 export function Order(props) {
-  console.log(props.orderBucket);
+  const [totalPrice, setTotalPrice] = useState(0);
+  useEffect(() => {
+    let price = 0;
+    props.orderBucket.forEach((el) => price += el.price);
+    price = price.toFixed(2);
+    setTotalPrice(price);
+  }, []);
   const dataToFetch = {
-    userID: 123,
-    orders: [
-      { orderID: 1, price: 33, date: 10102022 },
-    ],
-    favorites: [
-      'meelID1', 'meelID2',
-    ],
+    userID: props.userID,
+    meals: props.orderBucket,
   };
   async function sendTestData() {
-    const data = await fetch(`${firebaseURL}orders.json`, {
+    await fetch(`${firebaseURL}orders.json`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(dataToFetch),
     });
-    const res = await data.json();
-    console.log(res);
   }
   return (
     <div className="container">
@@ -35,9 +35,12 @@ export function Order(props) {
               </li>
             ))}
           </ul>
+          <button onClick={sendTestData}>Dodaj</button>
         </div>
         <div className="order__container__sumary">
-          Price:43$
+          Total Price:
+          {totalPrice}
+          $
         </div>
       </div>
     </div>

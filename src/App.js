@@ -104,7 +104,7 @@ function App() {
               <Route path="/:dataID" element={<DetailsFoodElement db={elements} />} />
               <Route path="/signIn" element={<RegistrationForm />} />
               <Route path="/login" element={<LoginForm />} />
-              <Route path="/order" element={<Order orderBucket={orderBucket} />} />
+              <Route path="/order" element={<Order orderBucket={orderBucket} userID={localId} />} />
             </Routes>
           )}
         </isAuthenticatedContext.Provider>
