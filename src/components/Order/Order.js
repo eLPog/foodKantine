@@ -32,6 +32,7 @@ export function Order(props) {
                 <h4>{el.name}</h4>
                 <p>{el.price}</p>
                 <p>{el.date}</p>
+                <button onClick={() => props.removeMeal(el.mealID)}>Delete</button>
               </li>
             ))}
           </ul>

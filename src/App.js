@@ -69,6 +69,10 @@ function App() {
     };
     setOrderCart((prevState) => [...prevState, mealObj]);
   };
+  const removeMealFromOrder = (mealID) => {
+    const meals = orderCart.filter((el) => el.mealID !== mealID);
+    setOrderCart(meals);
+  };
   const searchElement = (value) => {
     const filteredElements = elementsBeforeSearch.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
             || el.description.toLowerCase().includes(value.toLowerCase()));
@@ -103,7 +107,7 @@ function App() {
               <Route path="/:dataID" element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/signIn" element={<RegistrationForm />} />
-              <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} /> : <Navigate to="/" />} />
+              <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} removeMeal={removeMealFromOrder} /> : <Navigate to="/" />} />
             </Routes>
           )}
         </isAuthenticatedContext.Provider>
