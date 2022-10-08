@@ -5,13 +5,13 @@ export function Order(props) {
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     let price = 0;
-    props.orderBucket.forEach((el) => price += el.price);
+    props.orderCart.forEach((el) => price += el.price);
     price = price.toFixed(2);
     setTotalPrice(price);
-  }, []);
+  }, [props.orderCart]);
   const dataToFetch = {
     userID: props.userID,
-    meals: props.orderBucket,
+    meals: props.orderCart,
   };
   async function sendTestData() {
     await fetch(`${firebaseURL}orders.json`, {
@@ -27,7 +27,7 @@ export function Order(props) {
       <div className="order__container">
         <div className="order__container__mealsList">
           <ul>
-            {props.orderBucket.map((el) => (
+            {props.orderCart.map((el) => (
               <li key={el.mealID}>
                 <h4>{el.name}</h4>
                 <p>{el.price}</p>

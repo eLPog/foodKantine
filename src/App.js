@@ -1,7 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import {
-  BrowserRouter, Routes, Route,
+  BrowserRouter, Routes, Route, Navigate,
 } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { Menu } from './components/Menu/Menu';
@@ -23,7 +23,7 @@ function App() {
   const [userEmail, setUserEmail] = useState('');
   const [idToken, setIdToken] = useState('');
   const [localId, setLocalId] = useState('');
-  const [orderBucket, setOrderBucket] = useState([]);
+  const [orderCart, setOrderCart] = useState([]);
   const userLoginHandler = (isAuth, userData) => {
     if (!isAuth) {
       setIsUserAuthenticated(false);
@@ -67,7 +67,7 @@ function App() {
     const mealObj = {
       mealID, name: meal.name, price, date: '05.10.2022',
     };
-    setOrderBucket((prevState) => [...prevState, mealObj]);
+    setOrderCart((prevState) => [...prevState, mealObj]);
   };
   const searchElement = (value) => {
     const filteredElements = elementsBeforeSearch.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
@@ -96,15 +96,14 @@ function App() {
           isUserAuthenticated, userEmail, idToken, localId, userLoginHandler,
         }}
         >
-          <Menu />
-          {/* <button onClick={() => addMealToOrder('k3u2ht4j98jg23')}>Add test meal</button> */}
+          <Menu numbersOfItemsInOrdersCart={orderCart.length} />
           {loading ? <Loading /> : (
             <Routes>
               <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} />} />
-              <Route path="/:dataID" element={<DetailsFoodElement db={elements} />} />
-              <Route path="/signIn" element={<RegistrationForm />} />
+              <Route path="/:dataID" element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
               <Route path="/login" element={<LoginForm />} />
-              <Route path="/order" element={<Order orderBucket={orderBucket} userID={localId} />} />
+              <Route path="/signIn" element={<RegistrationForm />} />
+              <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} /> : <Navigate to="/" />} />
             </Routes>
           )}
         </isAuthenticatedContext.Provider>

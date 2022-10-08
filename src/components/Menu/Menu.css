@@ -52,6 +52,9 @@ a:hover {
     color:white;
 
 }
+.itemAddedToCartAnimation {
+    animation: itemAdded 500ms ease-in-out;
+}
 
 @media only screen and (max-width: 576px){
     .toggle--button {
@@ -89,6 +92,25 @@ a:hover {
     }
     to {
         height: 5rem;
+    }
+}
+@keyframes itemAdded {
+    0% {
+        transform: scale(1);
+    }
+    10% {
+        transform: scale(0.8);
+    }
+    30% {
+        transform: scale(1.5);
+        background-color: var(--second-bgcolor);
+        color:var(--first-color);
+    }
+    50% {
+        transform: scale(1.8);
+    }
+    100% {
+        transform: scale(1);
     }
 }
 

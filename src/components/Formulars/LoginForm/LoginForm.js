@@ -40,7 +40,6 @@ export function LoginForm() {
   };
   return (
     <div className="container">
-      <Order />
       <form>
         Login :
         {' '}
