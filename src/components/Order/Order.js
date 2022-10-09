@@ -44,7 +44,7 @@ export function Order(props) {
           {props.orderCart.map((el) => (
             <li key={el.mealID} className="order__container__mealsList__oneMealCard">
               <h4>{el.name}</h4>
-              <p>{el.price}</p>
+              <p>{el.price.toFixed(2)}</p>
               <p>{el.quantity}</p>
               <button className="btn-primary" onClick={() => props.removeMeal(el.mealID)}>Remove</button>
             </li>

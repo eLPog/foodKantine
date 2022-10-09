@@ -12,9 +12,18 @@
     padding-top: 2rem;
 }
 .userHistory__container__bottom {
-    background-color: lightcyan;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     padding-top: 1.4rem;
+}
+.userHistory__container__bottom__orderList {
+    padding:1rem;
+    list-style: none;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+    background-color: lightblue;
+    margin:0.6rem;
+    height: fit-content;
+
 }

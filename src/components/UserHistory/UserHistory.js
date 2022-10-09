@@ -1,19 +1,27 @@
 import { useContext, useEffect, useState } from 'react';
 import './UserHistory.css';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
+import { Loading } from '../Assets/Loading/Loading';
+import { firebaseURL } from '../../assets/db/firebaseurl';
 
-// pobrać https://foodkantine-a6214-default-rtdb.europe-west1.firebasedatabase.app/orders
 export function UserHistory() {
   const [allUsersMeals, setAllUsersMeals] = useState([]);
+  const [lastOrder, setLastOrder] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [valueOfOrders, setValueOfOrders] = useState(0);
   const { localId } = useContext(isAuthenticatedContext);
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await fetch('https://foodkantine-a6214-default-rtdb.europe-west1.firebasedatabase.app/orders.json');
+        const data = await fetch(`${firebaseURL}orders.json`);
         let res = await data.json();
         res = Object.values(res);
+        res = res.filter((el) => el.userID === localId);
         setAllUsersMeals(res);
+        setLastOrder(res[res.length - 1]);
+        let totalValue = 0;
+        res.forEach((el) => el.meals.forEach((el) => totalValue += el.price));
+        setValueOfOrders(totalValue.toFixed(2));
         setIsLoading(false);
       } catch (err) {
         console.log(err);
@@ -24,40 +32,46 @@ export function UserHistory() {
 
   return (
     <div className="container userHistory__container">
-      {isLoading ? <h2>Loading</h2> : (
+      {isLoading ? <Loading /> : (
         <>
           <div className="userHistory__container__top">
-            <div className="userHistory__container__lastOrders">
+            <div className="userHistory__container__lastOrder">
+              <p>Last order</p>
               <ul>
-                {allUsersMeals.map((el) => (
-                  <ul key={el.date}>
-                    {el.date}
-                    {el.meals.map((oneMeal) => (
-                      <li key={Math.random() * 1000}>{oneMeal.name}</li>
-                    ))}
-                  </ul>
+                {lastOrder.meals.map((el) => (
+                  <li key={Math.random() * 1000}>
+                    {el.name}
+                  </li>
                 ))}
               </ul>
+              <p>{lastOrder.date}</p>
             </div>
             <div className="userHistory__container__stats">
-              Zamówiono razem:3
+              All orders:
+              {allUsersMeals.length}
               <br />
-              Całkowity koszt:100
-              <br />
-              Ostatnie zamówienie
+              Value of all orders:
+              {valueOfOrders}
+              $
               <br />
               Ulubione
             </div>
           </div>
           <div className="userHistory__container__bottom">
-            <ul>
-              <li>Posiłek</li>
-              <li>Posiłek</li>
-              <li>Posiłek</li>
-              <li>Posiłek</li>
-              <li>Posiłek</li>
-              <li>Posiłek</li>
-            </ul>
+            {allUsersMeals.map((el) => (
+              <ul key={el.date} className="userHistory__container__bottom__orderList">
+                {el.date}
+                {el.meals.map((oneMeal) => (
+                  <li key={Math.random() * 1000}>
+                    {oneMeal.name}
+                    <p>
+                      Price:
+                      {oneMeal.price}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            ))}
           </div>
         </>
       )}
