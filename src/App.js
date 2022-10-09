@@ -89,6 +89,9 @@ function App() {
       setOrderCart(meals);
     }
   };
+  const clearOrder = () => {
+    setOrderCart([]);
+  };
   const searchElement = (value) => {
     const filteredElements = elementsBeforeSearch.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
             || el.description.toLowerCase().includes(value.toLowerCase()));
@@ -123,7 +126,7 @@ function App() {
               <Route path="/:dataID" element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/signIn" element={<RegistrationForm />} />
-              <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} removeMeal={removeMealFromOrder} /> : <Navigate to="/" />} />
+              <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} removeMeal={removeMealFromOrder} clearOrder={clearOrder} /> : <Navigate to="/" />} />
               <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
             </Routes>
           )}

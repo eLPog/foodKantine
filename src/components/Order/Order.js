@@ -1,28 +1,35 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { firebaseURL } from '../../assets/db/firebaseurl';
 import './Order.css';
 
 export function Order(props) {
   const [totalPrice, setTotalPrice] = useState(0);
+  const navigate = useNavigate();
   useEffect(() => {
     let price = 0;
     props.orderCart.forEach((el) => price += el.price);
     price = price.toFixed(2);
-    setTotalPrice(price);
+    setTotalPrice(Number(price));
   }, [props.orderCart]);
-  const dataToFetch = {
+  const completeOrder = {
     userID: props.userID,
     meals: props.orderCart,
   };
-  async function sendTestData() {
-    await fetch(`${firebaseURL}orders.json`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(dataToFetch),
-    });
+  async function sendOrder() {
+    try {
+      await fetch(`${firebaseURL}orders.json`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(completeOrder),
+      });
+      props.clearOrder();
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+    }
   }
   return (
     <div className="container order__container">
@@ -50,7 +57,7 @@ export function Order(props) {
           </>
         ) : (
           <>
-            <button className="btn-primary" onClick={sendTestData}>Buy</button>
+            <button className="btn-primary" onClick={sendOrder}>Buy</button>
             Total Price:
             {totalPrice}
             $
@@ -61,4 +68,3 @@ export function Order(props) {
     </div>
   );
 }
-// @TODO jak są dwa takie same i zrobimy remove to usuwa obydwa.
