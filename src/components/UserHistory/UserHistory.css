@@ -1,0 +1,20 @@
+.userHistory__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.userHistory__container__top {
+    width: 100%;
+    min-height: 10rem;
+    background-color: lightpink;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 2rem;
+}
+.userHistory__container__bottom {
+    background-color: lightcyan;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 1.4rem;
+}

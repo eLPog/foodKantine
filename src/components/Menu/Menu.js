@@ -59,7 +59,7 @@ export function Menu(props) {
             </NavLink>
           </li>
           <li title="Orders stats">
-            <NavLink to="/signIn">
+            <NavLink to="/history">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"

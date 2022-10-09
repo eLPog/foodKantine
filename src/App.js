@@ -14,6 +14,7 @@ import { DetailsFoodElement } from './components/Foods/DetailsFoodElement/Detail
 import { LoginForm } from './components/Formulars/LoginForm/LoginForm';
 import { isAuthenticatedContext } from './context/isAuthenticatedContext';
 import { Order } from './components/Order/Order';
+import { UserHistory } from './components/UserHistory/UserHistory';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -123,6 +124,7 @@ function App() {
               <Route path="/login" element={<LoginForm />} />
               <Route path="/signIn" element={<RegistrationForm />} />
               <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} removeMeal={removeMealFromOrder} /> : <Navigate to="/" />} />
+              <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
             </Routes>
           )}
         </isAuthenticatedContext.Provider>

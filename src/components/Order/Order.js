@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { firebaseURL } from '../../assets/db/firebaseurl';
 import './Order.css';
 
@@ -42,10 +43,20 @@ export function Order(props) {
         </ul>
       </div>
       <div className="order__container__sumary">
-        <button className="btn-primary" onClick={sendTestData}>Buy</button>
-        Total Price:
-        {totalPrice}
-        $
+        {props.orderCart.length < 1 ? (
+          <>
+            <p>List is empty</p>
+            <NavLink to="/"><button className="btn-primary">Meals</button></NavLink>
+          </>
+        ) : (
+          <>
+            <button className="btn-primary" onClick={sendTestData}>Buy</button>
+            Total Price:
+            {totalPrice}
+            $
+          </>
+        )}
+
       </div>
     </div>
   );
