@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { firebaseURL } from '../../assets/db/firebaseurl';
 import './Order.css';
+import { getActuallyDate } from '../../utils/getActuallyDate';
 
 export function Order(props) {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -14,6 +15,7 @@ export function Order(props) {
   }, [props.orderCart]);
   const completeOrder = {
     userID: props.userID,
+    date: getActuallyDate(),
     meals: props.orderCart,
   };
   async function sendOrder() {

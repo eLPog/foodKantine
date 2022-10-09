@@ -15,6 +15,7 @@ import { LoginForm } from './components/Formulars/LoginForm/LoginForm';
 import { isAuthenticatedContext } from './context/isAuthenticatedContext';
 import { Order } from './components/Order/Order';
 import { UserHistory } from './components/UserHistory/UserHistory';
+import { getActuallyDate } from './utils/getActuallyDate';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -72,7 +73,7 @@ function App() {
       setOrderCart([...allItems, isItemAlreadyAdded]);
     } else {
       const mealObj = {
-        mealID, name: meal.name, price, date: '05.10.2022', quantity: 1,
+        mealID, name: meal.name, price, quantity: 1,
       };
       setOrderCart((prevState) => [...prevState, mealObj]);
     }
