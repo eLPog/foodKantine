@@ -15,7 +15,6 @@ import { LoginForm } from './components/Formulars/LoginForm/LoginForm';
 import { isAuthenticatedContext } from './context/isAuthenticatedContext';
 import { Order } from './components/Order/Order';
 import { UserHistory } from './components/UserHistory/UserHistory';
-import { getActuallyDate } from './utils/getActuallyDate';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -26,6 +25,7 @@ function App() {
   const [idToken, setIdToken] = useState('');
   const [localId, setLocalId] = useState('');
   const [orderCart, setOrderCart] = useState([]);
+
   const userLoginHandler = (isAuth, userData) => {
     if (!isAuth) {
       setIsUserAuthenticated(false);
@@ -53,6 +53,7 @@ function App() {
         const res = await data.json();
         setElements(res['-NCAQYq_QqAk59rSL8Bq']);
         setElementsBeforeSearch(res['-NCAQYq_QqAk59rSL8Bq']);
+
         setLoading(false);
       } catch (err) {
         console.log(err);
