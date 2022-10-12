@@ -36,7 +36,7 @@ export function UserHistory() {
         <>
           <div className="userHistory__container__top">
             <div className="userHistory__container__lastOrder">
-              <p>Last order</p>
+              <span>Last order</span>
               <ul>
                 {lastOrder.meals.map((el) => (
                   <li key={Math.random() * 1000}>
@@ -44,29 +44,32 @@ export function UserHistory() {
                   </li>
                 ))}
               </ul>
-              <p>{lastOrder.date}</p>
+              <span>{lastOrder.date}</span>
             </div>
             <div className="userHistory__container__stats">
-              All orders:
-              {allUsersMeals.length}
-              <br />
-              Value of all orders:
-              {valueOfOrders}
-              $
-              <br />
-              Ulubione
+              <div>
+                <span>All orders: </span>
+                {allUsersMeals.length}
+              </div>
+              <div>
+                <span>Value of all orders:</span>
+                {valueOfOrders}
+                $
+              </div>
             </div>
           </div>
           <div className="userHistory__container__bottom">
             {allUsersMeals.map((el) => (
               <ul key={el.date} className="userHistory__container__bottom__orderList">
-                {el.date}
+                <span className="userHistory__container__bottom__orderList--date">
+                  {el.date.slice(0, 10)}
+                </span>
                 {el.meals.map((oneMeal) => (
                   <li key={Math.random() * 1000}>
                     {oneMeal.name}
-                    <p>
-                      Price:
+                    <p className="userHistory__container__bottom__orderList--price">
                       {oneMeal.price}
+                      $
                     </p>
                   </li>
                 ))}
