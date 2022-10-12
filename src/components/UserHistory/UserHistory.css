@@ -12,6 +12,7 @@
     width: 100%;
     min-height: 10rem;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     padding-top: 2rem;
     font-family: Roboto Condensed;
@@ -24,6 +25,11 @@
     flex-wrap: wrap;
     justify-content: center;
     padding-top: 1.4rem;
+    justify-items: center;
+    align-items: flex-end;
+}
+.userHistory__container__bottom ul {
+    border-radius: 1rem 0.3rem;
 }
 .userHistory__container__stats div {
     display: flex;
@@ -63,4 +69,5 @@ display: flex;
     justify-content: center;
     text-shadow: 3px 2px 2px rgba(0,0,0,0.4);
     color:#ffffff;
+    border-bottom: 1px dotted black;
 }

@@ -34,7 +34,7 @@ export function UserHistory() {
     <div className="container userHistory__container">
       {isLoading ? <Loading /> : (
         <>
-          <div className="userHistory__container__top">
+          <div className="flex-sm-row userHistory__container__top">
             <div className="userHistory__container__lastOrder">
               <span>Last order</span>
               <ul>

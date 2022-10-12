@@ -28,6 +28,7 @@ a:hover {
 }
 .nav__container__menu__list li:hover {
     background-color: var(--third-color);
+    color:white;
     border-radius: 10px;
 }
 .toggle--button {
@@ -41,6 +42,9 @@ a:hover {
     background-color: var(--second-bgcolor);
     height: 21px;
     border:none;
+}
+.toggle--button svg {
+    color:black;
 }
 .toggle--button--bar {
     color: var(--first-color);
@@ -69,7 +73,9 @@ a:hover {
         width: 100%;
         flex-direction: column;
         gap:0.5rem;
+        animation: showMenu 500ms ease-in;
     }
+
     .nav__container {
         flex-direction: column;
         align-items: flex-start;
@@ -81,7 +87,7 @@ a:hover {
     .nav__container__menu__list.active {
         display: flex;
         height: 5rem;
-        animation: showMenu 500ms ease-in;
+        animation: showMenu 100ms ease-in;
     }
 
 
