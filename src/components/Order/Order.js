@@ -37,7 +37,7 @@ export function Order(props) {
     <div className="container order__container">
       <div className="order__container__header">
         <span>Order List</span>
-        <span>22.10.2022</span>
+        <span>{getActuallyDate().slice(0, 10)}</span>
       </div>
       <div className="order__container__mealsList">
         <ul>
