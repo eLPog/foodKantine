@@ -23,7 +23,7 @@ function AllFoodList(props) {
         <div className="row mt-3 d-flex justify-content-around allFoodList__container">
           <div className="allFoodList__container__filterApplied">
             <span className="allFoodList__container__filterApplied--element">
-              Category:
+              Category/Searched word:
             </span>
             {props.mealsFilter}
           </div>

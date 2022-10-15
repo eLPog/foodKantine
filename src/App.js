@@ -101,6 +101,7 @@ function App() {
     setOrderCart([]);
   };
   const searchElement = (value) => {
+    setMealsFilter(value);
     const filteredElements = elementsBeforeSearch.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
             || el.description.toLowerCase().includes(value.toLowerCase()));
     setElements(filteredElements);
