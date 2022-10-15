@@ -101,7 +101,6 @@ export function Menu(props) {
       <div className="nav__container__logo">
         <NavLink to="/">
           <h1>Food Kantine</h1>
-          <h2>{userEmail}</h2>
         </NavLink>
       </div>
       <button className="toggle--button" onClick={hamburgerMenuHandler}>
