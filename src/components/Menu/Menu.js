@@ -1,32 +1,22 @@
 import './Menu.css';
 import { NavLink } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
 import { ProductAddedModal } from '../Modals/ProductAddedModal/ProductAddedModal';
 
 export function Menu(props) {
+  const newProduct = props.newProductAdded;
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
-  const [newProductInCart, setNewProductInCart] = useState(false);
   const { isUserAuthenticated, userLoginHandler, userEmail } = useContext(isAuthenticatedContext);
   const hamburgerMenuHandler = () => {
     showHamburgerMenu ? setShowHamburgerMenu(false) : setShowHamburgerMenu(true);
   };
-  useEffect(() => {
-    if (props.numbersOfItemsInOrdersCart === 0) return;
-    setNewProductInCart(true);
-    const timer = setTimeout(() => {
-      setNewProductInCart(false);
-    }, 300);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [props.numbersOfItemsInOrdersCart]);
 
   const menu = (
     <>
       {isUserAuthenticated ? (
         <>
-          <NavLink to="/order" className={newProductInCart ? 'itemAddedToCartAnimation' : ''}>
+          <NavLink to="/order" className={newProduct ? 'itemAddedToCartAnimation' : ''}>
             <li title="Shop card">
 
               <svg
@@ -159,7 +149,7 @@ export function Menu(props) {
           {menu}
         </ul>
       </div>
-      {newProductInCart && <ProductAddedModal />}
+      {newProduct && <ProductAddedModal />}
     </nav>
 
   );

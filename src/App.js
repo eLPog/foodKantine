@@ -25,6 +25,7 @@ function App() {
   const [idToken, setIdToken] = useState('');
   const [localId, setLocalId] = useState('');
   const [orderCart, setOrderCart] = useState([]);
+  const [addProductToCart, setAddProductToCart] = useState(false);
 
   const userLoginHandler = (isAuth, userData) => {
     if (!isAuth) {
@@ -78,6 +79,10 @@ function App() {
       };
       setOrderCart((prevState) => [...prevState, mealObj]);
     }
+    setAddProductToCart(true);
+    setTimeout(() => {
+      setAddProductToCart(false);
+    }, 800);
   };
   const removeMealFromOrder = (mealID) => {
     const itemToRemove = orderCart.find((el) => el.mealID === mealID);
@@ -121,7 +126,7 @@ function App() {
           isUserAuthenticated, userEmail, idToken, localId, userLoginHandler,
         }}
         >
-          <Menu numbersOfItemsInOrdersCart={orderCart.length} />
+          <Menu numbersOfItemsInOrdersCart={orderCart.length} newProductAdded={addProductToCart} />
           {loading ? <Loading /> : (
             <Routes>
               <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} />} />

@@ -46,6 +46,8 @@
     background-color: var(--third-bgcolor);
     margin:0.6rem;
     height: fit-content;
+    min-width: 10rem;
+    min-height: 5rem;
 
 }
 .userHistory__container__lastOrder {
