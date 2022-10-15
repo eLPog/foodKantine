@@ -26,6 +26,7 @@ function App() {
   const [localId, setLocalId] = useState('');
   const [orderCart, setOrderCart] = useState([]);
   const [addProductToCart, setAddProductToCart] = useState(false);
+  const [mealsFilter, setMealsFilter] = useState('');
 
   const userLoginHandler = (isAuth, userData) => {
     if (!isAuth) {
@@ -106,15 +107,18 @@ function App() {
   };
   const searchFoodByCategory = (category) => {
     if (!category) {
+      setMealsFilter('All');
       setElements(elementsBeforeSearch);
       return;
     }
     if (category === 'sale') {
       const filteredElements = elementsBeforeSearch.filter((el) => el.specialOffer === true);
       setElements(filteredElements);
+      setMealsFilter('Sale');
       return;
     }
     const filteredElements = elementsBeforeSearch.filter((el) => el.category === category);
+    setMealsFilter(category[0].toUpperCase().concat(category.slice(1)));
     setElements(filteredElements);
   };
 
@@ -129,7 +133,7 @@ function App() {
           <Menu numbersOfItemsInOrdersCart={orderCart.length} newProductAdded={addProductToCart} />
           {loading ? <Loading /> : (
             <Routes>
-              <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} />} />
+              <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} mealsFilter={mealsFilter} />} />
               <Route path="/:dataID" element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/signIn" element={<RegistrationForm />} />

@@ -2,6 +2,11 @@
     border-radius: 10px;
     background-color: var(--second-bgcolor);
 }
+.allFoodList__container__filterApplied{
+    display: flex;
+    justify-content: center;
+    font-family: Cambria;
+}
 .food__searchButton {
     margin:0.3rem;
 }

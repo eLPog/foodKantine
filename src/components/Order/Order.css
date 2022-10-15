@@ -44,10 +44,7 @@
     align-items: center;
     margin-bottom: 2rem;
 }
-span[class$="--element"]{
-    font-family: Alegreya;
-    margin-right: 1rem;
-}
+
 
 @media only screen and (max-width: 576px) {
 .order__container__mealsList {

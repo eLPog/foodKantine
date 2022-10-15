@@ -73,6 +73,10 @@ body {
     box-shadow: 0 2px 2px black;
     transform: translateY(-2px);
 }
+span[class$="--element"]{
+    font-family: Alegreya;
+    margin-right: 1rem;
+}
 
 @media only screen and (max-width: 576px){
     #root {
