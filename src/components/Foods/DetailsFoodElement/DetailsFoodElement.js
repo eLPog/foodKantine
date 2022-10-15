@@ -55,6 +55,9 @@ export function DetailsFoodElement(props) {
           {element.specialOffer && specialOffer}
         </div>
       </div>
+      <button className="btn-primary btn__back" onClick={() => props.addMealToOrder(dataID)}>
+        Buy
+      </button>
       <button className="btn-primary btn__back" onClick={handleClick}>
         Back
       </button>
