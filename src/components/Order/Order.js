@@ -36,33 +36,43 @@ export function Order(props) {
   return (
     <div className="container order__container">
       <div className="order__container__header">
-        <span>Order List</span>
+        <span>Your order</span>
         <span>{getActuallyDate().slice(0, 10)}</span>
       </div>
-      <div className="order__container__mealsList">
-        <ul>
-          {props.orderCart.map((el) => (
-            <li key={el.mealID} className="order__container__mealsList__oneMealCard">
-              <h4>{el.name}</h4>
-              <p>{el.price.toFixed(2)}</p>
-              <p>{el.quantity}</p>
-              <button className="btn-primary" onClick={() => props.removeMeal(el.mealID)}>Remove</button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="order__container__sumary">
+      <ul className="container order__container__mealsList">
+        {props.orderCart.map((el) => (
+          <li key={el.mealID} className="order__container__mealsList__oneMealCard">
+            <h4>{el.name}</h4>
+            <p>
+              <span className="order__container__mealsList__oneMealCard--element">Price:</span>
+              {el.price.toFixed(2)}
+            </p>
+            <p>
+              <span className="order__container__mealsList__oneMealCard--element">Quantity:</span>
+              {el.quantity}
+            </p>
+            <button className="btn-primary" onClick={() => props.removeMeal(el.mealID)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+
+      <div className="order__container__summary">
         {props.orderCart.length < 1 ? (
           <>
-            <p>List is empty</p>
+            <span className="order__container__summary--element">List is empty</span>
             <NavLink to="/"><button className="btn-primary">Meals</button></NavLink>
           </>
         ) : (
           <>
-            <button className="btn-primary" onClick={sendOrder}>Buy</button>
-            Total Price:
+            <span className="order__container__summary--element">Total Price:</span>
             {totalPrice}
             $
+            <br />
+            <button className="btn-primary" onClick={sendOrder}>Buy</button>
+            <NavLink to="/">
+              <button className="btn-primary">Add more</button>
+            </NavLink>
+
           </>
         )}
 

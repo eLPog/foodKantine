@@ -12,6 +12,11 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    padding: 0 5rem;
+}
+.order__container__mealsList {
+    width: 50%;
+    padding-top: 2rem;
 }
 
 
@@ -31,4 +36,24 @@
     box-shadow: 5px 5px 5px var(--third-color);
     transform: translateY(-3px);
 
+}
+.order__container__summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+span[class$="--element"]{
+    font-family: Alegreya;
+    margin-right: 1rem;
+}
+
+@media only screen and (max-width: 576px) {
+.order__container__mealsList {
+    width: 100%;
+}
+    .order__container__mealsList__oneMealCard {
+        padding: 0.4rem;
+    }
 }
