@@ -2,6 +2,7 @@ import './Menu.css';
 import { NavLink } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
+import { ProductAddedModal } from '../Modals/ProductAddedModal/ProductAddedModal';
 
 export function Menu(props) {
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
@@ -158,6 +159,7 @@ export function Menu(props) {
           {menu}
         </ul>
       </div>
+      {newProductInCart && <ProductAddedModal />}
     </nav>
 
   );

@@ -1,0 +1,13 @@
+.ProductAddedModalContainer {
+    width: 20%;
+    height: 7rem;
+    background-color: var(--third-bgcolor);
+    position: fixed;
+    left: 40%;
+    top: 30%;
+    z-index: 100;
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
