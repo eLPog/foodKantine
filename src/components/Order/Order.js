@@ -9,7 +9,7 @@ export function Order(props) {
   const navigate = useNavigate();
   useEffect(() => {
     let price = 0;
-    props.orderCart.forEach((el) => price += el.price);
+    props.orderCart.forEach((el) => price += el.price * el.quantity);
     price = price.toFixed(2);
     setTotalPrice(Number(price));
   }, [props.orderCart]);

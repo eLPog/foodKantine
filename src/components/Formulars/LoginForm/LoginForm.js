@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { firebaseLoginWithEmail } from '../../../assets/db/firebaseurl';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
+import './LoginForm.css';
 
 export function LoginForm() {
   const [email, setEmail] = useState('');
@@ -38,12 +39,11 @@ export function LoginForm() {
     }
   };
   return (
-    <div className="container">
+    <div className="container loginForm__container">
       <form>
-        Login :
-        {' '}
+        Login
         <input type="text" onChange={loginHandler} />
-        Password:
+        Password
         <input type="password" onChange={passwordHandler} />
         <button className="btn-primary" onClick={fetchLogin}>Login</button>
       </form>
