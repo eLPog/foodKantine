@@ -1,13 +1,15 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { firebaseAddUser } from '../../../assets/db/firebaseurl';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
+import { setButtonActive } from '../../../utils/setButtonActive';
 
 export function RegistrationForm() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [btnActive, setBtnActive] = useState(false);
   const { userLoginHandler } = useContext(isAuthenticatedContext);
   const loginHandler = (e) => {
     setEmail(e.target.value);
@@ -15,6 +17,13 @@ export function RegistrationForm() {
   const passwordHandler = (e) => {
     setPassword(e.target.value);
   };
+  useEffect(() => {
+    if (setButtonActive(email, password)) {
+      setBtnActive(true);
+    } else {
+      setBtnActive(false);
+    }
+  }, [email, password]);
   const registerUserFetch = async (e) => {
     e.preventDefault();
     try {
@@ -38,16 +47,15 @@ export function RegistrationForm() {
     }
   };
   return (
-    <div className="container">
-      <form>
-        Login :
-        {' '}
-        <input type="text" onChange={loginHandler} />
-        Password:
-        <input type="password" onChange={passwordHandler} />
-        <button className="btn-primary" onClick={registerUserFetch}>Register</button>
+    <section className="container register__container">
+      <form className="register__container__form">
+        Login
+        <input type="email" className="register__container__form__input--email" onChange={loginHandler} />
+        Password
+        <input type="password" className="register__container__form__input--password" onChange={passwordHandler} />
+        <button className="btn-primary" onClick={registerUserFetch} disabled={!btnActive}>Register</button>
+        {error && <span className="container login__container__form--error">{error}</span>}
       </form>
-      {error && <h3>{error}</h3>}
-    </div>
+    </section>
   );
 }

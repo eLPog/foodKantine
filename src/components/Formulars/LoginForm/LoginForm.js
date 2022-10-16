@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { firebaseLoginWithEmail } from '../../../assets/db/firebaseurl';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 import './LoginForm.css';
+import { setButtonActive } from '../../../utils/setButtonActive';
 
 export function LoginForm() {
   const [email, setEmail] = useState('');
@@ -12,7 +13,7 @@ export function LoginForm() {
   const navigate = useNavigate();
   const { userLoginHandler } = useContext(isAuthenticatedContext);
   useEffect(() => {
-    if (email.trim().length > 1 && email.includes('@') && password.trim().length > 4) {
+    if (setButtonActive(email, password)) {
       setBtnActive(true);
     } else {
       setBtnActive(false);
