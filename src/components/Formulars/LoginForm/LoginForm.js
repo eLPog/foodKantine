@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { firebaseLoginWithEmail } from '../../../assets/db/firebaseurl';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
@@ -8,8 +8,16 @@ export function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [btnActive, setBtnActive] = useState(false);
   const navigate = useNavigate();
   const { userLoginHandler } = useContext(isAuthenticatedContext);
+  useEffect(() => {
+    if (email.trim().length > 1 && email.includes('@') && password.trim().length > 4) {
+      setBtnActive(true);
+    } else {
+      setBtnActive(false);
+    }
+  }, [email, password]);
   const loginHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -39,15 +47,15 @@ export function LoginForm() {
     }
   };
   return (
-    <div className="container loginForm__container">
-      <form>
-        Login
-        <input type="text" onChange={loginHandler} />
+    <section className="container login__container">
+      <form className="login__container__form">
+        Email
+        <input type="email" required className="login__container__form__input--email" onChange={loginHandler} />
         Password
-        <input type="password" onChange={passwordHandler} />
-        <button className="btn-primary" onClick={fetchLogin}>Login</button>
+        <input type="password" required className="login__container__form__input--password" onChange={passwordHandler} />
+        <button className="btn-primary" disabled={!btnActive} onClick={fetchLogin}>Login</button>
+        {error && <span className="container login__container__form--error">{error}</span>}
       </form>
-      {error && <h3>{error}</h3>}
-    </div>
+    </section>
   );
 }
