@@ -34,7 +34,7 @@ export function Menu(props) {
               {props.numbersOfItemsInOrdersCart}
             </li>
           </NavLink>
-          <NavLink to="/signIn">
+          <NavLink to="/user">
             <li title="User account">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

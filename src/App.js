@@ -15,6 +15,7 @@ import { LoginForm } from './components/Formulars/LoginForm/LoginForm';
 import { isAuthenticatedContext } from './context/isAuthenticatedContext';
 import { Order } from './components/Order/Order';
 import { UserHistory } from './components/UserHistory/UserHistory';
+import { UserPage } from './components/UserPage/UserPage';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -139,6 +140,7 @@ function App() {
               <Route path="/login" element={<LoginForm />} />
               <Route path="/signIn" element={<RegistrationForm />} />
               <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} removeMeal={removeMealFromOrder} clearOrder={clearOrder} /> : <Navigate to="/" />} />
+              <Route path="/user" element={isUserAuthenticated ? <UserPage /> : <Navigate to="/" />} />
               <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
             </Routes>
           )}

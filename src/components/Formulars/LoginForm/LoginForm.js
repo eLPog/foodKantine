@@ -37,6 +37,7 @@ export function LoginForm() {
         body: JSON.stringify({ email, password, returnSecureToken: true }),
       });
       const res = await data.json();
+      console.log(res);
       if (res.error) {
         setError('Invalid email or password');
         return;
