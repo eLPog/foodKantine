@@ -29,7 +29,7 @@ export function RegistrationForm() {
     return () => clearTimeout(arePasswordsTheSame);
   }, [password, confirmedPassword]);
   useEffect(() => {
-    if (setButtonActive(email, password, confirmedPassword)) {
+    if (setButtonActive(email, password) && password === confirmedPassword) {
       setBtnActive(true);
     } else {
       setBtnActive(false);
