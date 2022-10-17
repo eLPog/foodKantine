@@ -1,16 +1,16 @@
-.login__container {
+.register__container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 2rem;
 }
-.login__container form {
+.register__container form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     align-items: center;
 }
-.login__container input {
+.register__container input {
     border-radius: 10px;
 }

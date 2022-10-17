@@ -50,10 +50,14 @@ export function LoginForm() {
   return (
     <section className="container login__container">
       <form className="login__container__form">
-        Email
-        <input type="email" required className="login__container__form__input--email" onChange={loginHandler} />
-        Password
-        <input type="password" required className="login__container__form__input--password" onChange={passwordHandler} />
+        <label htmlFor="loginEmail">
+          Email
+        </label>
+        <input type="email" id="loginEmail" required className="login__container__form__input--email" onChange={loginHandler} />
+        <label htmlFor="loginPassword">
+          Password
+        </label>
+        <input type="password" id="loginPassword" required className="login__container__form__input--password" onChange={passwordHandler} />
         <button className="btn-primary" disabled={!btnActive} onClick={fetchLogin}>Login</button>
         {error && <span className="container login__container__form--error">{error}</span>}
       </form>
