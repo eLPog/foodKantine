@@ -24,16 +24,17 @@ export function UserPage() {
       console.log(err);
     }
   };
+  // @TODO zmiana maila
   return (
     <div className="container userPage__container">
       <div className="userPage__container__infos">
         <span>{userEmail}</span>
       </div>
       <div className="userPage__container__actions">
-        <p>Change email</p>
-        <p>Change password</p>
-        <button onClick={passwordReset}>Reset password</button>
-        <p>Delete account</p>
+        <button className="userPage__container__actions--button">Change email</button>
+        <button className="userPage__container__actions--button">Change password</button>
+        <button className="userPage__container__actions--button" onClick={passwordReset}>Reset password</button>
+        <button className="userPage__container__actions--button">Delete account</button>
       </div>
     </div>
   );
