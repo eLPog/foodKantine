@@ -1,16 +1,16 @@
 import './Menu.css';
 import { NavLink } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
 import { ProductAddedModal } from '../Modals/ProductAddedModal/ProductAddedModal';
 
 export function Menu(props) {
   const newProduct = props.newProductAdded;
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
-  const { isUserAuthenticated, userLoginHandler, userEmail } = useContext(isAuthenticatedContext);
-  const hamburgerMenuHandler = () => {
+  const { isUserAuthenticated, userLoginHandler } = useContext(isAuthenticatedContext);
+  const hamburgerMenuHandler = useCallback(() => {
     showHamburgerMenu ? setShowHamburgerMenu(false) : setShowHamburgerMenu(true);
-  };
+  }, [showHamburgerMenu]);
 
   const menu = (
     <>
