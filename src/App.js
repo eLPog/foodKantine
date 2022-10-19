@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   BrowserRouter, Routes, Route, Navigate,
 } from 'react-router-dom';
@@ -98,9 +98,9 @@ function App() {
       setOrderCart(meals);
     }
   };
-  const clearOrder = () => {
+  const clearOrder = useCallback(() => {
     setOrderCart([]);
-  };
+  }, []);
   const searchElement = (value) => {
     setMealsFilter(value);
     const filteredElements = elementsBeforeSearch.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())

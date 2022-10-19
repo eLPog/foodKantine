@@ -17,7 +17,6 @@ export function UserHistory() {
         let res = await data.json();
         res = Object.values(res);
         res = res.filter((el) => el.userID === localId);
-        console.log(res);
         setAllUsersMeals(res);
         setLastOrder(res[res.length - 1]);
         let totalValue = 0;
@@ -74,7 +73,7 @@ export function UserHistory() {
                       <li key={Math.random() * 1000}>
                         {oneMeal.name}
                         <p className="userHistory__container__bottom__orderList--price">
-                          {oneMeal.price}
+                          {oneMeal.price.toFixed(2)}
                           $
                         </p>
                       </li>
