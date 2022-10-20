@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
-import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
+import { useEffect } from 'react';
 
-export function PasswordReset() {
-  const { userLoginHandler } = useContext(isAuthenticatedContext);
-  useEffect(userLoginHandler(false));
+export function PasswordReset(props) {
+  useEffect(() => {
+    props.userLoginHandler(false);
+  }, []);
   return (
     <div className="container text-center mt-5">
       <section>

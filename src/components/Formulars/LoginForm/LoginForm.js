@@ -1,17 +1,16 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { firebaseLoginWithEmail } from '../../../assets/db/firebaseurl';
-import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 import './LoginForm.css';
 import { setButtonActive } from '../../../utils/setButtonActive';
 
-export function LoginForm() {
+export function LoginForm(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [btnActive, setBtnActive] = useState(false);
   const navigate = useNavigate();
-  const { userLoginHandler } = useContext(isAuthenticatedContext);
+  const { userLoginHandler } = props;
   useEffect(() => {
     if (setButtonActive(email, password)) {
       setBtnActive(true);
@@ -37,7 +36,6 @@ export function LoginForm() {
         body: JSON.stringify({ email, password, returnSecureToken: true }),
       });
       const res = await data.json();
-      console.log(res);
       if (res.error) {
         setError('Invalid email or password');
         return;

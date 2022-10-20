@@ -131,7 +131,7 @@ function App() {
       <Header searchDish={searchElement} />
       <BrowserRouter>
         <isAuthenticatedContext.Provider value={{
-          isUserAuthenticated, userEmail, idToken, localId, userLoginHandler,
+          isUserAuthenticated, userEmail, idToken, localId,
         }}
         >
           <Menu numbersOfItemsInOrdersCart={orderCart.length} newProductAdded={addProductToCart} />
@@ -139,11 +139,11 @@ function App() {
             <Routes>
               <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} mealsFilter={mealsFilter} />} />
               <Route path="/:dataID" element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
-              <Route path="/login" element={<LoginForm />} />
-              <Route path="/signIn" element={<RegistrationForm />} />
+              <Route path="/login" element={<LoginForm userLoginHandler={userLoginHandler} />} />
+              <Route path="/signIn" element={<RegistrationForm userLoginHandler={userLoginHandler} />} />
               <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} removeMeal={removeMealFromOrder} clearOrder={clearOrder} /> : <Navigate to="/" />} />
               <Route path="/user" element={isUserAuthenticated ? <UserPage /> : <Navigate to="/" />} />
-              <Route path="/user/passwordReset" element={<PasswordReset />} />
+              <Route path="/user/passwordReset" element={<PasswordReset userLoginHandler={userLoginHandler} />} />
               <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
               <Route path="/error" element={<ErrorPage />} />
             </Routes>

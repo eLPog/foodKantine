@@ -5,14 +5,14 @@ import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext'
 import { setButtonActive } from '../../../utils/setButtonActive';
 import './RegistrationForm.css';
 
-export function RegistrationForm() {
+export function RegistrationForm(props) {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmedPassword, setConfirmedPassword] = useState('');
   const [error, setError] = useState('');
   const [btnActive, setBtnActive] = useState(false);
-  const { userLoginHandler } = useContext(isAuthenticatedContext);
+  const { userLoginHandler } = props;
   const loginHandler = (e) => {
     setEmail(e.target.value);
   };
