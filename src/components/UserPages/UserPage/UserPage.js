@@ -1,9 +1,11 @@
 import './UserPage.css';
-import { useContext } from 'react';
-import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
-import { firebasePasswordReset } from '../../assets/db/firebaseurl';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
+import { firebasePasswordReset } from '../../../assets/db/firebaseurl';
 
 export function UserPage() {
+  const navigate = useNavigate();
   const { userEmail } = useContext(isAuthenticatedContext);
   const passwordReset = async () => {
     try {
@@ -18,13 +20,15 @@ export function UserPage() {
           email: userEmail,
         }),
       });
-      const data = await res.json();
-      console.log(data);
+      if (res.ok) {
+        navigate('/user/passwordReset');
+      } else {
+        navigate('/error');
+      }
     } catch (err) {
       console.log(err);
     }
   };
-  // @TODO zmiana maila
   return (
     <div className="container userPage__container">
       <div className="userPage__container__infos">

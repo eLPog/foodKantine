@@ -7,3 +7,4 @@ export const isAuthenticatedContext = createContext({
   localId: '',
   userLoginHandler: () => {},
 });
+// @TODO usunąć loginHandler z contextu i przekazać jako props do komponentu resetowania hasła, aby wylogować użytkownika po pomyślnym wysłaniu maila

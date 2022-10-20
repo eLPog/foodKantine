@@ -15,7 +15,9 @@ import { LoginForm } from './components/Formulars/LoginForm/LoginForm';
 import { isAuthenticatedContext } from './context/isAuthenticatedContext';
 import { Order } from './components/Order/Order';
 import { UserHistory } from './components/UserHistory/UserHistory';
-import { UserPage } from './components/UserPage/UserPage';
+import { UserPage } from './components/UserPages/UserPage/UserPage';
+import { PasswordReset } from './components/UserPages/PasswordReset/PasswordReset';
+import { ErrorPage } from './components/ErrorPage/ErrorPage';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -141,7 +143,9 @@ function App() {
               <Route path="/signIn" element={<RegistrationForm />} />
               <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} removeMeal={removeMealFromOrder} clearOrder={clearOrder} /> : <Navigate to="/" />} />
               <Route path="/user" element={isUserAuthenticated ? <UserPage /> : <Navigate to="/" />} />
+              <Route path="/user/passwordReset" element={<PasswordReset />} />
               <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
+              <Route path="/error" element={<ErrorPage />} />
             </Routes>
           )}
         </isAuthenticatedContext.Provider>
