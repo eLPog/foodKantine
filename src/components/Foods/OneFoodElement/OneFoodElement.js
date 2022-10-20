@@ -12,7 +12,7 @@ export function OneFoodElement(props) {
             {props.name}
           </p>
           <div className="text-center">
-            <Link to={`/${props.dataID}`}>
+            <Link to={`/products/${props.dataID}`}>
               <button className="btn-primary">
                 Details
               </button>

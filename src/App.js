@@ -18,6 +18,7 @@ import { UserHistory } from './components/UserHistory/UserHistory';
 import { UserPage } from './components/UserPages/UserPage/UserPage';
 import { PasswordReset } from './components/UserPages/PasswordReset/PasswordReset';
 import { ErrorPage } from './components/ErrorPage/ErrorPage';
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -138,7 +139,7 @@ function App() {
           {loading ? <Loading /> : (
             <Routes>
               <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} mealsFilter={mealsFilter} />} />
-              <Route path="/:dataID" element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
+              <Route path="/products/:dataID" element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
               <Route path="/login" element={<LoginForm userLoginHandler={userLoginHandler} />} />
               <Route path="/signIn" element={<RegistrationForm userLoginHandler={userLoginHandler} />} />
               <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} removeMeal={removeMealFromOrder} clearOrder={clearOrder} /> : <Navigate to="/" />} />
@@ -146,6 +147,7 @@ function App() {
               <Route path="/user/passwordReset" element={<PasswordReset userLoginHandler={userLoginHandler} />} />
               <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
               <Route path="/error" element={<ErrorPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           )}
         </isAuthenticatedContext.Provider>
