@@ -1,5 +1,5 @@
 import './UserPage.css';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 import { firebasePasswordReset } from '../../../assets/db/firebaseurl';
@@ -7,7 +7,7 @@ import { firebasePasswordReset } from '../../../assets/db/firebaseurl';
 export function UserPage() {
   const navigate = useNavigate();
   const { userEmail } = useContext(isAuthenticatedContext);
-  const passwordReset = async () => {
+  const setNewPassword = async () => {
     try {
       const res = await fetch(firebasePasswordReset, {
         method: 'POST',
@@ -21,7 +21,7 @@ export function UserPage() {
         }),
       });
       if (res.ok) {
-        navigate('/user/passwordReset');
+        navigate('/user/setNewPassword');
       } else {
         navigate('/error');
       }
@@ -36,8 +36,7 @@ export function UserPage() {
       </div>
       <div className="userPage__container__actions">
         <button className="userPage__container__actions--button">Change email</button>
-        <button className="userPage__container__actions--button">Change password</button>
-        <button className="userPage__container__actions--button" onClick={passwordReset}>Reset password</button>
+        <button className="userPage__container__actions--button" onClick={setNewPassword}>Change password</button>
         <button className="userPage__container__actions--button">Delete account</button>
       </div>
     </div>
