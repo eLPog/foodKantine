@@ -16,9 +16,10 @@ import { isAuthenticatedContext } from './context/isAuthenticatedContext';
 import { Order } from './components/Order/Order';
 import { UserHistory } from './components/UserHistory/UserHistory';
 import { UserPage } from './components/UserPages/UserPage/UserPage';
-import { PasswordReset } from './components/UserPages/PasswordReset/PasswordReset';
+import { PasswordChange } from './components/UserPages/PasswordChange/PasswordChange';
 import { ErrorPage } from './components/ErrorPage/ErrorPage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
+import { EmailChange } from './components/UserPages/EmailChange/EmailChange';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -135,7 +136,7 @@ function App() {
           isUserAuthenticated, userEmail, idToken, localId,
         }}
         >
-          <Menu numbersOfItemsInOrdersCart={orderCart.length} newProductAdded={addProductToCart} />
+          <Menu numbersOfItemsInOrdersCart={orderCart.length} newProductAdded={addProductToCart} userLoginHandler={userLoginHandler} />
           {loading ? <Loading /> : (
             <Routes>
               <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} mealsFilter={mealsFilter} />} />
@@ -144,7 +145,8 @@ function App() {
               <Route path="/signIn" element={<RegistrationForm userLoginHandler={userLoginHandler} />} />
               <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} removeMeal={removeMealFromOrder} clearOrder={clearOrder} /> : <Navigate to="/" />} />
               <Route path="/user" element={isUserAuthenticated ? <UserPage /> : <Navigate to="/" />} />
-              <Route path="/user/passwordReset" element={<PasswordReset userLoginHandler={userLoginHandler} />} />
+              <Route path="/user/passwordReset" element={<PasswordChange userLoginHandler={userLoginHandler} />} />
+              <Route path="/user/emailChange" element={<EmailChange userLoginHandler={userLoginHandler} />} />
               <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
               <Route path="/error" element={<ErrorPage />} />
               <Route path="*" element={<NotFoundPage />} />

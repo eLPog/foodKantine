@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { firebaseAddUser } from '../../../assets/db/firebaseurl';
-import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 import { setButtonActive } from '../../../utils/setButtonActive';
 import './RegistrationForm.css';
 

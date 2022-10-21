@@ -7,7 +7,7 @@ import { ProductAddedModal } from '../Modals/ProductAddedModal/ProductAddedModal
 export function Menu(props) {
   const newProduct = props.newProductAdded;
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
-  const { isUserAuthenticated, userLoginHandler } = useContext(isAuthenticatedContext);
+  const { isUserAuthenticated } = useContext(isAuthenticatedContext);
   const hamburgerMenuHandler = useCallback(() => {
     showHamburgerMenu ? setShowHamburgerMenu(false) : setShowHamburgerMenu(true);
   }, [showHamburgerMenu]);
@@ -72,7 +72,7 @@ export function Menu(props) {
               </svg>
             </li>
           </NavLink>
-          <NavLink to="/" onClick={() => userLoginHandler(false)}>
+          <NavLink to="/" onClick={() => props.userLoginHandler(false)}>
             <li>
               Logout
             </li>
