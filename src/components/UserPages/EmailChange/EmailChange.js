@@ -3,12 +3,21 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { firebaseChangeEmail } from '../../../assets/db/firebaseurl';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
+import { setButtonActive } from '../../../utils/setButtonActive';
 
 export function EmailChange(props) {
   const [email, setEmail] = useState('');
   const [emailChangedStatus, setEmailChangedStatus] = useState(false);
+  const [isButtonActive, setIsButtonActive] = useState(false);
   const { idToken } = useContext(isAuthenticatedContext);
   const navigate = useNavigate();
+  useEffect(() => {
+    if (setButtonActive(email)) {
+      setIsButtonActive(true);
+    } else {
+      setIsButtonActive(false);
+    }
+  }, [email]);
   const emailInputHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -53,10 +62,10 @@ export function EmailChange(props) {
       {emailChangedStatus ? emailSuccessfulChanged : (
         <>
           <label htmlFor="inputChangeEmail">
-            Your new email
+            Enter new email
           </label>
           <input onChange={emailInputHandler} type="email" className="emailChange__container__input" />
-          <button className="btn-primary" onClick={setNewEmail}>Save</button>
+          <button className="btn-primary" onClick={setNewEmail} disabled={!isButtonActive}>Save</button>
         </>
       )}
     </div>
