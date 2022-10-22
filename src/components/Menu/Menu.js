@@ -2,7 +2,7 @@ import './Menu.css';
 import { NavLink } from 'react-router-dom';
 import { useCallback, useContext, useState } from 'react';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
-import { InfoModal } from '../Modals/ProductAddedModal/InfoModal';
+import { InfoModal } from '../Modals/InfoModal/InfoModal';
 
 export function Menu(props) {
   const newProduct = props.newProductAdded;

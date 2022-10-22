@@ -1,13 +1,10 @@
 import './OneFoodElement.css';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
-// @TODO wyświetlić info, że aby zamówić to trzeba się zalogować
+
 export function OneFoodElement(props) {
   const { isUserAuthenticated } = useContext(isAuthenticatedContext);
-  const { needToLoginInfo, setNeedToLoginInfo } = useState('');
-  const navigate = useNavigate();
-
   return (
     <div className={`d-flex flex-sm-column col-sm-4 col-lg-3 oneFoodElement__container ${props.specialOffer && 'specialOffer__select'}`}>
       <div className="d-flex flex-sm-col
@@ -23,9 +20,18 @@ export function OneFoodElement(props) {
                 Details
               </button>
             </Link>
-            <button className="btn-primary" onClick={() => props.addMealToOrder(props.dataID)}>
-              Buy
-            </button>
+            {isUserAuthenticated ? (
+              <button className="btn-primary" onClick={() => props.addMealToOrder(props.dataID)}>
+                Buy
+              </button>
+            ) : (
+              <Link to="/login">
+                <button className="btn-primary">
+                  Buy
+                </button>
+              </Link>
+            )}
+
           </div>
         </div>
       </div>
