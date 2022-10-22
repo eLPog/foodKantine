@@ -20,6 +20,7 @@ import { PasswordChange } from './components/UserPages/PasswordChange/PasswordCh
 import { ErrorPage } from './components/ErrorPage/ErrorPage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { EmailChange } from './components/UserPages/EmailChange/EmailChange';
+// @TODO jak jest niezalogowany i klika buy to wyskakuje product added
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -69,6 +70,7 @@ function App() {
     fetchMeals();
   }, []);
   const addMealToOrder = (mealID) => {
+    if (!isUserAuthenticated) return;
     const meal = elementsBeforeSearch.find((el) => el.dataID === mealID);
     let { price } = meal;
     if (meal.specialOffer) {

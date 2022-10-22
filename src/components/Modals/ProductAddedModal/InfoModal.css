@@ -1,7 +1,7 @@
 .ProductAddedModalContainer {
     width: 20%;
     height: 7rem;
-    background-color: var(--third-color);
+    background-color: var(--third-bgcolor);
     position: fixed;
     left: 40%;
     top: 30%;
@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: showModal 200ms ease-in-out;
+    animation: showModal 300ms ease-in-out;
     border-radius: 50rem;
 }
 

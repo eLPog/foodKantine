@@ -2,7 +2,7 @@ import './Menu.css';
 import { NavLink } from 'react-router-dom';
 import { useCallback, useContext, useState } from 'react';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
-import { ProductAddedModal } from '../Modals/ProductAddedModal/ProductAddedModal';
+import { InfoModal } from '../Modals/ProductAddedModal/InfoModal';
 
 export function Menu(props) {
   const newProduct = props.newProductAdded;
@@ -148,7 +148,7 @@ export function Menu(props) {
           {menu}
         </ul>
       </div>
-      {newProduct && <ProductAddedModal />}
+      {newProduct && <InfoModal text="Product added to cart" />}
     </nav>
 
   );
