@@ -42,13 +42,12 @@ export function UserHistory() {
               <div className="flex-sm-row userHistory__container__top">
                 <div className="userHistory__container__lastOrder">
                   <span>Last order</span>
-                  <ul>
-                    {lastOrder.meals.map((el) => (
-                      <li key={Math.random() * 1000}>
-                        {el.name}
-                      </li>
-                    ))}
-                  </ul>
+                  {lastOrder.meals.map((el) => (
+                    <p key={Math.random() * 1000}>
+                      {el.name}
+                    </p>
+                  ))}
+
                   <span>{lastOrder.date}</span>
                 </div>
                 <div className="userHistory__container__stats">

@@ -54,10 +54,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-items: center;
 }
-.userHistory__container__lastOrder ul {
-    list-style: none;
-}
+
 .userHistory__container__lastOrder span {
     font-weight: bolder;
 }
