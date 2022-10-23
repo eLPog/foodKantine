@@ -61,8 +61,17 @@ background-color: lightpink;
 
 
 @media only screen and (max-width: 576px){
-    .oneFoodElement__container__card__photo  {
-
+    a {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-start;
+        overflow: no-display;
+    }
+    .oneFoodElement__container__card__photo {
+        object-fit: cover;
+        height: 100%;
+        overflow: hidden;
     }
     .oneFoodElement__container {
         margin:5px;
