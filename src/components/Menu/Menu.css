@@ -62,35 +62,11 @@ a:hover {
 }
 
 @media only screen and (max-width: 576px){
-    .toggle--button {
-        display: flex;
-    }
-    .nav__container__menu{
-        width: 100%;
-    }
-
-    .nav__container__menu__list {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        gap:0.5rem;
-        animation: showMenu 500ms ease-in;
-    }
 
     .nav__container {
         flex-direction: column;
-        align-items: flex-start;
+        padding-bottom: 1.5rem;
     }
-    .nav__container__menu__list {
-        align-items: center;
-        height: 0;
-    }
-    .nav__container__menu__list.active {
-        display: flex;
-        height: 5rem;
-        animation: showMenu 100ms ease-in;
-    }
-
 
 }
 @keyframes showMenu {
