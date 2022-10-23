@@ -13,4 +13,16 @@
 }
 .login__container input {
     border-radius: 10px;
+    text-align: center;
+
+}
+
+@media only screen and (max-width: 576px){
+    .login__container form {
+        width: 100%;
+    }
+    input {
+        width: 75%;
+        height: 1.5rem;
+    }
 }

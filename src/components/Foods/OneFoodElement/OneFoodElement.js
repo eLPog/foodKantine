@@ -35,7 +35,7 @@ export function OneFoodElement(props) {
           </div>
         </div>
       </div>
-      <Link to={`/${props.dataID}`}>
+      <Link to={`/products/${props.dataID}`}>
         <div className="oneFoodElement__container__card__photo">
           <img
             src={props.photo}
