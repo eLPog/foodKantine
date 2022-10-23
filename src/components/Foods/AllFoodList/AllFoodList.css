@@ -15,22 +15,4 @@
     margin:0.3rem;
 }
 
-.percentSign {
-font-size: 1rem;
-    animation: saleButton 2000ms infinite ;
-}
 
-
-@keyframes saleButton {
-0% {
-    font-size: 0.8rem;
-
-}
-    50% {
-        font-size: 1.1rem;
-
-    }
-    100% {
-        font-size: 0.8rem;
-    }
-}

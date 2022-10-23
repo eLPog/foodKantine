@@ -25,6 +25,7 @@ a:hover {
 }
 .nav__container__menu__list li {
     padding: 0 0.5rem;
+    display: block;
 }
 .nav__container__menu__list li:hover {
     background-color: var(--third-color);
