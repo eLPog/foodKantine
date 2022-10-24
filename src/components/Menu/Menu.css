@@ -5,6 +5,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--second-bgcolor);
+    z-index: 1000;
 }
 a {
     text-decoration: none;

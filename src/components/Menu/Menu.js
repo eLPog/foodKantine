@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useCallback, useContext, useState } from 'react';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
 import { InfoModal } from '../Modals/InfoModal/InfoModal';
-// @TODO przypiąć menu do górnego paska, jeśli zjeżdża okno w dół
+
 export function Menu(props) {
   const newProduct = props.newProductAdded;
   const { isUserAuthenticated } = useContext(isAuthenticatedContext);

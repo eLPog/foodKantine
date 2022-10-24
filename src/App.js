@@ -90,7 +90,7 @@ function App() {
     setAddProductToCart(true);
     setTimeout(() => {
       setAddProductToCart(false);
-    }, 800);
+    }, 1000);
   };
   const removeMealFromOrder = (mealID) => {
     const itemToRemove = orderCart.find((el) => el.mealID === mealID);
