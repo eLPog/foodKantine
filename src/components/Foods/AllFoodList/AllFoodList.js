@@ -4,9 +4,9 @@ import { OneFoodElement } from '../OneFoodElement/OneFoodElement';
 
 function AllFoodList(props) {
   return (
-    <>
+    <main>
       <div className="container mainSection__container">
-        <div className="row d-flex align-items-center  justify-content-center">
+        <section className="row d-flex align-items-center  justify-content-center">
           <button className="btn-secondary food__searchButton--sale" onClick={() => { props.searchFoodByCategory('sale'); }}>
             <span>
               <strong>
@@ -22,8 +22,8 @@ function AllFoodList(props) {
           <button className="btn-secondary col-sm-4 food__searchButton" onClick={() => { props.searchFoodByCategory('dessert'); }}>Dessert</button>
           <button className="btn-secondary col-sm-4 food__searchButton" onClick={() => { props.searchFoodByCategory(false); }}>All</button>
 
-        </div>
-        <div className="row mt-3 d-flex justify-content-around allFoodList__container">
+        </section>
+        <section className="row mt-3 d-flex justify-content-around allFoodList__container">
           <div className="allFoodList__container__filterApplied">
             <span className="allFoodList__container__filterApplied--element">
               Category/Searched word:
@@ -41,9 +41,9 @@ function AllFoodList(props) {
               addMealToOrder={props.addMealToOrder}
             />
           ))}
-        </div>
+        </section>
       </div>
-    </>
+    </main>
 
   );
 }

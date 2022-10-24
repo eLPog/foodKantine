@@ -6,7 +6,7 @@ import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext'
 export function OneFoodElement(props) {
   const { isUserAuthenticated } = useContext(isAuthenticatedContext);
   return (
-    <div className={`d-flex flex-sm-column col-sm-4 col-lg-3 oneFoodElement__container ${props.specialOffer && 'specialOffer__select'}`}>
+    <section className={`d-flex flex-sm-column col-sm-4 col-lg-3 oneFoodElement__container ${props.specialOffer && 'specialOffer__select'}`}>
       <div className="d-flex flex-sm-col
       flex-column justify-content-around oneFoodElement__container__card__description"
       >
@@ -43,6 +43,6 @@ export function OneFoodElement(props) {
           />
         </div>
       </Link>
-    </div>
+    </section>
   );
 }
