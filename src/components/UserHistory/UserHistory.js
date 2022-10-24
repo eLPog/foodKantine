@@ -17,7 +17,7 @@ export function UserHistory() {
         let res = await data.json();
         res = Object.values(res);
         res = res.filter((el) => el.userID === localId);
-        setAllUsersMeals(res);
+        setAllUsersMeals(res.reverse());
         setLastOrder(res[res.length - 1]);
         let totalValue = 0;
         res.forEach((el) => el.meals.forEach((el) => totalValue += el.price));
