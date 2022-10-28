@@ -50,6 +50,7 @@ export function UserPage() {
         }),
       });
       if (res.ok) {
+        localStorage.removeItem('user-data');
         navigate('/user/delete');
       } else {
         navigate('/error');
