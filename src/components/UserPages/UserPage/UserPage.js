@@ -2,10 +2,10 @@ import './UserPage.css';
 import { useContext, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
-import { firebasePasswordReset } from '../../../assets/db/firebaseurl';
+import { firebaseDeleteAccount, firebasePasswordReset } from '../../../assets/db/firebaseurl';
 
 export function UserPage() {
-  const { userEmail } = useContext(isAuthenticatedContext);
+  const { userEmail, idToken } = useContext(isAuthenticatedContext);
   const navigate = useNavigate();
 
   const setNewPassword = async () => {
@@ -22,12 +22,36 @@ export function UserPage() {
         }),
       });
       if (res.ok) {
-        navigate('/user/setNewPassword');
+        navigate('/user/passwordReset');
       } else {
         navigate('/error');
       }
     } catch (err) {
       console.log(err);
+      navigate('/error');
+    }
+  };
+
+  const deleteAccount = async () => {
+    try {
+      const res = await fetch(firebaseDeleteAccount, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          idToken,
+        }),
+      });
+      if (res.ok) {
+        navigate('/user/delete');
+      } else {
+        navigate('/error');
+      }
+    } catch (err) {
+      console.log(err);
+      navigate('/error');
     }
   };
   return (
@@ -40,7 +64,7 @@ export function UserPage() {
           <button className="userPage__container__actions--button">Change email</button>
         </NavLink>
         <button className="userPage__container__actions--button" onClick={setNewPassword}>Change password</button>
-        <button className="userPage__container__actions--button">Delete account</button>
+        <button className="userPage__container__actions--button" onClick={deleteAccount}>Delete account</button>
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ import { PasswordChange } from './components/UserPages/PasswordChange/PasswordCh
 import { ErrorPage } from './components/ErrorPage/ErrorPage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { EmailChange } from './components/UserPages/EmailChange/EmailChange';
+import { DeleteAccountSummary } from './components/UserPages/DeleteAccountSummary/DeleteAccountSummary';
 // @TODO jak jest niezalogowany i klika buy to wyskakuje product added
 
 function App() {
@@ -149,6 +150,7 @@ function App() {
               <Route path="/user" element={isUserAuthenticated ? <UserPage /> : <Navigate to="/" />} />
               <Route path="/user/passwordReset" element={<PasswordChange userLoginHandler={userLoginHandler} />} />
               <Route path="/user/emailChange" element={<EmailChange userLoginHandler={userLoginHandler} />} />
+              <Route path="/user/delete" element={isUserAuthenticated ? <DeleteAccountSummary userLoginHandler={userLoginHandler} /> : <Navigate to="/" />} />
               <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
               <Route path="/error" element={<ErrorPage />} />
               <Route path="*" element={<NotFoundPage />} />

@@ -11,9 +11,9 @@ export function OneFoodElement(props) {
       flex-column justify-content-around oneFoodElement__container__card__description"
       >
         <div className="d-flex flex-column align-items-center">
-          <p className="oneFoodElement__container__card__description__title">
+          <h2 className="oneFoodElement__container__card__description__title">
             {props.name}
-          </p>
+          </h2>
           <div className="text-center">
             <Link to={`/products/${props.dataID}`}>
               <button className="btn-primary">

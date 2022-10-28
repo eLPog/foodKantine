@@ -68,6 +68,8 @@ export function RegistrationForm(props) {
   };
   return (
     <section className="container register__container">
+      <h2 className="container register__container__title">Register as new user</h2>
+
       <form className="register__container__form">
         <label htmlFor="registerEmail">
           Email

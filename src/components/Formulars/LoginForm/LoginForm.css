@@ -16,6 +16,11 @@
     text-align: center;
 
 }
+.login__container__title{
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
 
 @media only screen and (max-width: 576px){
     .login__container form {

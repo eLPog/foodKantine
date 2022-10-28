@@ -48,6 +48,7 @@ export function LoginForm(props) {
   };
   return (
     <section className="container login__container">
+      <h2 className="container login__container__title">Login</h2>
       <form className="login__container__form">
         <label htmlFor="loginEmail">
           Email

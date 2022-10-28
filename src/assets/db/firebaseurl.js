@@ -4,3 +4,4 @@ export const firebaseAddUser = `https://identitytoolkit.googleapis.com/v1/accoun
 export const firebaseLoginWithEmail = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebaseApiKey}`;
 export const firebasePasswordReset = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${firebaseApiKey}`;
 export const firebaseChangeEmail = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${firebaseApiKey}`;
+export const firebaseDeleteAccount = `https://identitytoolkit.googleapis.com/v1/accounts:delete?key=${firebaseApiKey}`;
