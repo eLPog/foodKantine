@@ -25,11 +25,20 @@ a:hover {
     transition: all 500ms ease-in;
 
 }
-.nav__container__menu__list li {
-    padding: 0 0.5rem;
+
+.nav__container__menu__list__li__shopCard {
+    display: flex;
+    flex-direction: row;
+}
+.nav__container__menu__list__numbersOfProducts {
     display: block;
 }
-.nav__container__menu__list li:hover {
+.nav__container__menu__list__li {
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+.nav__container__menu__list__li:hover {
     background-color: var(--third-color);
     color:white;
     border-radius: 10px;
@@ -62,7 +71,10 @@ a:hover {
 .itemAddedToCartAnimation {
     animation: itemAdded 500ms ease-in-out;
 }
-
+.nav__container__menu__list__li__text {
+    font-size: 0.6rem;
+    letter-spacing: 1px ;
+}
 @media only screen and (max-width: 576px){
 
     .nav__container {

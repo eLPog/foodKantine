@@ -12,8 +12,7 @@ export function Menu(props) {
       {isUserAuthenticated ? (
         <>
           <NavLink to="/order" className={newProduct ? 'itemAddedToCartAnimation' : ''}>
-            <li title="Shop card">
-
+            <li title="Shop card" className="nav__container__menu__list__li__shopCard">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -26,11 +25,13 @@ export function Menu(props) {
                   d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
                 />
               </svg>
-              {props.numbersOfItemsInOrdersCart}
+              <span className="nav__container__menu__list__numbersOfProducts">
+                {props.numbersOfItemsInOrdersCart}
+              </span>
             </li>
           </NavLink>
           <NavLink to="/user">
-            <li title="User account">
+            <li title="User account" className="nav__container__menu__list__li">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -46,7 +47,7 @@ export function Menu(props) {
             </li>
           </NavLink>
           <NavLink to="/history">
-            <li title="Orders stats">
+            <li title="Orders stats" className="nav__container__menu__list__li">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -68,7 +69,7 @@ export function Menu(props) {
             </li>
           </NavLink>
           <NavLink to="/" onClick={() => props.userLoginHandler(false)}>
-            <li>
+            <li className="nav__container__menu__list__li">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -92,7 +93,7 @@ export function Menu(props) {
       ) : (
         <>
           <NavLink to="/signIn">
-            <li>
+            <li className="nav__container__menu__list__li">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -109,10 +110,11 @@ export function Menu(props) {
                   d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
                 />
               </svg>
+              <span className="nav__container__menu__list__li__text">Sign in</span>
             </li>
           </NavLink>
           <NavLink to="/login">
-            <li>
+            <li className="nav__container__menu__list__li">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -130,6 +132,7 @@ export function Menu(props) {
                   d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
                 />
               </svg>
+              <span className="nav__container__menu__list__li__text">Log In</span>
             </li>
           </NavLink>
         </>
