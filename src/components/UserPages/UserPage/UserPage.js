@@ -1,11 +1,12 @@
 import './UserPage.css';
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 import { firebaseDeleteAccount, firebasePasswordReset } from '../../../assets/db/firebaseurl';
 
 export function UserPage() {
   const { userEmail, idToken } = useContext(isAuthenticatedContext);
+  const [isDeleteConfirmed, setIsDeleteConfirmed] = useState(false);
   const navigate = useNavigate();
 
   const setNewPassword = async () => {
@@ -31,6 +32,10 @@ export function UserPage() {
       navigate('/error');
     }
   };
+
+  const isDeleteConfirmedHandler = useCallback(() => {
+    isDeleteConfirmed ? setIsDeleteConfirmed(false) : setIsDeleteConfirmed(true);
+  }, [isDeleteConfirmed]);
 
   const deleteAccount = async () => {
     try {
@@ -64,7 +69,14 @@ export function UserPage() {
           <button className="userPage__container__actions--button">Change email</button>
         </NavLink>
         <button className="userPage__container__actions--button" onClick={setNewPassword}>Change password</button>
-        <button className="userPage__container__actions--button" onClick={deleteAccount}>Delete account</button>
+        <button className="userPage__container__actions--button" onClick={isDeleteConfirmedHandler}>Delete account</button>
+        {isDeleteConfirmed && (
+        <>
+          <p>Do You really want to delete Your account?</p>
+          <button className="btn-primary userPage__container__actions--confirm" onClick={deleteAccount}>Delete</button>
+          <button className="btn-primary userPage__container__actions--cancel" onClick={isDeleteConfirmedHandler}>Cancel</button>
+        </>
+        )}
       </div>
     </div>
   );

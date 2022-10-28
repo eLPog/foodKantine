@@ -8,9 +8,11 @@ export function DeleteAccountSummary(props) {
     }, 5000);
   }, []);
   return (
-    <section className="container text-center mt-5">
-      <p>Account successfully deleted</p>
-      <p>Thank You for using my app</p>
-    </section>
+    <>
+      <section className="container text-center mt-5">
+        <p>Account successfully deleted</p>
+        <p>Thank You for using my app</p>
+      </section>
+    </>
   );
 }
