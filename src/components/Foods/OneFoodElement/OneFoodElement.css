@@ -53,10 +53,12 @@ a:hover .oneFoodElement__container__card__description__title {
     padding: 0;
 }
 .specialOffer__select {
-background-color: lightpink;
+    background: rgb(143,47,47);
+    background: linear-gradient(0deg, rgba(143,47,47,0) 0%, rgba(145,26,26,0.11248249299719892) 54%, rgba(119,252,206,0.8491771708683473) 100%);
 }
 .specialOffer__select:hover {
-    border: 3px solid pink
+    background: rgb(119,252,206);
+    background: linear-gradient(0deg, rgba(119,252,206,1) 0%, rgba(119,252,206,0.4990371148459384) 54%, rgba(119,252,206,0) 100%);
 }
 
 
