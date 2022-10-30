@@ -34,7 +34,8 @@ export function DetailsFoodElement(props) {
     </div>
   );
   return (
-    <div className="container detailsFoodElement__card">
+    // <div className="container detailsFoodElement__card">
+    <div className={`container detailsFoodElement__card ${element.specialOffer && 'specialBackground'}`}>
       <h1>{element.name}</h1>
       <div className="d-flex flex-column align-items-center justify-content-around flex-sm-row">
         <img className="oneFoodElement__card__photo m-sm-2" src={element.photo} alt="food description" />

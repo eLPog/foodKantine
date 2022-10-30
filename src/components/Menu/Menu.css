@@ -80,8 +80,11 @@ a:hover {
     .nav__container {
         flex-direction: column;
         padding-bottom: 1.5rem;
+        opacity: 0.9;
     }
-
+    .nav__container:hover{
+        opacity: 1;
+    }
 }
 @keyframes showMenu {
     from {
