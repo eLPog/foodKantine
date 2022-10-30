@@ -7,6 +7,7 @@
     border-radius: 10px;
     box-shadow: 15px 10px 5px rgba(0,0,0,0.5);
     padding-top: 1rem;
+    max-width: 600px;
 }
 .order__container__header {
     display: flex;
@@ -25,7 +26,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--first-bgcolor);
+    background: rgb(119,214,235);
+    background: linear-gradient(0deg, rgba(119,214,235,0) 70%, rgba(119,194,250,1) 100%);
     border-radius: 10px;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
     margin-bottom: 2rem;

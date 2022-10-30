@@ -1,18 +1,20 @@
 .ProductAddedModalContainer {
     width: 15rem;
     height: 7rem;
-    background-color: var(--third-bgcolor);
+    background: rgb(232,236,237);
+    background: linear-gradient(0deg, rgba(232,236,237,1) 0%, rgba(119,223,250,1) 100%);
     position: fixed;
     top:50%;
     left:50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    color:white;
+    color:#000000;
     display: flex;
     justify-content: center;
     align-items: center;
     animation: showModal 300ms ease-in-out;
-    border-radius: 50rem;
+    border-radius: 20%;
+    box-shadow: 10px 10px 5px rgba(0,0,0,0.6);
 }
 
 
