@@ -45,7 +45,7 @@ function App() {
       setIdToken('');
       setOrderCart([]);
       localStorage.removeItem('user-data');
-      localStorage.removeItem('oldOrder');
+      localStorage.setItem('oldOrder', JSON.stringify([]));
     } else {
       setIsUserAuthenticated(true);
       setUserEmail(userData.email);
