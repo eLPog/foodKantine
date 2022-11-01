@@ -21,7 +21,6 @@ import { ErrorPage } from './components/ErrorPage/ErrorPage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { EmailChange } from './components/UserPages/EmailChange/EmailChange';
 import { DeleteAccountSummary } from './components/UserPages/DeleteAccountSummary/DeleteAccountSummary';
-// @TODO jak jest niezalogowany i klika buy to wyskakuje product added
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -41,7 +40,9 @@ function App() {
       setUserEmail('');
       setLocalId('');
       setIdToken('');
+      setOrderCart([]);
       localStorage.removeItem('user-data');
+      localStorage.removeItem('oldOrder');
     } else {
       setIsUserAuthenticated(true);
       setUserEmail(userData.email);
@@ -50,7 +51,16 @@ function App() {
       localStorage.setItem('user-data', JSON.stringify(userData));
     }
   };
+  const setOldOrder = useCallback(() => {
+    const oldOrder = JSON.parse(localStorage.getItem('oldOrder'));
+    if (oldOrder) {
+      setOrderCart([...oldOrder]);
+    } else {
+      localStorage.setItem('oldOrder', JSON.stringify([]));
+    }
+  }, []);
   useEffect(() => {
+    setOldOrder();
     const fetchMeals = async () => {
       setLoading(true);
       const userDataFromLocalStorage = JSON.parse(localStorage.getItem('user-data'));
@@ -77,15 +87,21 @@ function App() {
     if (meal.specialOffer) {
       price *= 0.8;
     }
+    let oldOrder = JSON.parse(localStorage.getItem('oldOrder')); // pobranie tablicy old order
     const isItemAlreadyAdded = orderCart.find((el) => el.mealID === mealID);
     if (isItemAlreadyAdded) {
       isItemAlreadyAdded.quantity++;
       const allItems = orderCart.filter((el) => el.mealID !== mealID);
       setOrderCart([...allItems, isItemAlreadyAdded]);
+      oldOrder = oldOrder.filter((el) => el.mealID !== mealID);
+      oldOrder.unshift(isItemAlreadyAdded);
+      localStorage.setItem('oldOrder', JSON.stringify(oldOrder));
     } else {
       const mealObj = {
         mealID, name: meal.name, price, quantity: 1,
       };
+      oldOrder.unshift(mealObj);
+      localStorage.setItem('oldOrder', JSON.stringify(oldOrder));
       setOrderCart((prevState) => [...prevState, mealObj]);
     }
     setAddProductToCart(true);
@@ -104,6 +120,7 @@ function App() {
     } else {
       setOrderCart(meals);
     }
+    localStorage.setItem('oldOrder', JSON.stringify(meals));
   };
   const clearOrder = useCallback(() => {
     setOrderCart([]);
