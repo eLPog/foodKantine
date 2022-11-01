@@ -1,0 +1,22 @@
+.oldOrderInfoContainer {
+    position: fixed;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    z-index: 10001;
+    overflow: hidden;
+    background-color: var(--first-bgcolor);
+    width: 50%;
+    height: 8rem;
+    max-width: 500px;
+    border-radius: 2rem;
+    padding: 0.7rem 0.5rem;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.8);
+    animation: brightElementUp 1200ms ease-in-out;
+
+}
+@media only screen and (max-width: 576px){
+    .oldOrderInfoContainer {
+        width: 100vw;
+    }
+}

@@ -21,6 +21,8 @@ import { ErrorPage } from './components/ErrorPage/ErrorPage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { EmailChange } from './components/UserPages/EmailChange/EmailChange';
 import { DeleteAccountSummary } from './components/UserPages/DeleteAccountSummary/DeleteAccountSummary';
+import { Backdrop } from './components/Modals/Backdrop/Backdrop';
+import { NotFinishedOrderModal } from './components/Modals/NotFinishedOrderModal/NotFinishedOrderModal';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -33,6 +35,7 @@ function App() {
   const [orderCart, setOrderCart] = useState([]);
   const [addProductToCart, setAddProductToCart] = useState(false);
   const [mealsFilter, setMealsFilter] = useState('');
+  const [showNotFinishedOrderModal, setNotFinishedOrderModal] = useState(false);
 
   const userLoginHandler = (isAuth, userData) => {
     if (!isAuth) {
@@ -51,10 +54,14 @@ function App() {
       localStorage.setItem('user-data', JSON.stringify(userData));
     }
   };
+  const oldOrderModalHandler = useCallback(() => {
+    setNotFinishedOrderModal(false);
+  }, []);
   const setOldOrder = useCallback(() => {
     const oldOrder = JSON.parse(localStorage.getItem('oldOrder'));
     if (oldOrder) {
       setOrderCart([...oldOrder]);
+      if (oldOrder.length > 0)setNotFinishedOrderModal(true);
     } else {
       localStorage.setItem('oldOrder', JSON.stringify([]));
     }
@@ -87,7 +94,7 @@ function App() {
     if (meal.specialOffer) {
       price *= 0.8;
     }
-    let oldOrder = JSON.parse(localStorage.getItem('oldOrder')); // pobranie tablicy old order
+    let oldOrder = JSON.parse(localStorage.getItem('oldOrder'));
     const isItemAlreadyAdded = orderCart.find((el) => el.mealID === mealID);
     if (isItemAlreadyAdded) {
       isItemAlreadyAdded.quantity++;
@@ -150,6 +157,12 @@ function App() {
 
   return (
     <>
+      {showNotFinishedOrderModal && (
+      <>
+        <Backdrop />
+        <NotFinishedOrderModal closeModal={oldOrderModalHandler} />
+      </>
+      )}
       <Header searchDish={searchElement} />
       <BrowserRouter>
         <isAuthenticatedContext.Provider value={{

@@ -79,6 +79,14 @@ span[class$="--error"]{
     text-shadow: 1px 1px 10px red;
     color:var(--second-color);
 }
+@keyframes brightElementUp {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity:100
+    }
+}
 
 @media only screen and (max-width: 576px){
     #root {
