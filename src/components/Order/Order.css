@@ -34,11 +34,6 @@
     padding: 2rem;
     border:0.1rem solid var(--second-bgcolor)
 }
-.order__container__mealsList__oneMealCard:hover {
-    box-shadow: 5px 5px 5px var(--third-color);
-    transform: translateY(-3px);
-
-}
 .order__container__summary {
     display: flex;
     flex-direction: column;

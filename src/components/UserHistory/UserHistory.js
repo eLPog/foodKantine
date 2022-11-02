@@ -18,7 +18,7 @@ export function UserHistory() {
         res = Object.values(res);
         res = res.filter((el) => el.userID === localId);
         setAllUsersMeals(res.reverse());
-        setLastOrder(res[res.length - 1]);
+        setLastOrder(res[0]);
         let totalValue = 0;
         res.forEach((el) => el.meals.forEach((el) => totalValue += el.price));
         setValueOfOrders(totalValue.toFixed(2));

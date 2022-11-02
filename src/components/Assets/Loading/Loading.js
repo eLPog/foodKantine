@@ -7,4 +7,3 @@ export function Loading() {
     </div>
   );
 }
-// @TODO zrobić ładny loading

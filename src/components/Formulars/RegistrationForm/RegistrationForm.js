@@ -84,8 +84,8 @@ export function RegistrationForm(props) {
         </label>
         <input type="password" id="registerPassword2" className="register__container__form__input--password" onChange={confirmedPasswordHandler} />
         <button className="btn-primary" onClick={registerUserFetch} disabled={!btnActive}>Register</button>
-        {error && <span className="container login__container__form--error">{error}</span>}
       </form>
+      {error && <span className="container login__container__form--error">{error}</span>}
     </section>
   );
 }

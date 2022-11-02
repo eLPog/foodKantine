@@ -29,17 +29,19 @@ a:hover {
 .nav__container__menu__list__li__shopCard {
     display: flex;
     flex-direction: row;
+    padding: 1rem 0.5rem;
 }
 .nav__container__menu__list__numbersOfProducts {
-    display: block;
+font-size: 15px;
 }
 .nav__container__menu__list__li {
-    padding: 0 0.5rem;
+    padding: 1rem 0.5rem;
     display: flex;
     flex-direction: column;
 }
-.nav__container__menu__list__li:hover {
-    background-color: var(--third-color);
+.nav__container__menu__list__li:hover, .nav__container__menu__list__li__shopCard:hover {
+    background: rgb(114,144,242);
+    background: linear-gradient(90deg, rgba(114,144,242,1) 0%, rgba(25,81,138,0) 100%);
     color:white;
     border-radius: 10px;
 }
@@ -79,7 +81,7 @@ a:hover {
 
     .nav__container {
         flex-direction: column;
-        padding-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
         opacity: 0.9;
     }
     .nav__container:hover{
