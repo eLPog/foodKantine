@@ -28,6 +28,7 @@ export function Order(props) {
         body: JSON.stringify(completeOrder),
       });
       props.clearOrder();
+      localStorage.setItem('oldOrder', JSON.stringify([]));
       navigate('/');
     } catch (err) {
       console.log(err);

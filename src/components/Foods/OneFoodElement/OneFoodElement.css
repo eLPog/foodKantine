@@ -63,13 +63,13 @@ a:hover .oneFoodElement__container__card__description__title {
 
 
 @media only screen and (max-width: 576px){
-    a {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        justify-content: flex-start;
-        overflow: no-display;
-    }
+    /*a {*/
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+    /*    align-items: flex-end;*/
+    /*    justify-content: flex-start;*/
+    /*    overflow: no-display;*/
+    /*}*/
     .oneFoodElement__container__card__photo {
         object-fit: cover;
         height: 100%;

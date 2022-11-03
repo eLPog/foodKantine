@@ -1,0 +1,39 @@
+.firstVisit__container {
+    position: fixed;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    z-index: 10001;
+    overflow: hidden;
+    background-color: var(--third-bgcolor);
+    width: 50%;
+    height: fit-content;
+    max-width: 500px;
+    border-radius: 2rem;
+    padding: 0.7rem 0.5rem;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.8);
+    animation: brightElementUp 1200ms ease-in-out;
+    text-align: center;
+    color:white;
+    font-family: Algerian;
+}
+.firstVisit__container__list {
+  margin:4px;
+}
+.firstVisit__container__list li {
+    margin:5px;
+}
+.firstVisit__container__list__loginData span {
+    color:black;
+    margin-right: 13px;
+}
+.firstVisit__container__list__link {
+    color:var(--second-bgcolor);
+    border-bottom: 2px solid white;
+    padding-bottom: 20px;
+}
+@media only screen and (max-width: 576px){
+    .firstVisit__container {
+        width: 80%;
+    }
+}

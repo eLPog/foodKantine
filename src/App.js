@@ -23,6 +23,7 @@ import { EmailChange } from './components/UserPages/EmailChange/EmailChange';
 import { DeleteAccountSummary } from './components/UserPages/DeleteAccountSummary/DeleteAccountSummary';
 import { Backdrop } from './components/Modals/Backdrop/Backdrop';
 import { NotFinishedOrderModal } from './components/Modals/NotFinishedOrderModal/NotFinishedOrderModal';
+import { FirstVisitPage } from './components/FirstVisitPage/FirstVisitPage';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -36,6 +37,18 @@ function App() {
   const [addProductToCart, setAddProductToCart] = useState(false);
   const [mealsFilter, setMealsFilter] = useState('');
   const [showNotFinishedOrderModal, setNotFinishedOrderModal] = useState(false);
+  const [isFirstVisit, setIsFirstVisit] = useState(false);
+
+  useEffect(() => {
+    const firstVisit = localStorage.getItem('firstVisit');
+    if (!firstVisit) {
+      localStorage.setItem('firstVisit', JSON.stringify(true));
+      setIsFirstVisit(true);
+    }
+  }, []);
+  const firstVisitHandler = useCallback(() => {
+    setIsFirstVisit(false);
+  });
 
   const userLoginHandler = (isAuth, userData) => {
     if (!isAuth) {
@@ -163,8 +176,15 @@ function App() {
         <NotFinishedOrderModal closeModal={oldOrderModalHandler} />
       </>
       )}
+
       <Header searchDish={searchElement} />
       <BrowserRouter>
+        {isFirstVisit && (
+        <>
+          <Backdrop />
+          <FirstVisitPage closeModal={firstVisitHandler} />
+        </>
+        )}
         <isAuthenticatedContext.Provider value={{
           isUserAuthenticated, userEmail, idToken, localId,
         }}
