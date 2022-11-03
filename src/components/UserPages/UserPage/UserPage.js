@@ -1,15 +1,33 @@
 import './UserPage.css';
-import { useCallback, useContext, useState } from 'react';
+import {
+  useCallback, useContext, useEffect, useState,
+} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 import { firebaseDeleteAccount, firebasePasswordReset } from '../../../assets/db/firebaseurl';
+import { isTestAccount } from '../../../utils/isTestAccount';
 
 export function UserPage() {
   const { userEmail, idToken } = useContext(isAuthenticatedContext);
   const [isDeleteConfirmed, setIsDeleteConfirmed] = useState(false);
+  const [isTestAccountChanged, setIsTestAccountChanged] = useState(false);
+  const [showTestAccountInfo, setShowTestAccountInfo] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (userEmail === 'test@test.com') {
+      setShowTestAccountInfo(true);
+    }
+  }, [userEmail]);
+
   const setNewPassword = async () => {
+    if (isTestAccount(userEmail)) {
+      setIsTestAccountChanged(true);
+      setTimeout(() => {
+        setIsTestAccountChanged(false);
+      }, 5000);
+      return;
+    }
     try {
       const res = await fetch(firebasePasswordReset, {
         method: 'POST',
@@ -34,6 +52,13 @@ export function UserPage() {
   };
 
   const isDeleteConfirmedHandler = useCallback(() => {
+    if (isTestAccount(userEmail)) {
+      setIsTestAccountChanged(true);
+      setTimeout(() => {
+        setIsTestAccountChanged(false);
+      }, 5000);
+      return;
+    }
     isDeleteConfirmed ? setIsDeleteConfirmed(false) : setIsDeleteConfirmed(true);
   }, [isDeleteConfirmed]);
 
@@ -62,6 +87,7 @@ export function UserPage() {
   };
   return (
     <div className="container userPage__container">
+      {showTestAccountInfo && <p className="userPage__container__testAccountInfo">Because you are logged into a test account, account editing functions are blocked. To test these functionalities, create your own account.</p>}
       <div className="userPage__container__infos">
         <span>{userEmail}</span>
       </div>
@@ -77,6 +103,12 @@ export function UserPage() {
           <button className="btn-primary userPage__container__actions--confirmDELETE" onClick={deleteAccount}>Delete</button>
           <button className="btn-primary userPage__container__actions--cancel" onClick={isDeleteConfirmedHandler}>Cancel</button>
         </>
+        )}
+        {isTestAccountChanged && (
+        <span className="testAccountInfo--error">
+          <p>Im sorry. You cannot make this changes on test account.</p>
+          <p> If you want to check this functionality please create a own account.</p>
+        </span>
         )}
       </div>
     </div>

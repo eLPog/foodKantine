@@ -3,16 +3,18 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { firebaseChangeEmail } from '../../../assets/db/firebaseurl';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
-import { setButtonActive } from '../../../utils/setButtonActive';
+import { isTestAccount } from '../../../utils/isTestAccount';
 
 export function EmailChange(props) {
   const [email, setEmail] = useState('');
   const [emailChangedStatus, setEmailChangedStatus] = useState(false);
   const [isButtonActive, setIsButtonActive] = useState(false);
-  const { idToken } = useContext(isAuthenticatedContext);
+  const { idToken, userEmail } = useContext(isAuthenticatedContext);
+  const [isTestAccountChanged, setIsTestAccountChanged] = useState(false);
+
   const navigate = useNavigate();
   useEffect(() => {
-    if (setButtonActive(email)) {
+    if (email.trim().length > 1 && email.includes('@')) {
       setIsButtonActive(true);
     } else {
       setIsButtonActive(false);
@@ -22,6 +24,14 @@ export function EmailChange(props) {
     setEmail(e.target.value);
   };
   const setNewEmail = async () => {
+    if (isTestAccount(userEmail)) {
+      setIsTestAccountChanged(true);
+      setTimeout(() => {
+        setIsTestAccountChanged(false);
+        navigate('/user');
+      }, 5000);
+      return;
+    }
     try {
       const data = await fetch(`${firebaseChangeEmail}`, {
         method: 'POST',
@@ -67,6 +77,12 @@ export function EmailChange(props) {
           <input onChange={emailInputHandler} type="email" className="emailChange__container__input" />
           <button className="btn-primary" onClick={setNewEmail} disabled={!isButtonActive}>Save</button>
         </>
+      )}
+      {isTestAccountChanged && (
+      <span className="testAccountInfo--error">
+        <p>Im sorry. You cannot make this changes on test account.</p>
+        <p> If you want to check this functionality please create a own account.</p>
+      </span>
       )}
     </div>
   );

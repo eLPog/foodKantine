@@ -21,6 +21,11 @@
     box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
     transform: translateY(-5px);
 }
+.userPage__container__testAccountInfo{
+    text-indent: 5px;
+    text-align: center;
+    margin: 3rem 5rem;
+}
 
 @media only screen and (max-width: 576px){
     .userPage__container__actions--button{
