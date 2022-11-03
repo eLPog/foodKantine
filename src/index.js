@@ -11,6 +11,5 @@ root.render(
   </React.StrictMode>,
 );
 // @TODO podziękowanie po zamówieniu - modal Dziękujemy i po chwili sam się zamyka
-// @TODO modal powitalny - witaj na stronie - zarejestruj sie/ zaloguj na testowe konto
 // @TODO ikona w menu INFORMACJE i HISTORIA + komponenty
 // @TODO zrobić ładny loading - ew. z nowego reacta ten loadingComponent (??)

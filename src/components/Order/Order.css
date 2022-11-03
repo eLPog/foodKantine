@@ -8,6 +8,7 @@
     box-shadow: 15px 10px 5px rgba(0,0,0,0.5);
     padding-top: 1rem;
     max-width: 600px;
+    min-height: 200px;
 }
 .order__container__header {
     display: flex;
@@ -41,7 +42,16 @@
     align-items: center;
     margin-bottom: 2rem;
 }
-
+.order__thanks {
+    font-family: Cambria;
+    text-align: center;
+    letter-spacing: 1px;
+    background-color: var(--second-bgcolor);
+    padding: 1rem;
+    box-shadow: 1px 1px 5px 5px green;
+    font-weight: bold;
+    animation: brightElementUp 1000ms ease-in;
+}
 
 @media only screen and (max-width: 576px) {
 .order__container__mealsList {
