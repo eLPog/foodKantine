@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 export function AboutApp() {
   return (
-    <section>
+    <section className="container about__container__all">
       <h1 className="about__title">About App</h1>
 
-      <div className="container about__container">
+      <div className=" about__container">
         <div className="about__container__header">
           <p className="about__description">The application simulates ordering meals, e.g. in a company restaurant, employee canteen, etc.</p>
 

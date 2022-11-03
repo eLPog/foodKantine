@@ -21,10 +21,7 @@
     box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
     transform: translateY(-5px);
 }
-button[class$="--confirm"]{
-background-color: lightcoral;
-    margin-bottom: 0;
-}
+
 @media only screen and (max-width: 576px){
     .userPage__container__actions--button{
         padding: 0.5rem 1rem;

@@ -18,10 +18,12 @@
     font-family: Algerian;
 }
 .firstVisit__container__list {
-  margin:4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .firstVisit__container__list li {
-    margin:5px;
+    margin:2px;
 }
 .firstVisit__container__list__loginData span {
     color:black;

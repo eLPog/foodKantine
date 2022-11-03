@@ -74,7 +74,7 @@ export function UserPage() {
         {isDeleteConfirmed && (
         <>
           <p>Do You really want to delete Your account?</p>
-          <button className="btn-primary userPage__container__actions--confirm" onClick={deleteAccount}>Delete</button>
+          <button className="btn-primary userPage__container__actions--confirmDELETE" onClick={deleteAccount}>Delete</button>
           <button className="btn-primary userPage__container__actions--cancel" onClick={isDeleteConfirmedHandler}>Cancel</button>
         </>
         )}

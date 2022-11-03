@@ -20,7 +20,7 @@
 body {
     font-size: 10px;
     font-family: 'Arvo', 'Roboto Condensed', 'Alegreya', serif;
-    height: 100vh;
+    height: 100%;
     background-color: var(--second-bgcolor);
 
 
@@ -81,6 +81,22 @@ span[class$="--error"]{
     font-size: 1.5rem;
     text-shadow: 1px 1px 10px red;
     color:var(--second-color);
+}
+
+button[class$="--confirmDELETE"]{
+    background:white;
+    margin-bottom: 0;
+}
+button[class$="--confirmDELETE"]:hover{
+    background: red;
+    color:white;
+}
+button[class$="--confirmOK"]{
+    background-color: white;
+}
+button[class$="--confirmOK"]:hover {
+    background: green;
+    color:white;
 }
 @keyframes brightElementUp {
     from {
