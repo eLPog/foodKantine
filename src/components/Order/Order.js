@@ -52,7 +52,7 @@ export function Order(props) {
               <span className="order__container__mealsList__oneMealCard--element">Quantity:</span>
               {el.quantity}
             </p>
-            <button className="btn-primary" onClick={() => props.removeMeal(el.mealID)}>Remove</button>
+            <button className="btn-primary --confirmDELETE" onClick={() => props.removeMeal(el.mealID)}>Remove</button>
           </li>
         ))}
       </ul>
@@ -69,7 +69,7 @@ export function Order(props) {
             {totalPrice}
             $
             <br />
-            <button className="btn-primary" onClick={sendOrder}>Buy</button>
+            <button className="btn-primary --confirmOK" onClick={sendOrder}>Buy</button>
             <NavLink to="/">
               <button className="btn-primary">Add more</button>
             </NavLink>

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { firebaseAddUser } from '../../../assets/db/firebaseurl';
 import { setButtonActive } from '../../../utils/setButtonActive';
 import './RegistrationForm.css';
@@ -86,6 +86,12 @@ export function RegistrationForm(props) {
         <button className="btn-primary" onClick={registerUserFetch} disabled={!btnActive}>Register</button>
       </form>
       {error && <span className="container login__container__form--error">{error}</span>}
+      <span className="--information">
+        Already have an account? Just
+        <Link to="/login">
+          <span className="--specific">log in.</span>
+        </Link>
+      </span>
     </section>
   );
 }

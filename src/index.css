@@ -82,6 +82,14 @@ span[class$="--error"]{
     text-shadow: 1px 1px 10px red;
     color:var(--second-color);
 }
+span[class$="--specific"]{
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 10px green;
+}
+span[class$="--information"]{
+    text-align: center;
+    width: 80%;
+}
 
 button[class$="--confirmDELETE"]{
     background:white;

@@ -10,7 +10,6 @@ root.render(
     <App />
   </React.StrictMode>,
 );
-// @TODO zablokowanie operacji na testowym koncie - wyświetlaj info modal że zabronione
 // @TODO podziękowanie po zamówieniu - modal Dziękujemy i po chwili sam się zamyka
 // @TODO modal powitalny - witaj na stronie - zarejestruj sie/ zaloguj na testowe konto
 // @TODO ikona w menu INFORMACJE i HISTORIA + komponenty

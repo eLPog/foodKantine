@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { firebaseLoginWithEmail } from '../../../assets/db/firebaseurl';
 import './LoginForm.css';
 import { setButtonActive } from '../../../utils/setButtonActive';
@@ -60,6 +60,12 @@ export function LoginForm(props) {
         <input type="password" id="loginPassword" required className="login__container__form__input--password" onChange={passwordHandler} />
         <button className="btn-primary" disabled={!btnActive} onClick={fetchLogin}>Login</button>
         {error && <span className="container login__container__form--error">{error}</span>}
+        <span className="--information">
+          You dont have an account yet? Create them
+          <Link to="/signIn">
+            <span className="--specific"> here.</span>
+          </Link>
+        </span>
       </form>
     </section>
   );

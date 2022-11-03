@@ -22,12 +22,12 @@ export function OneFoodElement(props) {
             </Link>
             {isUserAuthenticated ? (
               <button className="btn-primary" onClick={() => props.addMealToOrder(props.dataID)}>
-                Buy
+                Add
               </button>
             ) : (
               <Link to="/login">
                 <button className="btn-primary">
-                  Buy
+                  Add
                 </button>
               </Link>
             )}
