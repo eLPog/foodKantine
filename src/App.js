@@ -24,6 +24,7 @@ import { DeleteAccountSummary } from './components/UserPages/DeleteAccountSummar
 import { Backdrop } from './components/Modals/Backdrop/Backdrop';
 import { NotFinishedOrderModal } from './components/Modals/NotFinishedOrderModal/NotFinishedOrderModal';
 import { FirstVisitPage } from './components/FirstVisitPage/FirstVisitPage';
+import { AboutApp } from './components/AboutApp/AboutApp';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -202,6 +203,7 @@ function App() {
               <Route path="/user/emailChange" element={<EmailChange userLoginHandler={userLoginHandler} />} />
               <Route path="/user/delete" element={isUserAuthenticated ? <DeleteAccountSummary userLoginHandler={userLoginHandler} /> : <Navigate to="/" />} />
               <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
+              <Route path="/aboutApp" element={<AboutApp />} />
               <Route path="/error" element={<ErrorPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
