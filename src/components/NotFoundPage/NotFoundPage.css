@@ -1,0 +1,23 @@
+.notfound__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.notfound__container__image{
+    width: 50%;
+    height: 30%;
+}
+.notfound__container__information {
+    font-family: "Roboto Thin";
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+}
+@media only screen and (max-width: 576px){
+    .notfound__container__image {
+        width: 100%;
+    }
+    .notfound__container__information {
+        font-size: 1.1rem;
+    }
+}
