@@ -10,6 +10,3 @@ root.render(
     <App />
   </React.StrictMode>,
 );
-// @TODO podziękowanie po zamówieniu - modal Dziękujemy i po chwili sam się zamyka
-// @TODO ikona w menu INFORMACJE i HISTORIA + komponenty
-// @TODO zrobić ładny loading - ew. z nowego reacta ten loadingComponent (??)

@@ -3,13 +3,15 @@ import './ErrorPage.css';
 import { NavLink } from 'react-router-dom';
 
 export const ErrorPage = React.memo(() => (
-  <div className="container text-center mt-5">
-    <section>
-      <p>We have some Error. Please try again.</p>
+  <div className="container errorPage__container">
+    <img src="https://foodorder.networkmanager.pl/img/imgerror.svg" alt="errorGraphic" className="errorPage__container__image" />
+    <p className="errorPage__container__information">
+      Uuppss...We have some Error.
       <br />
-      <NavLink to="/">
-        <button className="btn-primary">Main Page</button>
-      </NavLink>
-    </section>
+      Please try again.
+    </p>
+    <NavLink to="/">
+      <button className="btn-primary">Main Page</button>
+    </NavLink>
   </div>
 ));

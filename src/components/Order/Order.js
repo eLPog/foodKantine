@@ -38,6 +38,7 @@ export function Order(props) {
       }, 3000);
     } catch (err) {
       console.log(err);
+      navigate('/error');
     }
   }
   return (
