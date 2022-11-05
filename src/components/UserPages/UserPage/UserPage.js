@@ -6,12 +6,14 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 import { firebaseDeleteAccount, firebasePasswordReset } from '../../../assets/db/firebaseurl';
 import { isTestAccount } from '../../../utils/isTestAccount';
+import { Loading } from '../../Loading/Loading';
 
 export function UserPage() {
   const { userEmail, idToken } = useContext(isAuthenticatedContext);
   const [isDeleteConfirmed, setIsDeleteConfirmed] = useState(false);
   const [isTestAccountChanged, setIsTestAccountChanged] = useState(false);
   const [showTestAccountInfo, setShowTestAccountInfo] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,6 +30,7 @@ export function UserPage() {
       }, 5000);
       return;
     }
+    setIsLoading(true);
     try {
       const res = await fetch(firebasePasswordReset, {
         method: 'POST',
@@ -40,6 +43,7 @@ export function UserPage() {
           email: userEmail,
         }),
       });
+      setIsLoading(false);
       if (res.ok) {
         navigate('/user/passwordReset');
       } else {
@@ -63,6 +67,7 @@ export function UserPage() {
   }, [isDeleteConfirmed]);
 
   const deleteAccount = async () => {
+    setIsLoading(true);
     try {
       const res = await fetch(firebaseDeleteAccount, {
         method: 'POST',
@@ -74,6 +79,7 @@ export function UserPage() {
           idToken,
         }),
       });
+      setIsLoading(false);
       if (res.ok) {
         localStorage.removeItem('user-data');
         navigate('/user/delete');
@@ -87,6 +93,7 @@ export function UserPage() {
   };
   return (
     <div className="container userPage__container">
+      {isLoading && <Loading />}
       {showTestAccountInfo && <p className="userPage__container__testAccountInfo">Because you are logged into a test account, account editing functions are blocked. To test these functionalities, create your own account.</p>}
       <div className="userPage__container__infos">
         <span>{userEmail}</span>

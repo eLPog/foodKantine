@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { firebaseChangeEmail } from '../../../assets/db/firebaseurl';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 import { isTestAccount } from '../../../utils/isTestAccount';
+import { Loading } from '../../Loading/Loading';
 
 export function EmailChange(props) {
   const [email, setEmail] = useState('');
   const [emailChangedStatus, setEmailChangedStatus] = useState(false);
   const [isButtonActive, setIsButtonActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { idToken, userEmail } = useContext(isAuthenticatedContext);
   const [isTestAccountChanged, setIsTestAccountChanged] = useState(false);
 
@@ -32,6 +34,7 @@ export function EmailChange(props) {
       }, 5000);
       return;
     }
+    setIsLoading(true);
     try {
       const data = await fetch(`${firebaseChangeEmail}`, {
         method: 'POST',
@@ -48,6 +51,7 @@ export function EmailChange(props) {
         setTimeout(() => {
           navigate('/login');
         }, 5000);
+        setIsLoading(false);
       } else {
         navigate('/error');
       }
@@ -69,7 +73,7 @@ export function EmailChange(props) {
   );
   return (
     <div className="container text-center emailChange__container">
-      {emailChangedStatus ? emailSuccessfulChanged : (
+      {isLoading ? <Loading /> : emailChangedStatus ? emailSuccessfulChanged : (
         <>
           <label htmlFor="inputChangeEmail">
             Enter new email

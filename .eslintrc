@@ -41,5 +41,6 @@
        "no-return-assign":0,
        "consistent-return":0,
        "react/display-name":"off",
+       "no-nested-ternary":"off"
     }
   }
