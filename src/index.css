@@ -27,6 +27,9 @@ body {
 
 
 }
+.main__loading {
+    text-align: center;
+}
 .btn-primary {
     width: 5rem;
     height: 2rem;

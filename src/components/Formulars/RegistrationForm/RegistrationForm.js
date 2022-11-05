@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { firebaseAddUser } from '../../../assets/db/firebaseurl';
 import { setButtonActive } from '../../../utils/setButtonActive';
 import './RegistrationForm.css';
+import { Loading } from '../../Loading/Loading';
 
 export function RegistrationForm(props) {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ export function RegistrationForm(props) {
   const [confirmedPassword, setConfirmedPassword] = useState('');
   const [error, setError] = useState('');
   const [btnActive, setBtnActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { userLoginHandler } = props;
   const loginHandler = (e) => {
     setEmail(e.target.value);
@@ -36,6 +38,7 @@ export function RegistrationForm(props) {
   }, [email, password, confirmedPassword]);
   const registerUserFetch = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const data = await fetch(firebaseAddUser, {
         method: 'POST',
@@ -46,6 +49,7 @@ export function RegistrationForm(props) {
         body: JSON.stringify({ email, password, returnSecureToken: true }),
       });
       const res = await data.json();
+      setIsLoading(false);
       if (res.error) {
         if (res.error.message.includes('WEAK_PASSWORD')) {
           setError('Password should be at least 6 characters');
@@ -64,6 +68,7 @@ export function RegistrationForm(props) {
       navigate('/');
     } catch (err) {
       console.log(err);
+      navigate('/error');
     }
   };
   return (
@@ -85,6 +90,7 @@ export function RegistrationForm(props) {
         <input type="password" id="registerPassword2" className="register__container__form__input--password" onChange={confirmedPasswordHandler} />
         <button className="btn-primary" onClick={registerUserFetch} disabled={!btnActive}>Register</button>
       </form>
+      {isLoading && <Loading />}
       {error && <span className="container login__container__form--error">{error}</span>}
       <span className="--information">
         Already have an account? Just

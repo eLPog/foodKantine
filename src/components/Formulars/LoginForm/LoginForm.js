@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { firebaseLoginWithEmail } from '../../../assets/db/firebaseurl';
 import './LoginForm.css';
@@ -29,6 +29,7 @@ export function LoginForm(props) {
   const fetchLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError('');
     try {
       const data = await fetch(firebaseLoginWithEmail, {
         method: 'POST',
@@ -41,6 +42,9 @@ export function LoginForm(props) {
       const res = await data.json();
       setIsLoading(false);
       if (res.error) {
+        setTimeout(() => {
+          setError('');
+        }, 5000);
         setError('Invalid email or password');
         return;
       }

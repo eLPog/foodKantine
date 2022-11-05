@@ -1,6 +1,7 @@
 .allFoodList__container {
     border-radius: 10px;
     background-color: var(--second-bgcolor);
+    animation: brightElementUp 500ms ease-in;
 }
 .allFoodList__container__filterApplied{
     display: flex;

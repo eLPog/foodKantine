@@ -30,7 +30,7 @@ function App() {
   const [elements, setElements] = useState([]);
   const [elementsBeforeSearch, setElementsBeforeSearch] = useState([]);
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [idToken, setIdToken] = useState('');
   const [localId, setLocalId] = useState('');
@@ -83,7 +83,7 @@ function App() {
   useEffect(() => {
     setOldOrder();
     const fetchMeals = async () => {
-      setLoading(true);
+      setIsLoading(true);
       const userDataFromLocalStorage = JSON.parse(localStorage.getItem('user-data'));
       if (userDataFromLocalStorage) {
         userLoginHandler(true, userDataFromLocalStorage);
@@ -94,7 +94,7 @@ function App() {
         setElements(res['-NCAQYq_QqAk59rSL8Bq']);
         setElementsBeforeSearch(res['-NCAQYq_QqAk59rSL8Bq']);
 
-        setLoading(false);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
       }
@@ -191,7 +191,11 @@ function App() {
         }}
         >
           <Menu numbersOfItemsInOrdersCart={orderCart.length} newProductAdded={addProductToCart} userLoginHandler={userLoginHandler} />
-          {loading ? <Loading /> : (
+          {isLoading ? (
+            <section className="main__loading">
+              <Loading />
+            </section>
+          ) : (
             <Routes>
               <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} mealsFilter={mealsFilter} />} />
               <Route path="/products/:dataID" element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
