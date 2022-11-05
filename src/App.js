@@ -8,7 +8,7 @@ import { Menu } from './components/Menu/Menu';
 import { RegistrationForm } from './components/Formulars/RegistrationForm/RegistrationForm';
 import AllFoodList from './components/Foods/AllFoodList/AllFoodList';
 import { firebaseURL } from './assets/db/firebaseurl';
-import { Loading } from './components/Assets/Loading/Loading';
+import { Loading } from './components/Loading/Loading';
 
 import { DetailsFoodElement } from './components/Foods/DetailsFoodElement/DetailsFoodElement';
 import { LoginForm } from './components/Formulars/LoginForm/LoginForm';

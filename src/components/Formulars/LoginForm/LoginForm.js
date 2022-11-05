@@ -3,12 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { firebaseLoginWithEmail } from '../../../assets/db/firebaseurl';
 import './LoginForm.css';
 import { setButtonActive } from '../../../utils/setButtonActive';
+import { Loading } from '../../Loading/Loading';
 
 export function LoginForm(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [btnActive, setBtnActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { userLoginHandler } = props;
   useEffect(() => {
@@ -26,6 +28,7 @@ export function LoginForm(props) {
   };
   const fetchLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const data = await fetch(firebaseLoginWithEmail, {
         method: 'POST',
@@ -36,6 +39,7 @@ export function LoginForm(props) {
         body: JSON.stringify({ email, password, returnSecureToken: true }),
       });
       const res = await data.json();
+      setIsLoading(false);
       if (res.error) {
         setError('Invalid email or password');
         return;
@@ -43,7 +47,9 @@ export function LoginForm(props) {
       userLoginHandler(true, { email: res.email, localId: res.localId, idToken: res.idToken });
       navigate('/');
     } catch (err) {
+      setIsLoading(false);
       console.log(err);
+      navigate('/error');
     }
   };
   return (
@@ -59,6 +65,7 @@ export function LoginForm(props) {
         </label>
         <input type="password" id="loginPassword" required className="login__container__form__input--password" onChange={passwordHandler} />
         <button className="btn-primary" disabled={!btnActive} onClick={fetchLogin}>Login</button>
+        {isLoading && <Loading />}
         {error && <span className="container login__container__form--error">{error}</span>}
         <span className="--information">
           You dont have an account yet? Create them

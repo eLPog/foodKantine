@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import './UserHistory.css';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
-import { Loading } from '../Assets/Loading/Loading';
+
 import { firebaseURL } from '../../assets/db/firebaseurl';
+import { Loading } from '../Loading/Loading';
 
 export function UserHistory() {
   const [allUsersMeals, setAllUsersMeals] = useState([]);

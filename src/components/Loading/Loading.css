@@ -1,0 +1,60 @@
+.loading__container {
+    letter-spacing: 1rem;
+    font-weight: bolder;
+
+}
+span[class$="--letter"]{
+}
+.loading__letter-1{
+    animation: loadingMenu 2000ms infinite ;
+    opacity: 0;
+
+}
+.loading__letter-2{
+    animation: loadingMenu 2000ms infinite 0.2s;
+    opacity: 0;
+
+}
+.loading__letter-3{
+    animation: loadingMenu 2000ms infinite 0.5s;
+    opacity: 0;
+
+}
+.loading__letter-4{
+    animation: loadingMenu 2000ms infinite 0.8s;
+    opacity: 0;
+
+}
+.loading__letter-5{
+    animation: loadingMenu 2000ms infinite 1s;
+    opacity: 0;
+
+}
+.loading__letter-6{
+    animation: loadingMenu 2000ms infinite 1.2s;
+    opacity: 0;
+
+}
+.loading__letter-7{
+    animation: loadingMenu 2000ms infinite 1.4s;
+    opacity: 0;
+
+}
+
+
+@keyframes loadingMenu {
+    0% {
+    }
+    33% {
+        opacity: 0;
+    }
+    66% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
