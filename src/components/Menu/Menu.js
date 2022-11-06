@@ -47,7 +47,7 @@ export function Menu(props) {
             </li>
           </NavLink>
           <NavLink to="/history">
-            <li title="Orders stats" className="nav__container__menu__list__li">
+            <li title="Orders history" className="nav__container__menu__list__li">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -69,7 +69,7 @@ export function Menu(props) {
             </li>
           </NavLink>
           <NavLink to="/" onClick={() => props.userLoginHandler(false)}>
-            <li className="nav__container__menu__list__li">
+            <li className="nav__container__menu__list__li" title="Logout">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -93,7 +93,7 @@ export function Menu(props) {
       ) : (
         <>
           <NavLink to="/signIn">
-            <li className="nav__container__menu__list__li">
+            <li className="nav__container__menu__list__li" title="Add user">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -114,7 +114,7 @@ export function Menu(props) {
             </li>
           </NavLink>
           <NavLink to="/login">
-            <li className="nav__container__menu__list__li">
+            <li className="nav__container__menu__list__li" title="Login">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -149,9 +149,27 @@ export function Menu(props) {
         </NavLink>
       </div>
       <ul className="nav__container__menu__list">
-        {menu}
+        <NavLink to="/">
+          <li className="nav__container__menu__list__li" title="All meals">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-card-list"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"
+              />
+              <path
+                d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"
+              />
+            </svg>
+          </li>
+        </NavLink>
         <NavLink to="/aboutApp">
-          <li className="nav__container__menu__list__li">
+          <li className="nav__container__menu__list__li" title="About App">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -169,6 +187,7 @@ export function Menu(props) {
             </svg>
           </li>
         </NavLink>
+        {menu}
       </ul>
       {newProduct && <InfoModal text="Product added to cart" />}
     </nav>
