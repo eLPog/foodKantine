@@ -1,4 +1,5 @@
 import './AboutApp.css';
+import { Link } from 'react-router-dom';
 
 export function AboutApp() {
   return (
@@ -68,6 +69,9 @@ export function AboutApp() {
           </div>
         </div>
       </div>
+      <Link to="/">
+        <button className="btn-primary">Main Page</button>
+      </Link>
     </section>
   );
 }
