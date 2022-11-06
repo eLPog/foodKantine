@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { firebaseLoginWithEmail } from '../../../assets/db/firebaseurl';
+import { firebaseLoginWithEmail, firebasePasswordReset } from '../../../assets/db/firebaseurl';
 import './LoginForm.css';
 import { setButtonActive } from '../../../utils/setButtonActive';
 import { Loading } from '../../Loading/Loading';
@@ -14,6 +14,17 @@ export function LoginForm(props) {
   const navigate = useNavigate();
   const { userLoginHandler } = props;
   useEffect(() => {
+    if (error) {
+      const timeAction = setTimeout(() => {
+        setError('');
+      }, 5000);
+      return () => clearTimeout(timeAction);
+    }
+  }, [error]);
+  useEffect(() => {
+    setError('');
+  }, [email, password]);
+  useEffect(() => {
     if (setButtonActive(email, password)) {
       setBtnActive(true);
     } else {
@@ -26,7 +37,7 @@ export function LoginForm(props) {
   const passwordHandler = (e) => {
     setPassword(e.target.value);
   };
-  const fetchLogin = async (e) => {
+  const loginUser = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
@@ -42,9 +53,6 @@ export function LoginForm(props) {
       const res = await data.json();
       setIsLoading(false);
       if (res.error) {
-        setTimeout(() => {
-          setError('');
-        }, 5000);
         setError('Invalid email or password');
         return;
       }
@@ -52,6 +60,31 @@ export function LoginForm(props) {
       navigate('/');
     } catch (err) {
       setIsLoading(false);
+      console.log(err);
+      navigate('/error');
+    }
+  };
+  const passwordReset = async () => {
+    if (email.trim().length < 5 || !email.includes('@')) {
+      setError('Provide valid email format');
+      return;
+    }
+    setIsLoading(true);
+    try {
+      await fetch(firebasePasswordReset, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          requestType: 'PASSWORD_RESET',
+          email,
+        }),
+      });
+      setIsLoading(false);
+      navigate('/user/passwordReset');
+    } catch (err) {
       console.log(err);
       navigate('/error');
     }
@@ -68,16 +101,25 @@ export function LoginForm(props) {
           Password
         </label>
         <input type="password" id="loginPassword" required className="login__container__form__input--password" onChange={passwordHandler} />
-        <button className="btn-primary" disabled={!btnActive} onClick={fetchLogin}>Login</button>
+        <button className="btn-primary" disabled={!btnActive} onClick={loginUser}>Login</button>
         {isLoading && <Loading />}
         {error && <span className="container login__container__form--error">{error}</span>}
+
+      </form>
+      <section className="login__container__options">
         <span className="--information">
-          You dont have an account yet? Create them
+          New user?
           <Link to="/signIn">
-            <span className="--specific"> here.</span>
+            <span className="--specific"> Sign In</span>
           </Link>
         </span>
-      </form>
+        <span className="--information">
+          Password forgot?
+          <Link to="" onClick={passwordReset}>
+            <span className="--specific"> Reset </span>
+          </Link>
+        </span>
+      </section>
     </section>
   );
 }

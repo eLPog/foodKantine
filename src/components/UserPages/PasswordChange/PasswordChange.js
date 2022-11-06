@@ -14,8 +14,8 @@ export function PasswordChange(props) {
         <p>
           If you havent received your email please check spam
         </p>
-        <NavLink to="/">
-          <button className="btn-primary">Main Page</button>
+        <NavLink to="/login">
+          <button className="btn-primary">Login</button>
         </NavLink>
       </section>
     </div>

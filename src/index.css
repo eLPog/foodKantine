@@ -92,6 +92,7 @@ span[class$="--specific"]{
 span[class$="--information"]{
     text-align: center;
     width: 80%;
+    font-size: 80%;
 }
 
 button[class$="--confirmDELETE"]{

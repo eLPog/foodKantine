@@ -21,6 +21,15 @@
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
+.login__container__options {
+    font-size: 1rem;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
 
 @media only screen and (max-width: 576px){
     .login__container form {
@@ -29,5 +38,9 @@
     input {
         width: 50%;
         height: 1.5rem;
+    }
+    .login__container__options {
+        flex-direction: column;
+        align-items: center;
     }
 }
