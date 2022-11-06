@@ -94,13 +94,18 @@ export function UserPage() {
   return (
     <div className="container userPage__container">
       {isLoading && <Loading />}
-      {showTestAccountInfo && <p className="userPage__container__testAccountInfo">Because you are logged into a test account, account editing functions are blocked. To test these functionalities, create your own account.</p>}
+      {showTestAccountInfo && <p className="userPage__container__testAccountInfo">Because you are logged into a test account, account editing functions are blocked.</p>}
       <div className="userPage__container__infos">
-        <span>{userEmail}</span>
+        <span className="--information">
+          You are logged as:
+          <span className="--specific">
+            {userEmail}
+          </span>
+        </span>
       </div>
       <div className="userPage__container__actions">
-        <NavLink to="/user/emailChange">
-          <button className="userPage__container__actions--button">Change email</button>
+        <NavLink to="/user/emailChange" className="userPage__container__actions--button">
+          Change email
         </NavLink>
         <button className="userPage__container__actions--button" onClick={setNewPassword}>Change password</button>
         <button className="userPage__container__actions--button" onClick={isDeleteConfirmedHandler}>Delete account</button>
@@ -112,10 +117,10 @@ export function UserPage() {
         </>
         )}
         {isTestAccountChanged && (
-        <span className="testAccountInfo--error">
+        <div className="testAccountError">
           <p>Im sorry. You cannot make this changes on test account.</p>
           <p> If you want to check this functionality please create a own account.</p>
-        </span>
+        </div>
         )}
       </div>
     </div>

@@ -65,7 +65,7 @@ export function RegistrationForm(props) {
         }
       }
       userLoginHandler(true, { email: res.email, localId: res.localId, idToken: res.idToken });
-      navigate('/');
+      navigate('/user');
     } catch (err) {
       console.log(err);
       navigate('/error');

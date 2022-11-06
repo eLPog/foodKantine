@@ -25,6 +25,7 @@ import { Backdrop } from './components/Modals/Backdrop/Backdrop';
 import { NotFinishedOrderModal } from './components/Modals/NotFinishedOrderModal/NotFinishedOrderModal';
 import { FirstVisitPage } from './components/FirstVisitPage/FirstVisitPage';
 import { AboutApp } from './components/AboutApp/AboutApp';
+import { Logout } from './components/Logout/Logout';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -39,6 +40,7 @@ function App() {
   const [mealsFilter, setMealsFilter] = useState('');
   const [showNotFinishedOrderModal, setNotFinishedOrderModal] = useState(false);
   const [isFirstVisit, setIsFirstVisit] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   useEffect(() => {
     const firstVisit = localStorage.getItem('firstVisit');
@@ -50,9 +52,13 @@ function App() {
   const firstVisitHandler = useCallback(() => {
     setIsFirstVisit(false);
   });
+  const logoutModalHandler = useCallback(() => {
+    setShowLogoutModal(false);
+  });
 
   const userLoginHandler = (isAuth, userData) => {
     if (!isAuth) {
+      setShowLogoutModal(true);
       setIsUserAuthenticated(false);
       setUserEmail('');
       setLocalId('');
@@ -177,13 +183,18 @@ function App() {
         <NotFinishedOrderModal closeModal={oldOrderModalHandler} />
       </>
       )}
-
       <Header searchDish={searchElement} />
       <BrowserRouter>
         {isFirstVisit && (
         <>
           <Backdrop />
           <FirstVisitPage closeModal={firstVisitHandler} />
+        </>
+        )}
+        {showLogoutModal && (
+        <>
+          <Backdrop />
+          <Logout logoutModalHandler={logoutModalHandler} />
         </>
         )}
         <isAuthenticatedContext.Provider value={{
