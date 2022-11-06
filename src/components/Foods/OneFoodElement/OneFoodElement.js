@@ -39,6 +39,7 @@ export function OneFoodElement(props) {
           <img
             src={props.photo}
             alt="meal view"
+            loading="lazy"
           />
         </div>
       </Link>

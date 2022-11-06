@@ -41,6 +41,17 @@ function AllFoodList(props) {
           />
         ))}
       </section>
+      <div className="mainSection__container__footer">
+        <a href="https://github.com/eLPog" target="_blank" rel="noreferrer">
+          Created by
+          eLPog
+        </a>
+        <a href="https://rockpaper.networkmanager.pl/" target="_blank" rel="noreferrer">RockPaper</a>
+        <a href="https://tickitoff.networkmanager.pl/" target="_blank" rel="noreferrer">ToDoList</a>
+        <p>
+          2022
+        </p>
+      </div>
     </main>
 
   );

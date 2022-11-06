@@ -15,5 +15,15 @@
     background: #77fcce;
     margin:0.3rem;
 }
+.mainSection__container__footer {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding-top: 10px;
+    border: 2px solid var(--first-bgcolor);
+    border-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+}
 
 
