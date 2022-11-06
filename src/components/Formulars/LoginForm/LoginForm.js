@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { firebaseLoginWithEmail, firebasePasswordReset } from '../../../assets/db/firebaseurl';
 import './LoginForm.css';
@@ -31,6 +31,7 @@ export function LoginForm(props) {
       setBtnActive(false);
     }
   }, [email, password]);
+
   const loginHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -57,13 +58,14 @@ export function LoginForm(props) {
         return;
       }
       userLoginHandler(true, { email: res.email, localId: res.localId, idToken: res.idToken });
-      navigate('/');
+      navigate('/user');
     } catch (err) {
       setIsLoading(false);
       console.log(err);
       navigate('/error');
     }
   };
+
   const passwordReset = async () => {
     if (email.trim().length < 5 || !email.includes('@')) {
       setError('Provide valid email format');
@@ -89,6 +91,31 @@ export function LoginForm(props) {
       navigate('/error');
     }
   };
+  const loginOnTestAccount = useCallback(() => {
+    setIsLoading(true);
+    const login = async () => {
+      try {
+        const data = await fetch(firebaseLoginWithEmail, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({ email: 'test@test.com', password: 'password', returnSecureToken: true }),
+        });
+        const res = await data.json();
+        userLoginHandler(true, { email: res.email, localId: res.localId, idToken: res.idToken });
+        navigate('/user');
+      } catch (err) {
+        console.log(err);
+        navigate('/error');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    login();
+  }, []);
+
   return (
     <section className="container login__container">
       <h2 className="container login__container__title">Login</h2>
@@ -117,6 +144,12 @@ export function LoginForm(props) {
           Password forgot?
           <Link to="" onClick={passwordReset}>
             <span className="--specific"> Reset </span>
+          </Link>
+        </span>
+        <span className="--information">
+          Only testing?
+          <Link to="" onClick={loginOnTestAccount}>
+            <span className="--specific"> Test Account </span>
           </Link>
         </span>
       </section>
