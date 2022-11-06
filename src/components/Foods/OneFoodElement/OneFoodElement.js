@@ -10,30 +10,29 @@ export function OneFoodElement(props) {
       <div className="d-flex flex-sm-col
       flex-column justify-content-around oneFoodElement__container__card__description"
       >
-        <div className="d-flex flex-column align-items-center">
-          <h2 className="oneFoodElement__container__card__description__title">
-            {props.name}
-          </h2>
-          <div className="text-center">
-            <Link to={`/products/${props.dataID}`}>
+        <h2 className="oneFoodElement__container__card__description__title">
+          {props.name}
+        </h2>
+        <section className="oneFoodElement__container__card__description--actions">
+          <Link to={`/products/${props.dataID}`}>
+            <button className="btn-primary">
+              Details
+            </button>
+          </Link>
+          {isUserAuthenticated ? (
+            <button className="btn-primary" onClick={() => props.addMealToOrder(props.dataID)}>
+              Add
+            </button>
+          ) : (
+            <Link to="/login">
               <button className="btn-primary">
-                Details
-              </button>
-            </Link>
-            {isUserAuthenticated ? (
-              <button className="btn-primary" onClick={() => props.addMealToOrder(props.dataID)}>
                 Add
               </button>
-            ) : (
-              <Link to="/login">
-                <button className="btn-primary">
-                  Add
-                </button>
-              </Link>
-            )}
+            </Link>
+          )}
 
-          </div>
-        </div>
+        </section>
+
       </div>
       <Link to={`/products/${props.dataID}`}>
         <div className="oneFoodElement__container__card__photo">

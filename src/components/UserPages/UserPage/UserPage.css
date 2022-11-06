@@ -5,6 +5,7 @@
 }
 .userPage__container__infos {
     text-align: center;
+    width: 80%;
 }
 .userPage__container__actions {
     margin-top: 3rem;
