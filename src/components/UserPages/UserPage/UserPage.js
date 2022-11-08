@@ -98,7 +98,6 @@ export function UserPage() {
       <div className="userPage__container__infos">
         <span className="--information">
           You are logged as:
-          {' '}
           <br />
           <span className="--specific">
             {userEmail}

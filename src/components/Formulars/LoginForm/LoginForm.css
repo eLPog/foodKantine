@@ -14,6 +14,7 @@
 .login__container input {
     border-radius: 10px;
     text-align: center;
+    min-width: 130px;
 
 }
 .login__container__title{
@@ -29,11 +30,15 @@
     width: 80%;
     max-width: 400px;
     margin-bottom: 20px;
+
 }
 
 @media only screen and (max-width: 576px){
     .login__container form {
         width: 75%;
+    }
+    .login__container {
+        margin:0;
     }
     input {
         width: 50%;

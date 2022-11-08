@@ -1,6 +1,6 @@
 import './EmailChange.css';
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { firebaseChangeEmail } from '../../../assets/db/firebaseurl';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 import { isTestAccount } from '../../../utils/isTestAccount';
@@ -80,6 +80,9 @@ export function EmailChange(props) {
           </label>
           <input onChange={emailInputHandler} type="email" className="emailChange__container__input" />
           <button className="btn-primary" onClick={setNewEmail} disabled={!isButtonActive}>Save</button>
+          <Link to="/user">
+            <button className="btn-primary">Cancel</button>
+          </Link>
         </>
       )}
       {isTestAccountChanged && (

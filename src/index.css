@@ -11,7 +11,7 @@
     --first-bgcolor: rgb(250, 250, 250);
     --second-bgcolor: rgb(235, 237, 239 );
     --third-bgcolor: rgb(124, 156, 243);
-    --first-color: rgb(165, 105, 189);
+    --first-color: rgb(165, 205, 189);
     --second-color: rgb(8,54,67);
     --third-color: rgb(110,141,238);
 
@@ -130,6 +130,7 @@ button[class$="--confirmOK"]:hover {
         text-shadow: 1px 1px 5px red;
         color:var(--second-color);
     }
+
 }
 @media only screen and (min-width: 576px){
     #root {

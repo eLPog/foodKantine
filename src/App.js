@@ -26,6 +26,7 @@ import { NotFinishedOrderModal } from './components/Modals/NotFinishedOrderModal
 import { FirstVisitPage } from './components/FirstVisitPage/FirstVisitPage';
 import { AboutApp } from './components/AboutApp/AboutApp';
 import { Logout } from './components/Logout/Logout';
+import { AppHistory } from './components/AppHistory/AppHistory';
 
 function App() {
   const [elements, setElements] = useState([]);
@@ -219,6 +220,7 @@ function App() {
               <Route path="/user/delete" element={isUserAuthenticated ? <DeleteAccountSummary userLoginHandler={userLoginHandler} /> : <Navigate to="/" />} />
               <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
               <Route path="/aboutApp" element={<AboutApp />} />
+              <Route path="/appHistory" element={<AppHistory />} />
               <Route path="/error" element={<ErrorPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
