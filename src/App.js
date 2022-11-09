@@ -53,10 +53,10 @@ function App() {
   }, []);
   const firstVisitHandler = useCallback(() => {
     setIsFirstVisit(false);
-  });
+  }, []);
   const logoutModalHandler = useCallback(() => {
     setShowLogoutModal(false);
-  });
+  }, []);
 
   const userLoginHandler = (isAuth, userData) => {
     if (!isAuth) {
