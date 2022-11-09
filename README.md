@@ -1,70 +1,53 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<h1>Food Kantine</h1>
+<img src="https://user-images.githubusercontent.com/89840843/200541043-039ec76e-12a1-4af3-bd5a-9d1aa62d8987.png">
+<hr><p>A react app to ordering meals, e.g. in a company restaurant, employee canteen, etc.</p><h2>General Information</h2>
+<hr><ul>
+<li>User, after login, can order dishes from the main page </li>
+<li>User can check all orders history and summary.</li>
+ <li>User can edit the email and password as well as delete the account </li>
+<li>Products from not finished order are save to local storage </li>
+<li>User logged information is save to local storage, but after logout - this data will be deleted.</li>
+</ul>
+<hr>
+<p>The view changes depending on the screen size</p>
+ <img src="https://user-images.githubusercontent.com/89840843/200542856-12e4991c-3a0a-4918-9474-fabca372864e.png"><hr>
+  <p>Small screen size</p>
+<img src="https://user-images.githubusercontent.com/89840843/200543085-e46f33c5-b76b-471f-aa51-4806b23489b9.png"><hr>
+<p>Orders history view</p>
+<img src="https://user-images.githubusercontent.com/89840843/200543461-8da33dee-5f2b-45e0-9c2d-082d516a7830.png"><hr>
+<p>Error and Not Found Page </p>
+<img src="https://user-images.githubusercontent.com/89840843/200546070-86d2e240-4dad-46f4-8b98-92803bb793e4.png"><hr>
+<img src="https://user-images.githubusercontent.com/89840843/200546266-36407d28-fb65-4fc2-9d6f-54439dcccc3e.png"><hr>
+<hr>
+<h2>Code examples</h2>
+<p>Function to fetch all meals data from database</p>
+<img src="https://user-images.githubusercontent.com/89840843/200545757-71e4f90b-fd82-43ce-a089-8642d6900b93.png"><hr>
+<p>Function to show modal after logot - useEffect with setTimeout and cleaner.</p>
+<img src="https://user-images.githubusercontent.com/89840843/200544711-8cef4ef4-ac48-479d-bd21-10de23ab2e0c.png"><hr>
+<p>Check if passwords in regstration formular are the same</p>
+<img src="https://user-images.githubusercontent.com/89840843/200545171-f4182542-1374-4ef9-a008-f17ddd8c9269.png"><hr>
+<ul>
+</ul><h2>Technologies Used</h2>
+<hr><ul>
+<li>HTML</li>
+</ul><ul>
+<li>CSS</li>
+<li>Firebase</li>
+</ul><ul>
+<li>React</li>
+</ul><h2>Setup</h2>
+<hr><h5>Steps</h5><ul>
+<li>use git clone https://github.com/eLPog/foodKantine</li>
+</ul><ul>
+<li>run script npm start to run this app</li>
+</ul><ul>
+<li>Or check this app online on https://foodorder.networkmanager.pl/</li>
+</ul><h2>Usage</h2>
+<hr><p>If you dont wont to create a new account, you can use test account</p>
+<p>Remember that all account functions like email change or account delete, are for test account not avaible. If you want to check this functionalities, you need to create a new account.</p>
+<h2>Project status</h2>
+<p>In progress</p>
+<h2>Contact</h2>
+<hr><p><span style="margin-right: 30px;"></span><a href="https://www.linkedin.com/in/lukas-pogorzelski-13412123a/"><img target="_blank" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" style="width: 10%;"></a><span style="margin-right: 30px;"></span><a href="https://github.com/eLPog"><img target="_blank" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" style="width: 10%;"></a></p>
