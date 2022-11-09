@@ -42,6 +42,7 @@ function App() {
   const [showNotFinishedOrderModal, setNotFinishedOrderModal] = useState(false);
   const [isFirstVisit, setIsFirstVisit] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const firstVisit = localStorage.getItem('firstVisit');
@@ -100,10 +101,11 @@ function App() {
         const res = await data.json();
         setElements(res['-NCAQYq_QqAk59rSL8Bq']);
         setElementsBeforeSearch(res['-NCAQYq_QqAk59rSL8Bq']);
-
-        setIsLoading(false);
       } catch (err) {
         console.log(err);
+        navigate('/error');
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchMeals();
@@ -156,7 +158,7 @@ function App() {
   const searchElement = (value) => {
     setMealsFilter(value);
     const filteredElements = elementsBeforeSearch.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
-            || el.description.toLowerCase().includes(value.toLowerCase()));
+        || el.description.toLowerCase().includes(value.toLowerCase()));
     setElements(filteredElements);
   };
   const searchFoodByCategory = (category) => {
@@ -179,54 +181,52 @@ function App() {
   return (
     <>
       {showNotFinishedOrderModal && (
-      <>
-        <Backdrop />
-        <NotFinishedOrderModal closeModal={oldOrderModalHandler} />
-      </>
+        <>
+          <Backdrop />
+          <NotFinishedOrderModal closeModal={oldOrderModalHandler} />
+        </>
       )}
       <Header searchDish={searchElement} />
-      <BrowserRouter>
-        {isFirstVisit && (
-        <>
-          <Backdrop />
-          <FirstVisitPage closeModal={firstVisitHandler} />
-        </>
+      {isFirstVisit && (
+      <>
+        <Backdrop />
+        <FirstVisitPage closeModal={firstVisitHandler} />
+      </>
+      )}
+      {showLogoutModal && (
+      <>
+        <Backdrop />
+        <Logout logoutModalHandler={logoutModalHandler} />
+      </>
+      )}
+      <isAuthenticatedContext.Provider value={{
+        isUserAuthenticated, userEmail, idToken, localId,
+      }}
+      >
+        <Menu numbersOfItemsInOrdersCart={orderCart.length} newProductAdded={addProductToCart} userLoginHandler={userLoginHandler} />
+        {isLoading ? (
+          <section className="main__loading">
+            <Loading />
+          </section>
+        ) : (
+          <Routes>
+            <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} mealsFilter={mealsFilter} />} />
+            <Route path="/products/:dataID" element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
+            <Route path="/login" element={<LoginForm userLoginHandler={userLoginHandler} />} />
+            <Route path="/signIn" element={<RegistrationForm userLoginHandler={userLoginHandler} />} />
+            <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} removeMeal={removeMealFromOrder} clearOrder={clearOrder} /> : <Navigate to="/" />} />
+            <Route path="/user" element={isUserAuthenticated ? <UserPage /> : <Navigate to="/" />} />
+            <Route path="/user/passwordReset" element={<PasswordChange userLoginHandler={userLoginHandler} />} />
+            <Route path="/user/emailChange" element={<EmailChange userLoginHandler={userLoginHandler} />} />
+            <Route path="/user/delete" element={isUserAuthenticated ? <DeleteAccountSummary userLoginHandler={userLoginHandler} /> : <Navigate to="/" />} />
+            <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
+            <Route path="/aboutApp" element={<AboutApp />} />
+            <Route path="/appHistory" element={<AppHistory />} />
+            <Route path="/error" element={<ErrorPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
         )}
-        {showLogoutModal && (
-        <>
-          <Backdrop />
-          <Logout logoutModalHandler={logoutModalHandler} />
-        </>
-        )}
-        <isAuthenticatedContext.Provider value={{
-          isUserAuthenticated, userEmail, idToken, localId,
-        }}
-        >
-          <Menu numbersOfItemsInOrdersCart={orderCart.length} newProductAdded={addProductToCart} userLoginHandler={userLoginHandler} />
-          {isLoading ? (
-            <section className="main__loading">
-              <Loading />
-            </section>
-          ) : (
-            <Routes>
-              <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} mealsFilter={mealsFilter} />} />
-              <Route path="/products/:dataID" element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
-              <Route path="/login" element={<LoginForm userLoginHandler={userLoginHandler} />} />
-              <Route path="/signIn" element={<RegistrationForm userLoginHandler={userLoginHandler} />} />
-              <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} removeMeal={removeMealFromOrder} clearOrder={clearOrder} /> : <Navigate to="/" />} />
-              <Route path="/user" element={isUserAuthenticated ? <UserPage /> : <Navigate to="/" />} />
-              <Route path="/user/passwordReset" element={<PasswordChange userLoginHandler={userLoginHandler} />} />
-              <Route path="/user/emailChange" element={<EmailChange userLoginHandler={userLoginHandler} />} />
-              <Route path="/user/delete" element={isUserAuthenticated ? <DeleteAccountSummary userLoginHandler={userLoginHandler} /> : <Navigate to="/" />} />
-              <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
-              <Route path="/aboutApp" element={<AboutApp />} />
-              <Route path="/appHistory" element={<AppHistory />} />
-              <Route path="/error" element={<ErrorPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          )}
-        </isAuthenticatedContext.Provider>
-      </BrowserRouter>
+      </isAuthenticatedContext.Provider>
     </>
   );
 }
