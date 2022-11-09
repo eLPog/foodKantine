@@ -42,7 +42,6 @@ function App() {
   const [showNotFinishedOrderModal, setNotFinishedOrderModal] = useState(false);
   const [isFirstVisit, setIsFirstVisit] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const firstVisit = localStorage.getItem('firstVisit');
@@ -105,7 +104,6 @@ function App() {
         setIsLoading(false);
       } catch (err) {
         console.log(err);
-        navigate('/error');
       }
     };
     fetchMeals();

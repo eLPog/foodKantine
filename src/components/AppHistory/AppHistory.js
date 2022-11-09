@@ -5,7 +5,7 @@ import { HistoryElementLeft } from './HistoryElementLeft';
 
 export function AppHistory() {
   return (
-    <div className="timeline__container">
+    <div className="container timeline__container">
       <div className="timeline">
         <HistoryElementRight
           date="September 2022"
