@@ -4,6 +4,7 @@ import { firebaseLoginWithEmail, firebasePasswordReset } from '../../../assets/d
 import './LoginForm.css';
 import { setButtonActive } from '../../../utils/setButtonActive';
 import { Loading } from '../../Loading/Loading';
+import { loginTestUserFetch } from '../../../utils/loginTestUserFetch';
 
 export function LoginForm(props) {
   const [email, setEmail] = useState('');
@@ -94,17 +95,9 @@ export function LoginForm(props) {
   };
   const loginOnTestAccount = useCallback(() => {
     setIsLoading(true);
-    const login = async () => {
+    (async () => {
       try {
-        const data = await fetch(firebaseLoginWithEmail, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({ email: 'test@test.com', password: 'password', returnSecureToken: true }),
-        });
-        const res = await data.json();
+        const res = await loginTestUserFetch();
         userLoginHandler(true, { email: res.email, localId: res.localId, idToken: res.idToken });
         navigate('/user');
       } catch (err) {
@@ -113,8 +106,7 @@ export function LoginForm(props) {
       } finally {
         setIsLoading(false);
       }
-    };
-    login();
+    })();
   }, []);
   const eyePasswordHandler = () => {
     showPassword ? setShowPassword(false) : setShowPassword(true);

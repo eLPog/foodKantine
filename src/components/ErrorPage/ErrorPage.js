@@ -10,6 +10,7 @@ export const ErrorPage = React.memo(() => (
       <br />
       Please try again.
     </p>
+    <button onClick={() => console.log('Kliknięto')}>Click me</button>
     <NavLink to="/">
       <button className="btn-primary">Main Page</button>
     </NavLink>
