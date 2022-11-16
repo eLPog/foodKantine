@@ -1,6 +1,6 @@
 import './Menu.css';
 import { NavLink } from 'react-router-dom';
-import { useCallback, useContext, useState } from 'react';
+import { useContext } from 'react';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
 import { InfoModal } from '../Modals/InfoModal/InfoModal';
 
@@ -68,7 +68,15 @@ export function Menu(props) {
               </svg>
             </li>
           </NavLink>
-          <NavLink to="/" onClick={() => props.userLoginHandler(false)}>
+          <div
+            onClick={() => props.userLoginHandler(false)}
+            role="button"
+            tabIndex={0}
+            aria-pressed={false}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter')props.userLoginHandler(false);
+            }}
+          >
             <li className="nav__container__menu__list__li" title="Logout">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +96,7 @@ export function Menu(props) {
                 />
               </svg>
             </li>
-          </NavLink>
+          </div>
         </>
       ) : (
         <>
@@ -144,9 +152,9 @@ export function Menu(props) {
   return (
     <nav className="nav__container container">
       <div className="nav__container__logo">
-        <NavLink to="/">
+        <a href="/">
           <h1>Food Kantine</h1>
-        </NavLink>
+        </a>
       </div>
       <ul className="nav__container__menu__list">
         <NavLink to="/">

@@ -10,7 +10,6 @@ export function GoToTopButton() {
   }
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    console.log(scrollPosition);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };

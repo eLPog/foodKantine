@@ -67,6 +67,7 @@ export function Main() {
       setOrderCart([]);
       localStorage.removeItem('user-data');
       localStorage.setItem('oldOrder', JSON.stringify([]));
+      navigate('/');
     } else {
       setIsUserAuthenticated(true);
       setUserEmail(userData.email);
