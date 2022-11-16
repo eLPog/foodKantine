@@ -8,9 +8,11 @@ import { Loading } from '../Loading/Loading';
 
 export function UserHistory() {
   const [allUsersMeals, setAllUsersMeals] = useState([]);
+  const [showedOrders, setShowedOrders] = useState([]);
   const [lastOrder, setLastOrder] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [valueOfOrders, setValueOfOrders] = useState(0);
+  const [howManyResultsShow, setHowManyResultsShow] = useState(5);
   const navigate = useNavigate();
   const { localId } = useContext(isAuthenticatedContext);
   useEffect(() => {
@@ -21,6 +23,7 @@ export function UserHistory() {
         res = Object.values(res);
         res = res.filter((el) => el.userID === localId);
         setAllUsersMeals(res.reverse());
+        setShowedOrders(res.reverse().slice(0, howManyResultsShow));
         setLastOrder(res[0]);
         let totalValue = 0;
         res.forEach((el) => el.meals.forEach((el) => totalValue += el.price));
@@ -33,6 +36,16 @@ export function UserHistory() {
     };
     getData();
   }, []);
+  useEffect(() => {
+    if (howManyResultsShow === 0) {
+      setShowedOrders(allUsersMeals);
+    } else {
+      setShowedOrders(allUsersMeals.slice(0, howManyResultsShow));
+    }
+  }, [howManyResultsShow]);
+  const showHistoryHandler = (e) => {
+    setHowManyResultsShow(Number(e.target.value));
+  };
   return (
     <div className="container userHistory__container">
       {allUsersMeals.length < 1 ? (
@@ -41,6 +54,7 @@ export function UserHistory() {
         </section>
       ) : (
         <>
+
           <div className="flex-sm-row userHistory__container__top">
             <div className="userHistory__container__lastOrder">
               <span>Last order</span>
@@ -64,8 +78,19 @@ export function UserHistory() {
               </div>
             </div>
           </div>
+          <div className="userHistory__select">
+            <label htmlFor="howManyShow">Show last</label>
+            <select name="howManyShow" id="howManyShow" onChange={showHistoryHandler}>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="0">All</option>
+            </select>
+            orders
+          </div>
+
           <div className="userHistory__container__bottom">
-            {allUsersMeals.map((el) => (
+            {showedOrders.map((el) => (
               <ul key={el.date} className="userHistory__container__bottom__orderList">
                 <span className="userHistory__container__bottom__orderList--date">
                   {el.date.slice(0, 10)}

@@ -25,7 +25,7 @@ import { AppHistory } from '../AppHistory/AppHistory';
 import { ErrorPage } from '../ErrorPage/ErrorPage';
 import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
 import { getProducts } from '../../utils/fetchMeals';
-import { GoToTopButton } from '../elements/GoToTopButton';
+import { GoToTopButton } from '../elements/GoTopButton/GoToTopButton';
 
 export function Main() {
   const [elements, setElements] = useState([]);

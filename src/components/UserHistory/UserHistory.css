@@ -73,6 +73,9 @@ display: flex;
     color:#ffffff;
     border-bottom: 1px dotted black;
 }
+#howManyShow{
+    margin:0.5rem 1rem;
+}
 
 @media only screen and (max-width: 576px){
     .userHistory__container__bottom {
