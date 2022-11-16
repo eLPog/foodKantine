@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import {
   Navigate, Route, Routes, useNavigate,
 } from 'react-router-dom';
-import { firebaseURL } from '../../assets/db/firebaseurl';
 import { Backdrop } from '../Modals/Backdrop/Backdrop';
 import { NotFinishedOrderModal } from '../Modals/NotFinishedOrderModal/NotFinishedOrderModal';
 import { Header } from '../Header/Header';
@@ -26,6 +25,7 @@ import { AppHistory } from '../AppHistory/AppHistory';
 import { ErrorPage } from '../ErrorPage/ErrorPage';
 import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
 import { getProducts } from '../../utils/fetchMeals';
+import { GoToTopButton } from '../elements/GoToTopButton';
 
 export function Main() {
   const [elements, setElements] = useState([]);
@@ -177,6 +177,8 @@ export function Main() {
 
   return (
     <>
+      <GoToTopButton />
+
       {showNotFinishedOrderModal && (
         <>
           <Backdrop />

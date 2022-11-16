@@ -20,7 +20,7 @@ export function Header(props) {
   }, []);
 
   return (
-    <header>
+    <header id="searchStart">
       <div className="container header__container">
         <input
           ref={inputRef}
