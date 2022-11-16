@@ -21,6 +21,7 @@ export function Order(props) {
     userID: props.userID,
     date: getActuallyDate(),
     meals: props.orderCart,
+    totalPrice,
   };
   async function sendOrder() {
     setIsLoading(true);

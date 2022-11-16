@@ -22,8 +22,9 @@ export function UserHistory() {
         let res = await data.json();
         res = Object.values(res);
         res = res.filter((el) => el.userID === localId);
-        setAllUsersMeals(res.reverse());
-        setShowedOrders(res.reverse().slice(0, howManyResultsShow));
+        const orders = res.reverse();
+        setAllUsersMeals(orders);
+        setShowedOrders(orders.slice(0, howManyResultsShow));
         setLastOrder(res[0]);
         let totalValue = 0;
         res.forEach((el) => el.meals.forEach((el) => totalValue += el.price));
@@ -90,22 +91,34 @@ export function UserHistory() {
           </div>
 
           <div className="userHistory__container__bottom">
-            {showedOrders.map((el) => (
-              <ul key={el.date} className="userHistory__container__bottom__orderList">
-                <span className="userHistory__container__bottom__orderList--date">
-                  {el.date.slice(0, 10)}
-                </span>
-                {el.meals.map((oneMeal) => (
-                  <li key={Math.random() * 1000}>
-                    {oneMeal.name}
-                    <p className="userHistory__container__bottom__orderList--price">
-                      {oneMeal.price.toFixed(2)}
+            <ul className="userHistory__container__bottom__list">
+              {showedOrders.map((el) => (
+                <li key={el.date} className="userHistory__container__bottom__orderList">
+                  <div>
+                    <span className="userHistory__container__bottom__orderList--date">
+                      {el.date.slice(0, 10)}
+                    </span>
+                    {el.meals.map((oneMeal) => (
+                      <section key={Math.random() * 1000}>
+                        {oneMeal.name}
+                        <p className="userHistory__container__bottom__orderList--price">
+                          {oneMeal.price.toFixed(2)}
+                          $
+                        </p>
+                      </section>
+                    ))}
+                  </div>
+                  <section className="userHistory__container__bottom__orderList--summary">
+                    <span>Total: </span>
+                    <span>
+                      {el.totalPrice}
                       $
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            ))}
+                    </span>
+
+                  </section>
+                </li>
+              ))}
+            </ul>
           </div>
         </>
       )}

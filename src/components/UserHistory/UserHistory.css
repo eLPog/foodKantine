@@ -19,7 +19,8 @@
     border-bottom: 1px solid black;
 
 }
-.userHistory__container__bottom {
+
+.userHistory__container__bottom__list {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -28,9 +29,7 @@
     justify-items: center;
     align-items: flex-end;
 }
-.userHistory__container__bottom ul {
-    border-radius: 1rem 0.3rem;
-}
+
 .userHistory__container__stats div {
     display: flex;
     flex-direction: column;
@@ -45,11 +44,17 @@
     box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
     background: rgb(119,214,235);
     background: linear-gradient(0deg, rgba(119,214,235,0) 70%, rgba(119,194,250,1) 100%);    margin:0.6rem;
-    min-height: 200px;
     min-width: 10rem;
+    height: fit-content;
     border-left:1px solid black;
     border-top:1px solid black;
-
+    border-radius: 1rem 0.3rem;
+}
+.userHistory__container__bottom__orderList--summary{
+    border-top: 2px dotted black;
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.2rem;
 }
 .userHistory__container__lastOrder {
     display: flex;
@@ -85,5 +90,8 @@ display: flex;
     .userHistory__container__top {
         padding: 0;
         font-size: 0.8rem;
+    }
+    .userHistory__container__bottom__orderList {
+        height: auto;
     }
 }
