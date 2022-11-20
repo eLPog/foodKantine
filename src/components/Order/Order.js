@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { v4 } from 'uuid';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { firebaseURL } from '../../assets/db/firebaseurl';
 import './Order.css';
@@ -22,6 +23,7 @@ export function Order(props) {
     date: getActuallyDate(),
     meals: props.orderCart,
     totalPrice,
+    orderID: v4(),
   };
   async function sendOrder() {
     setIsLoading(true);

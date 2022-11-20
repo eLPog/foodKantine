@@ -1,4 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import {
+  useCallback, useContext, useEffect, useState,
+} from 'react';
 import './UserHistory.css';
 import { useNavigate } from 'react-router-dom';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
@@ -13,6 +15,8 @@ export function UserHistory() {
   const [isLoading, setIsLoading] = useState(true);
   const [valueOfOrders, setValueOfOrders] = useState(0);
   const [howManyResultsShow, setHowManyResultsShow] = useState(5);
+  const [showOrderDetails, setShowOrderDetails] = useState(false);
+  const [orderID, setOrderID] = useState('');
   const navigate = useNavigate();
   const { localId } = useContext(isAuthenticatedContext);
   useEffect(() => {
@@ -46,6 +50,10 @@ export function UserHistory() {
   }, [howManyResultsShow]);
   const showHistoryHandler = (e) => {
     setHowManyResultsShow(Number(e.target.value));
+  };
+  const showDetails = (orderID) => {
+    setOrderID(orderID);
+    showOrderDetails ? setShowOrderDetails(false) : setShowOrderDetails(true);
   };
   return (
     <div className="container userHistory__container">
@@ -94,10 +102,18 @@ export function UserHistory() {
             <ul className="userHistory__container__bottom__list">
               {showedOrders.map((el) => (
                 <li key={el.date} className="userHistory__container__bottom__orderList">
-                  <div>
-                    <span className="userHistory__container__bottom__orderList--date">
-                      {el.date.slice(0, 10)}
+                  <span className="userHistory__container__bottom__orderList--date">
+                    {el.date.slice(0, 10)}
+                  </span>
+                  <section className="userHistory__container__bottom__orderList--summary">
+                    <span>Total: </span>
+                    <span>
+                      {el.totalPrice}
+                      $
                     </span>
+                  </section>
+                  <button className="btn-primary" onClick={() => showDetails(el.orderID)}>Show more</button>
+                  <div className={el.orderID === orderID && showOrderDetails ? 'userHistory__container__bottom__orderList--show' : 'userHistory__container__bottom__orderList--hide'}>
                     {el.meals.map((oneMeal) => (
                       <section key={Math.random() * 1000}>
                         {oneMeal.name}
@@ -108,14 +124,6 @@ export function UserHistory() {
                       </section>
                     ))}
                   </div>
-                  <section className="userHistory__container__bottom__orderList--summary">
-                    <span>Total: </span>
-                    <span>
-                      {el.totalPrice}
-                      $
-                    </span>
-
-                  </section>
                 </li>
               ))}
             </ul>
