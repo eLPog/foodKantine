@@ -51,10 +51,15 @@ export function UserHistory() {
   const showHistoryHandler = (e) => {
     setHowManyResultsShow(Number(e.target.value));
   };
-  const showDetails = (orderID) => {
-    setOrderID(orderID);
-    showOrderDetails ? setShowOrderDetails(false) : setShowOrderDetails(true);
-  };
+  const showDetails = useCallback((orderIdNumber) => {
+    if (orderIdNumber === orderID) {
+      setShowOrderDetails(false);
+      setOrderID('');
+    } else {
+      setOrderID(orderIdNumber);
+      setShowOrderDetails(true);
+    }
+  }, [orderID]);
   return (
     <div className="container userHistory__container">
       {allUsersMeals.length < 1 ? (
@@ -112,7 +117,7 @@ export function UserHistory() {
                       $
                     </span>
                   </section>
-                  <button className="btn-primary" onClick={() => showDetails(el.orderID)}>Show more</button>
+                  <button className="btn-primary" onClick={() => showDetails(el.orderID)}>{showOrderDetails && el.orderID === orderID ? 'Hide' : 'Show more'}</button>
                   <div className={el.orderID === orderID && showOrderDetails ? 'userHistory__container__bottom__orderList--show' : 'userHistory__container__bottom__orderList--hide'}>
                     {el.meals.map((oneMeal) => (
                       <section key={Math.random() * 1000}>
