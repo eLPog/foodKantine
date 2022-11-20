@@ -1,8 +1,10 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 import './DetailsFoodElement.css';
+import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 
 export function DetailsFoodElement(props) {
+  const { isUserAuthenticated } = useContext(isAuthenticatedContext);
   const navigate = useNavigate();
   function handleClick() {
     navigate(-1);
@@ -34,7 +36,6 @@ export function DetailsFoodElement(props) {
     </div>
   );
   return (
-    // <div className="container detailsFoodElement__card">
     <div className={`container detailsFoodElement__card ${element.specialOffer && 'specialBackground'}`}>
       <h1>{element.name}</h1>
       <div className="d-flex flex-column align-items-center justify-content-around flex-sm-row">
@@ -56,9 +57,17 @@ export function DetailsFoodElement(props) {
           {element.specialOffer && specialOffer}
         </div>
       </div>
-      <button className="btn-primary btn__back" onClick={() => props.addMealToOrder(dataID)}>
-        Buy
-      </button>
+      {isUserAuthenticated ? (
+        <button className="btn-primary" onClick={() => props.addMealToOrder(props.dataID)}>
+          Add
+        </button>
+      ) : (
+        <Link to="/login">
+          <button className="btn-primary">
+            Add
+          </button>
+        </Link>
+      )}
       <button className="btn-primary btn__back" onClick={handleClick}>
         Back
       </button>
