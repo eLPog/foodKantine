@@ -1,0 +1,11 @@
+.order__thanks {
+    font-family: Cambria;
+    text-align: center;
+    letter-spacing: 1px;
+    background-color: var(--second-bgcolor);
+    padding: 1rem;
+    margin: 5rem 0;
+    box-shadow: 1px 1px 5px 5px green;
+    font-weight: bold;
+    animation: brightElementUp 1000ms ease-in;
+}

@@ -22,6 +22,11 @@ export function AppHistory() {
           version="version 1.0.2"
           content="The ability to log into a test account. Remembering the basket when an order is not finalized."
         />
+        <HistoryElementLeft
+          date="November 2022"
+          version="version 1.0.3"
+          content="User can now repeat the order from the orders history list"
+        />
       </div>
       <div className="button__bottom">
         <Link to="/">

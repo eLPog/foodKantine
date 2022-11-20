@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 import { useNavigate, NavLink } from 'react-router-dom';
-import { firebaseURL } from '../../assets/db/firebaseurl';
 import './Order.css';
 import { getActuallyDate } from '../../utils/getActuallyDate';
 import { Loading } from '../Loading/Loading';
+import { sendNewOrder } from '../../utils/sendOrder';
+import { OrderSummaryModal } from '../elements/OrderSummaryModal/OrderSummaryModal';
 
 export function Order(props) {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -28,13 +29,7 @@ export function Order(props) {
   async function sendOrder() {
     setIsLoading(true);
     try {
-      await fetch(`${firebaseURL}orders.json`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(completeOrder),
-      });
+      await sendNewOrder(completeOrder);
       setIsLoading(false);
       props.clearOrder();
       localStorage.setItem('oldOrder', JSON.stringify([]));
@@ -50,12 +45,7 @@ export function Order(props) {
   }
   return (
     <section className="container order__container">
-      {showSummaryModal ? (
-        <section className="order__thanks">
-          <p> The order has been sent successfully. </p>
-          <p> You will return to the home page in a moment</p>
-        </section>
-      ) : (
+      {showSummaryModal ? <OrderSummaryModal /> : (
         <>
           {isLoading ? <Loading /> : (
             <>
