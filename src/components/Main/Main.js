@@ -31,35 +31,37 @@ export function Main() {
   const [elements, setElements] = useState([]);
   const [elementsBeforeSearch, setElementsBeforeSearch] = useState([]);
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [idToken, setIdToken] = useState('');
   const [localId, setLocalId] = useState('');
   const [orderCart, setOrderCart] = useState([]);
-  const [addProductToCart, setAddProductToCart] = useState(false);
   const [mealsFilter, setMealsFilter] = useState('');
   const [showNotFinishedOrderModal, setNotFinishedOrderModal] = useState(false);
   const [isFirstVisit, setIsFirstVisit] = useState(false);
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [mainState, setMainState] = useState({
+    isLoading: false,
+    showLogoutModal: false,
+    addProductToCart: false,
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
     const firstVisit = localStorage.getItem('firstVisit');
     if (!firstVisit) {
-      localStorage.setItem('firstVisit', JSON.stringify(true));
       setIsFirstVisit(true);
+      localStorage.setItem('firstVisit', JSON.stringify(true));
     }
   }, []);
   const firstVisitHandler = useCallback(() => {
     setIsFirstVisit(false);
   }, []);
   const logoutModalHandler = useCallback(() => {
-    setShowLogoutModal(false);
+    setMainState({ ...mainState, showLogoutModal: false });
   }, []);
 
   const userLoginHandler = (isAuth, userData) => {
     if (!isAuth) {
-      setShowLogoutModal(true);
+      setMainState({ ...mainState, showLogoutModal: true });
       setIsUserAuthenticated(false);
       setUserEmail('');
       setLocalId('');
@@ -91,7 +93,7 @@ export function Main() {
   useEffect(() => {
     setOldOrder();
     (async () => {
-      setIsLoading(true);
+      setMainState({ ...mainState, isLoading: true });
       const userDataFromLocalStorage = JSON.parse(localStorage.getItem('user-data'));
       if (userDataFromLocalStorage) {
         userLoginHandler(true, userDataFromLocalStorage);
@@ -104,7 +106,7 @@ export function Main() {
         console.log(err);
         navigate('/error');
       } finally {
-        setIsLoading(false);
+        setMainState({ ...mainState, isLoading: false });
       }
     })();
   }, []);
@@ -132,9 +134,9 @@ export function Main() {
       localStorage.setItem('oldOrder', JSON.stringify(oldOrder));
       setOrderCart((prevState) => [...prevState, mealObj]);
     }
-    setAddProductToCart(true);
+    setMainState({ ...mainState, addProductToCart: true });
     setTimeout(() => {
-      setAddProductToCart(false);
+      setMainState({ ...mainState, addProductToCart: false });
     }, 1000);
   };
   const removeMealFromOrder = (mealID) => {
@@ -193,7 +195,7 @@ export function Main() {
           <FirstVisitPage closeModal={firstVisitHandler} />
         </>
       )}
-      {showLogoutModal && (
+      {mainState.showLogoutModal && (
         <>
           <Backdrop />
           <Logout logoutModalHandler={logoutModalHandler} />
@@ -203,8 +205,8 @@ export function Main() {
         isUserAuthenticated, userEmail, idToken, localId, userLoginHandler,
       }}
       >
-        <Menu numbersOfItemsInOrdersCart={orderCart.length} newProductAdded={addProductToCart} userLoginHandler={userLoginHandler} />
-        {isLoading ? (
+        <Menu numbersOfItemsInOrdersCart={orderCart.length} newProductAdded={mainState.addProductToCart} />
+        {mainState.isLoading ? (
           <section className="main__loading">
             <Loading />
           </section>

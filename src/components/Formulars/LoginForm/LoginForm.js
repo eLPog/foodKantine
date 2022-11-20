@@ -1,12 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
+import {
+  useCallback, useContext, useEffect, useState,
+} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { firebaseLoginWithEmail, firebasePasswordReset } from '../../../assets/db/firebaseurl';
 import './LoginForm.css';
 import { setButtonActive } from '../../../utils/setButtonActive';
 import { Loading } from '../../Loading/Loading';
 import { loginTestUserFetch } from '../../../utils/loginTestUserFetch';
+import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 
-export function LoginForm(props) {
+export function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -14,7 +17,7 @@ export function LoginForm(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { userLoginHandler } = props;
+  const { userLoginHandler } = useContext(isAuthenticatedContext);
   useEffect(() => {
     if (error) {
       const timeAction = setTimeout(() => {
