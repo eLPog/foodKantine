@@ -13,6 +13,7 @@ export function EmailChange(props) {
   const [isLoading, setIsLoading] = useState(false);
   const { idToken, userEmail } = useContext(isAuthenticatedContext);
   const [isTestAccountChanged, setIsTestAccountChanged] = useState(false);
+  const { userLoginHandler } = useContext(isAuthenticatedContext);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -55,7 +56,7 @@ export function EmailChange(props) {
       } else {
         navigate('/error');
       }
-      props.userLoginHandler(false);
+      userLoginHandler(false);
     } catch (err) {
       console.log(err);
       navigate('/error');

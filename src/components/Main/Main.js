@@ -200,7 +200,7 @@ export function Main() {
         </>
       )}
       <isAuthenticatedContext.Provider value={{
-        isUserAuthenticated, userEmail, idToken, localId,
+        isUserAuthenticated, userEmail, idToken, localId, userLoginHandler,
       }}
       >
         <Menu numbersOfItemsInOrdersCart={orderCart.length} newProductAdded={addProductToCart} userLoginHandler={userLoginHandler} />
@@ -212,13 +212,13 @@ export function Main() {
           <Routes>
             <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} mealsFilter={mealsFilter} />} />
             <Route path="/products/:dataID" element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
-            <Route path="/login" element={<LoginForm userLoginHandler={userLoginHandler} />} />
-            <Route path="/signIn" element={<RegistrationForm userLoginHandler={userLoginHandler} />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/signIn" element={<RegistrationForm />} />
             <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} removeMeal={removeMealFromOrder} clearOrder={clearOrder} /> : <Navigate to="/" />} />
             <Route path="/user" element={isUserAuthenticated ? <UserPage /> : <Navigate to="/" />} />
-            <Route path="/user/passwordReset" element={<PasswordChange userLoginHandler={userLoginHandler} />} />
-            <Route path="/user/emailChange" element={<EmailChange userLoginHandler={userLoginHandler} />} />
-            <Route path="/user/delete" element={isUserAuthenticated ? <DeleteAccountSummary userLoginHandler={userLoginHandler} /> : <Navigate to="/" />} />
+            <Route path="/user/passwordReset" element={<PasswordChange />} />
+            <Route path="/user/emailChange" element={<EmailChange />} />
+            <Route path="/user/delete" element={isUserAuthenticated ? <DeleteAccountSummary /> : <Navigate to="/" />} />
             <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
             <Route path="/aboutApp" element={<AboutApp />} />
             <Route path="/appHistory" element={<AppHistory />} />

@@ -4,8 +4,9 @@ import { firebaseAddUser } from '../../../assets/db/firebaseurl';
 import { setButtonActive } from '../../../utils/setButtonActive';
 import './RegistrationForm.css';
 import { Loading } from '../../Loading/Loading';
+import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 
-export function RegistrationForm(props) {
+export function RegistrationForm() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,7 +14,7 @@ export function RegistrationForm(props) {
   const [error, setError] = useState('');
   const [btnActive, setBtnActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { userLoginHandler } = props;
+  const { userLoginHandler } = useContext(isAuthenticatedContext);
   const loginHandler = (e) => {
     setEmail(e.target.value);
   };

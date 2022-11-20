@@ -111,14 +111,16 @@ export function UserHistory() {
               </div>
             </div>
             <div className="userHistory__select">
-              <label htmlFor="howManyShow">Show last</label>
-              <select name="howManyShow" id="howManyShow" onChange={showHistoryHandler}>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="0">All</option>
-              </select>
-              orders
+              <section>
+                <label htmlFor="howManyShow">Show last</label>
+                <select name="howManyShow" id="howManyShow" onChange={showHistoryHandler}>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="0">All</option>
+                </select>
+                orders
+              </section>
             </div>
 
             <div className="userHistory__container__bottom">
@@ -137,6 +139,7 @@ export function UserHistory() {
                     </section>
                     <button className="btn-primary" onClick={() => showDetails(el.orderID)}>{showOrderDetails && el.orderID === orderID ? 'Hide' : 'Show more'}</button>
                     <div className={el.orderID === orderID && showOrderDetails ? 'userHistory__container__bottom__orderList--show' : 'userHistory__container__bottom__orderList--hide'}>
+                      <p>{el.date}</p>
                       {el.meals.map((oneMeal) => (
                         <section key={Math.random() * 1000}>
                           {oneMeal.name}

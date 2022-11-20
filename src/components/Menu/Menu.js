@@ -6,7 +6,7 @@ import { InfoModal } from '../Modals/InfoModal/InfoModal';
 
 export function Menu(props) {
   const newProduct = props.newProductAdded;
-  const { isUserAuthenticated } = useContext(isAuthenticatedContext);
+  const { isUserAuthenticated, userLoginHandler } = useContext(isAuthenticatedContext);
   const menu = (
     <>
       {isUserAuthenticated ? (
@@ -69,12 +69,12 @@ export function Menu(props) {
             </li>
           </NavLink>
           <div
-            onClick={() => props.userLoginHandler(false)}
+            onClick={() => userLoginHandler(false)}
             role="button"
             tabIndex={0}
             aria-pressed={false}
             onKeyDown={(e) => {
-              if (e.key === 'Enter')props.userLoginHandler(false);
+              if (e.key === 'Enter')userLoginHandler(false);
             }}
           >
             <li className="nav__container__menu__list__li" title="Logout">

@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 
-export function DeleteAccountSummary(props) {
+export function DeleteAccountSummary() {
+  const { userLoginHandler } = useContext(isAuthenticatedContext);
   useEffect(() => {
     const timer = setTimeout(() => {
-      props.userLoginHandler(false);
+      userLoginHandler(false);
       return () => clearTimeout(timer);
     }, 5000);
   }, []);

@@ -1,9 +1,12 @@
 import { NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 
-export function PasswordChange(props) {
+export function PasswordChange() {
+  const { userLoginHandler } = useContext(isAuthenticatedContext);
+
   useEffect(() => {
-    props.userLoginHandler(false);
+    userLoginHandler(false);
   }, []);
   return (
     <div className="container text-center mt-5">
