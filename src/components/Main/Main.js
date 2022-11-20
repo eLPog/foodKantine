@@ -10,7 +10,6 @@ import { Logout } from '../Logout/Logout';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
 import { Menu } from '../Menu/Menu';
 import { Loading } from '../Loading/Loading';
-import AllFoodList from '../Foods/AllFoodList/AllFoodList';
 import { DetailsFoodElement } from '../Foods/DetailsFoodElement/DetailsFoodElement';
 import { LoginForm } from '../Formulars/LoginForm/LoginForm';
 import { RegistrationForm } from '../Formulars/RegistrationForm/RegistrationForm';
@@ -26,18 +25,21 @@ import { ErrorPage } from '../ErrorPage/ErrorPage';
 import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
 import { getProducts } from '../../utils/fetchMeals';
 import { GoToTopButton } from '../elements/GoTopButton/GoToTopButton';
+import AllFoodList from '../Foods/AllFoodList/AllFoodList';
 
 export function Main() {
   const [elements, setElements] = useState([]);
   const [elementsBeforeSearch, setElementsBeforeSearch] = useState([]);
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
-  const [userEmail, setUserEmail] = useState('');
-  const [idToken, setIdToken] = useState('');
-  const [localId, setLocalId] = useState('');
   const [orderCart, setOrderCart] = useState([]);
   const [mealsFilter, setMealsFilter] = useState('');
   const [showNotFinishedOrderModal, setNotFinishedOrderModal] = useState(false);
   const [isFirstVisit, setIsFirstVisit] = useState(false);
+  const [userState, setUserState] = useState({
+    userEmail: '',
+    idToken: '',
+    localId: '',
+  });
   const [mainState, setMainState] = useState({
     isLoading: false,
     showLogoutModal: false,
@@ -63,18 +65,14 @@ export function Main() {
     if (!isAuth) {
       setMainState({ ...mainState, showLogoutModal: true });
       setIsUserAuthenticated(false);
-      setUserEmail('');
-      setLocalId('');
-      setIdToken('');
+      setUserState({ userEmail: '', idToken: '', localId: '' });
       setOrderCart([]);
       localStorage.removeItem('user-data');
       localStorage.setItem('oldOrder', JSON.stringify([]));
       navigate('/');
     } else {
       setIsUserAuthenticated(true);
-      setUserEmail(userData.email);
-      setLocalId(userData.localId);
-      setIdToken(userData.idToken);
+      setUserState({ userEmail: userData.email, idToken: userData.idToken, localId: userData.localId });
       localStorage.setItem('user-data', JSON.stringify(userData));
     }
   };
@@ -202,7 +200,7 @@ export function Main() {
         </>
       )}
       <isAuthenticatedContext.Provider value={{
-        isUserAuthenticated, userEmail, idToken, localId, userLoginHandler,
+        isUserAuthenticated, userState, userLoginHandler,
       }}
       >
         <Menu numbersOfItemsInOrdersCart={orderCart.length} newProductAdded={mainState.addProductToCart} />
@@ -216,7 +214,7 @@ export function Main() {
             <Route path="/products/:dataID" element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signIn" element={<RegistrationForm />} />
-            <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} userID={localId} removeMeal={removeMealFromOrder} clearOrder={clearOrder} /> : <Navigate to="/" />} />
+            <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} removeMeal={removeMealFromOrder} clearOrder={clearOrder} /> : <Navigate to="/" />} />
             <Route path="/user" element={isUserAuthenticated ? <UserPage /> : <Navigate to="/" />} />
             <Route path="/user/passwordReset" element={<PasswordChange />} />
             <Route path="/user/emailChange" element={<EmailChange />} />

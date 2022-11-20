@@ -9,7 +9,7 @@ import { isTestAccount } from '../../../utils/isTestAccount';
 import { Loading } from '../../Loading/Loading';
 
 export function UserPage() {
-  const { userEmail, idToken } = useContext(isAuthenticatedContext);
+  const { userState } = useContext(isAuthenticatedContext);
   const [isDeleteConfirmed, setIsDeleteConfirmed] = useState(false);
   const [isTestAccountChanged, setIsTestAccountChanged] = useState(false);
   const [showTestAccountInfo, setShowTestAccountInfo] = useState(false);
@@ -17,13 +17,13 @@ export function UserPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userEmail === 'test@test.com') {
+    if (userState.userEmail === 'test@test.com') {
       setShowTestAccountInfo(true);
     }
-  }, [userEmail]);
+  }, [userState.userEmail]);
 
   const setNewPassword = async () => {
-    if (isTestAccount(userEmail)) {
+    if (isTestAccount(userState.userEmail)) {
       setIsTestAccountChanged(true);
       setTimeout(() => {
         setIsTestAccountChanged(false);
@@ -40,7 +40,7 @@ export function UserPage() {
         },
         body: JSON.stringify({
           requestType: 'PASSWORD_RESET',
-          email: userEmail,
+          email: userState.userEmail,
         }),
       });
       setIsLoading(false);
@@ -56,7 +56,7 @@ export function UserPage() {
   };
 
   const isDeleteConfirmedHandler = useCallback(() => {
-    if (isTestAccount(userEmail)) {
+    if (isTestAccount(userState.userEmail)) {
       setIsTestAccountChanged(true);
       setTimeout(() => {
         setIsTestAccountChanged(false);
@@ -76,7 +76,7 @@ export function UserPage() {
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          idToken,
+          idToken: userState.idToken,
         }),
       });
       setIsLoading(false);
@@ -100,7 +100,7 @@ export function UserPage() {
           You are logged as:
           <br />
           <span className="--specific">
-            {userEmail}
+            {userState.userEmail}
           </span>
         </span>
       </div>

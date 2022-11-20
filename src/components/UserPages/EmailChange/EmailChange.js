@@ -6,14 +6,13 @@ import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext'
 import { isTestAccount } from '../../../utils/isTestAccount';
 import { Loading } from '../../Loading/Loading';
 
-export function EmailChange(props) {
+export function EmailChange() {
   const [email, setEmail] = useState('');
   const [emailChangedStatus, setEmailChangedStatus] = useState(false);
   const [isButtonActive, setIsButtonActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { idToken, userEmail } = useContext(isAuthenticatedContext);
   const [isTestAccountChanged, setIsTestAccountChanged] = useState(false);
-  const { userLoginHandler } = useContext(isAuthenticatedContext);
+  const { userLoginHandler, userState } = useContext(isAuthenticatedContext);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -27,7 +26,7 @@ export function EmailChange(props) {
     setEmail(e.target.value);
   };
   const setNewEmail = async () => {
-    if (isTestAccount(userEmail)) {
+    if (isTestAccount(userState.userEmail)) {
       setIsTestAccountChanged(true);
       setTimeout(() => {
         setIsTestAccountChanged(false);
@@ -44,7 +43,7 @@ export function EmailChange(props) {
         },
         body: JSON.stringify({
           email,
-          idToken,
+          idToken: userState.idToken,
         }),
       });
       if (data.status === 200) {

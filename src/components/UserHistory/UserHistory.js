@@ -23,7 +23,7 @@ export function UserHistory() {
   const [orderID, setOrderID] = useState('');
   const [showInfoAfterRepeatedOrder, setShowInfoAfterRepeatedOrder] = useState(false);
   const navigate = useNavigate();
-  const { localId } = useContext(isAuthenticatedContext);
+  const { userState } = useContext(isAuthenticatedContext);
   async function buyAgain(orderObj) {
     try {
       await sendNewOrder(orderObj);
@@ -42,7 +42,7 @@ export function UserHistory() {
         const data = await fetch(`${firebaseURL}orders.json`);
         let res = await data.json();
         res = Object.values(res);
-        res = res.filter((el) => el.userID === localId);
+        res = res.filter((el) => el.userID === userState.localId);
         const orders = res.reverse();
         setAllUsersMeals(orders);
         setShowedOrders(orders.slice(0, howManyResultsShow));

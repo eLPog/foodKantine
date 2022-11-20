@@ -2,8 +2,10 @@ import { createContext } from 'react';
 
 export const isAuthenticatedContext = createContext({
   isUserAuthenticated: false,
-  userEmail: '',
-  idToken: '',
-  localId: '',
+  userState: {
+    userEmail: '',
+    localId: '',
+    idToken: '',
+  },
   userLoginHandler: () => {},
 });

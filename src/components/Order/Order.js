@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 import { useNavigate, NavLink } from 'react-router-dom';
 import './Order.css';
@@ -6,11 +6,13 @@ import { getActuallyDate } from '../../utils/getActuallyDate';
 import { Loading } from '../Loading/Loading';
 import { sendNewOrder } from '../../utils/sendOrder';
 import { OrderSummaryModal } from '../elements/OrderSummaryModal/OrderSummaryModal';
+import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
 
 export function Order(props) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [showSummaryModal, setShowSummaryModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { userState } = useContext(isAuthenticatedContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export function Order(props) {
     setTotalPrice(Number(price));
   }, [props.orderCart]);
   const completeOrder = {
-    userID: props.userID,
+    userID: userState.localId,
     date: getActuallyDate(),
     meals: props.orderCart,
     totalPrice,
