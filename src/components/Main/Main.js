@@ -23,13 +23,13 @@ import { AboutApp } from '../AboutApp/AboutApp';
 import { AppHistory } from '../AppHistory/AppHistory';
 import { ErrorPage } from '../ErrorPage/ErrorPage';
 import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
-import { getProducts } from '../../utils/fetchMeals';
 import { GoToTopButton } from '../elements/GoTopButton/GoToTopButton';
 import AllFoodList from '../Foods/AllFoodList/AllFoodList';
+import { useGetAllMeals } from '../../hooks/useGetAllMeals';
 
 export function Main() {
+  const { allElements, isLoading } = useGetAllMeals();
   const [elements, setElements] = useState([]);
-  const [elementsBeforeSearch, setElementsBeforeSearch] = useState([]);
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   const [orderCart, setOrderCart] = useState([]);
   const [mealsFilter, setMealsFilter] = useState('');
@@ -41,11 +41,13 @@ export function Main() {
     localId: '',
   });
   const [mainState, setMainState] = useState({
-    isLoading: false,
     showLogoutModal: false,
     addProductToCart: false,
   });
   const navigate = useNavigate();
+  useEffect(() => {
+    setElements(allElements);
+  }, [allElements]);
 
   // check if user visit this page first time and save result to LS
   useEffect(() => {
@@ -92,32 +94,19 @@ export function Main() {
     }
   }, []);
 
-  // fetch all elements
+  // check if user was already logged and if he has unfinished order
   useEffect(() => {
-    setOldOrder();
-    (async () => {
-      setMainState({ ...mainState, isLoading: true });
-      const userDataFromLocalStorage = JSON.parse(localStorage.getItem('user-data'));
-      if (userDataFromLocalStorage) {
-        userLoginHandler(true, userDataFromLocalStorage);
-      }
-      try {
-        const res = await getProducts();
-        setElements(res['-NCAQYq_QqAk59rSL8Bq']);
-        setElementsBeforeSearch(res['-NCAQYq_QqAk59rSL8Bq']);
-      } catch (err) {
-        console.log(err);
-        navigate('/error');
-      } finally {
-        setMainState({ ...mainState, isLoading: false });
-      }
-    })();
+    const userDataFromLocalStorage = JSON.parse(localStorage.getItem('user-data'));
+    if (userDataFromLocalStorage) {
+      userLoginHandler(true, userDataFromLocalStorage);
+      setOldOrder();
+    }
   }, []);
 
   // add element to order
   const addMealToOrder = (mealID) => {
     if (!isUserAuthenticated) return;
-    const meal = elementsBeforeSearch.find((el) => el.dataID === mealID);
+    const meal = allElements.find((el) => el.dataID === mealID);
     let { price } = meal;
     if (meal.specialOffer) {
       price *= 0.8;
@@ -166,7 +155,7 @@ export function Main() {
   // search element from all meals
   const searchElement = (value) => {
     setMealsFilter(value);
-    const filteredElements = elementsBeforeSearch.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
+    const filteredElements = allElements.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
             || el.description.toLowerCase().includes(value.toLowerCase()));
     setElements(filteredElements);
   };
@@ -175,20 +164,19 @@ export function Main() {
   const searchFoodByCategory = (category) => {
     if (!category) {
       setMealsFilter('All');
-      setElements(elementsBeforeSearch);
+      setElements(allElements);
       return;
     }
     if (category === 'sale') {
-      const filteredElements = elementsBeforeSearch.filter((el) => el.specialOffer === true);
+      const filteredElements = allElements.filter((el) => el.specialOffer === true);
       setElements(filteredElements);
       setMealsFilter('Sale');
       return;
     }
-    const filteredElements = elementsBeforeSearch.filter((el) => el.category === category);
+    const filteredElements = allElements.filter((el) => el.category === category);
     setMealsFilter(category[0].toUpperCase().concat(category.slice(1)));
     setElements(filteredElements);
   };
-
   return (
     <>
       <GoToTopButton />
@@ -217,7 +205,7 @@ export function Main() {
       }}
       >
         <Menu numbersOfItemsInOrdersCart={orderCart.length} newProductAdded={mainState.addProductToCart} />
-        {mainState.isLoading ? (
+        {isLoading ? (
           <section className="main__loading">
             <Loading />
           </section>
