@@ -87,6 +87,9 @@ font-size: 15px;
     .nav__container:hover{
         opacity: 1;
     }
+    .nav__container__logo {
+        display: none;
+    }
 }
 @keyframes showMenu {
     from {

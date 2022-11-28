@@ -47,6 +47,7 @@ export function Main() {
   });
   const navigate = useNavigate();
 
+  // check if user visit this page first time and save result to LS
   useEffect(() => {
     const firstVisit = localStorage.getItem('firstVisit');
     if (!firstVisit) {
@@ -61,6 +62,7 @@ export function Main() {
     setMainState({ ...mainState, showLogoutModal: false });
   }, []);
 
+  // handling on user login
   const userLoginHandler = (isAuth, userData) => {
     if (!isAuth) {
       setMainState({ ...mainState, showLogoutModal: true });
@@ -76,6 +78,7 @@ export function Main() {
       localStorage.setItem('user-data', JSON.stringify(userData));
     }
   };
+  // check if user has unfinished order and if true - set this order to actually order
   const oldOrderModalHandler = useCallback(() => {
     setNotFinishedOrderModal(false);
   }, []);
@@ -88,6 +91,8 @@ export function Main() {
       localStorage.setItem('oldOrder', JSON.stringify([]));
     }
   }, []);
+
+  // fetch all elements
   useEffect(() => {
     setOldOrder();
     (async () => {
@@ -108,6 +113,8 @@ export function Main() {
       }
     })();
   }, []);
+
+  // add element to order
   const addMealToOrder = (mealID) => {
     if (!isUserAuthenticated) return;
     const meal = elementsBeforeSearch.find((el) => el.dataID === mealID);
@@ -137,6 +144,8 @@ export function Main() {
       setMainState({ ...mainState, addProductToCart: false });
     }, 1000);
   };
+
+  // remove element from order
   const removeMealFromOrder = (mealID) => {
     const itemToRemove = orderCart.find((el) => el.mealID === mealID);
     const itemIndex = orderCart.indexOf(itemToRemove);
@@ -153,12 +162,16 @@ export function Main() {
   const clearOrder = useCallback(() => {
     setOrderCart([]);
   }, []);
+
+  // search element from all meals
   const searchElement = (value) => {
     setMealsFilter(value);
     const filteredElements = elementsBeforeSearch.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
             || el.description.toLowerCase().includes(value.toLowerCase()));
     setElements(filteredElements);
   };
+
+  // set search category
   const searchFoodByCategory = (category) => {
     if (!category) {
       setMealsFilter('All');
