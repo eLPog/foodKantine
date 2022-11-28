@@ -1,29 +1,25 @@
 import {
-  useCallback, useContext, useEffect, useState,
+  useCallback, useEffect, useState,
 } from 'react';
 import './UserHistory.css';
 import { useNavigate } from 'react-router-dom';
 import { v4 } from 'uuid';
-import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
-
-import { firebaseURL } from '../../assets/db/firebaseurl';
 import { Loading } from '../Loading/Loading';
 import { sendNewOrder } from '../../utils/sendOrder';
 import { getActuallyDate } from '../../utils/getActuallyDate';
 import { OrderSummaryModal } from '../elements/OrderSummaryModal/OrderSummaryModal';
+import { useOrdersHistory } from '../../hooks/useOrdersHistory';
 
 export function UserHistory() {
-  const [allUsersMeals, setAllUsersMeals] = useState([]);
-  const [showedOrders, setShowedOrders] = useState([]);
-  const [lastOrder, setLastOrder] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [valueOfOrders, setValueOfOrders] = useState(0);
   const [howManyResultsShow, setHowManyResultsShow] = useState(5);
+  const {
+    lastOrder, totalValue, isLoading, allUserOrders,
+  } = useOrdersHistory();
+  const [showedOrders, setShowedOrders] = useState([]);
   const [showOrderDetails, setShowOrderDetails] = useState(false);
   const [orderID, setOrderID] = useState('');
   const [showInfoAfterRepeatedOrder, setShowInfoAfterRepeatedOrder] = useState(false);
   const navigate = useNavigate();
-  const { userState } = useContext(isAuthenticatedContext);
   async function buyAgain(orderObj) {
     try {
       await sendNewOrder(orderObj);
@@ -37,34 +33,12 @@ export function UserHistory() {
     }
   }
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = await fetch(`${firebaseURL}orders.json`);
-        let res = await data.json();
-        res = Object.values(res);
-        res = res.filter((el) => el.userID === userState.localId);
-        const orders = res.reverse();
-        setAllUsersMeals(orders);
-        setShowedOrders(orders.slice(0, howManyResultsShow));
-        setLastOrder(res[0]);
-        let totalValue = 0;
-        res.forEach((el) => el.meals.forEach((el) => totalValue += el.price));
-        setValueOfOrders(totalValue.toFixed(2));
-        setIsLoading(false);
-      } catch (err) {
-        console.log(err);
-        navigate('/error');
-      }
-    };
-    getData();
-  }, []);
-  useEffect(() => {
     if (howManyResultsShow === 0) {
-      setShowedOrders(allUsersMeals);
+      setShowedOrders(allUserOrders);
     } else {
-      setShowedOrders(allUsersMeals.slice(0, howManyResultsShow));
+      setShowedOrders(allUserOrders.slice(0, howManyResultsShow));
     }
-  }, [howManyResultsShow]);
+  }, [howManyResultsShow, allUserOrders]);
   const showHistoryHandler = (e) => {
     setHowManyResultsShow(Number(e.target.value));
   };
@@ -80,7 +54,7 @@ export function UserHistory() {
   if (!showInfoAfterRepeatedOrder) {
     return (
       <div className="container userHistory__container">
-        {allUsersMeals.length < 1 ? (
+        {allUserOrders.length < 1 ? (
           <section className="userHistory__container__status">
             {isLoading ? <Loading /> : <span className="userHistory__container--error"> Your orders history is empty</span>}
           </section>
@@ -101,11 +75,11 @@ export function UserHistory() {
               <div className="userHistory__container__stats">
                 <div>
                   <span>All orders: </span>
-                  {allUsersMeals.length}
+                  {allUserOrders.length}
                 </div>
                 <div>
                   <span>Value of all orders:</span>
-                  {valueOfOrders}
+                  {totalValue.toFixed(2)}
                   $
                 </div>
               </div>
