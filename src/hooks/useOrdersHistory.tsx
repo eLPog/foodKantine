@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { firebaseURL } from '../assets/db/firebaseurl';
 import { isAuthenticatedContext } from '../context/isAuthenticatedContext';
+import { orderFromFetchInterface } from '../interfaces/orderObjectInterface';
 
 export function useOrdersHistory() {
   const { userState } = useContext(isAuthenticatedContext);
@@ -16,7 +17,7 @@ export function useOrdersHistory() {
     (async function getData() {
       try {
         const data = await fetch(`${firebaseURL}orders.json`);
-        let res = await data.json();
+        let res:orderFromFetchInterface[] = await data.json();
         res = Object.values(res);
         res = res.filter((el) => el.userID === userState.localId);
         res = res.reverse();

@@ -1,19 +1,19 @@
 import './Header.js.css';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-export function Header(props) {
+export function Header(props:{searchDish:(value:String)=>{}}) {
   const [term, setTerm] = useState('');
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const searchHandler = () => {
     props.searchDish(term);
   };
-  const onInputHandler = (e) => {
+  const onInputHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value);
   };
 
   const focusInput = () => {
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
   useEffect(() => {
     focusInput();

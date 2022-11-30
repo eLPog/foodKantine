@@ -4,7 +4,11 @@ import { useContext } from 'react';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
 import { InfoModal } from '../Modals/InfoModal/InfoModal';
 
-export function Menu(props) {
+interface propsInterface {
+  numbersOfItemsInOrdersCart:number,
+  newProductAdded:boolean
+}
+export function Menu(props:propsInterface) {
   const newProduct = props.newProductAdded;
   const { isUserAuthenticated, userLoginHandler } = useContext(isAuthenticatedContext);
   const menu = (
@@ -69,16 +73,12 @@ export function Menu(props) {
             </li>
           </NavLink>
           <div
-            onClick={() => userLoginHandler(true, {email: res.email, localId: res.localId, idToken: res.idToken})}
+            onClick={() => userLoginHandler(false)}
             role="button"
             tabIndex={0}
             aria-pressed={false}
             onKeyDown={(e) => {
-              if (e.key === 'Enter')userLoginHandler(true, {
-                email: res.email,
-                localId: res.localId,
-                idToken: res.idToken
-              });
+              if (e.key === 'Enter')userLoginHandler(false);
             }}
           >
             <li className="nav__container__menu__list__li" title="Logout">

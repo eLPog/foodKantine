@@ -7,7 +7,6 @@ import { NotFinishedOrderModal } from '../Modals/NotFinishedOrderModal/NotFinish
 import { Header } from '../Header/Header';
 import { FirstVisitPage } from '../FirstVisitPage/FirstVisitPage';
 import { Logout } from '../Logout/Logout';
-import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
 import { Menu } from '../Menu/Menu';
 import { Loading } from '../Loading/Loading';
 import { DetailsFoodElement } from '../Foods/DetailsFoodElement/DetailsFoodElement';
@@ -26,6 +25,7 @@ import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
 import { GoToTopButton } from '../elements/GoTopButton/GoToTopButton';
 import AllFoodList from '../Foods/AllFoodList/AllFoodList';
 import { useGetAllMeals } from '../../hooks/useGetAllMeals';
+import { isAuthenticatedContext } from '../../context/isAuthenticatedContext'
 
 export function Main() {
   const { allElements, isLoading } = useGetAllMeals();

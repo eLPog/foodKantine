@@ -2,7 +2,7 @@ import './Logout.css';
 import { useEffect } from 'react';
 import { Loading } from '../Loading/Loading';
 
-export function Logout(props) {
+export function Logout(props:{logoutModalHandler:()=>{}}) {
   useEffect(() => {
     const timer = setTimeout(() => {
       props.logoutModalHandler();

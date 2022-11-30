@@ -1,6 +1,8 @@
 import './NotFinishedOrderModal.css';
 
-export function NotFinishedOrderModal(props) {
+export function NotFinishedOrderModal(props:{
+    closeModal:()=>{}
+}) {
   return (
     <div className="container text-center oldOrderInfoContainer">
       <p>You have some products in shopping card</p>

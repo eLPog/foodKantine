@@ -7,21 +7,28 @@ import { Loading } from '../Loading/Loading';
 import { sendNewOrder } from '../../utils/sendOrder';
 import { OrderSummaryModal } from '../elements/OrderSummaryModal/OrderSummaryModal';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
+import { orderObjectInterface } from '../../interfaces/orderObjectInterface';
 
-export function Order(props) {
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [showSummaryModal, setShowSummaryModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+interface propsInterface {
+  orderCart:{mealID:string,
+  name:string, price:number, quantity:number}[],
+  removeMeal:(mealID:string)=>{},
+  clearOrder:()=>{},
+}
+export function Order(props:propsInterface) {
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [showSummaryModal, setShowSummaryModal] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userState } = useContext(isAuthenticatedContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     let price = 0;
     props.orderCart.forEach((el) => price += el.price * el.quantity);
-    price = price.toFixed(2);
+    price = Number(price.toFixed(2));
     setTotalPrice(Number(price));
   }, [props.orderCart]);
-  const completeOrder = {
+  const completeOrder:orderObjectInterface = {
     userID: userState.localId,
     date: getActuallyDate(),
     meals: props.orderCart,

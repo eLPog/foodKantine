@@ -1,4 +1,4 @@
-import {
+import React, {
   useCallback, useEffect, useState,
 } from 'react';
 import './UserHistory.css';
@@ -9,6 +9,7 @@ import { sendNewOrder } from '../../utils/sendOrder';
 import { getActuallyDate } from '../../utils/getActuallyDate';
 import { OrderSummaryModal } from '../elements/OrderSummaryModal/OrderSummaryModal';
 import { useOrdersHistory } from '../../hooks/useOrdersHistory';
+import { orderObjectInterface } from '../../interfaces/orderObjectInterface';
 
 export function UserHistory() {
   const [howManyResultsShow, setHowManyResultsShow] = useState(5);
@@ -16,11 +17,11 @@ export function UserHistory() {
     lastOrder, totalValue, isLoading, allUserOrders,
   } = useOrdersHistory();
   const [showedOrders, setShowedOrders] = useState([]);
-  const [showOrderDetails, setShowOrderDetails] = useState(false);
-  const [orderID, setOrderID] = useState('');
-  const [showInfoAfterRepeatedOrder, setShowInfoAfterRepeatedOrder] = useState(false);
+  const [showOrderDetails, setShowOrderDetails] = useState<boolean>(false);
+  const [orderID, setOrderID] = useState<String>('');
+  const [showInfoAfterRepeatedOrder, setShowInfoAfterRepeatedOrder] = useState<boolean>(false);
   const navigate = useNavigate();
-  async function buyAgain(orderObj) {
+  async function buyAgain(orderObj:orderObjectInterface) {
     try {
       await sendNewOrder(orderObj);
       setShowInfoAfterRepeatedOrder(true);
@@ -39,10 +40,10 @@ export function UserHistory() {
       setShowedOrders(allUserOrders.slice(0, howManyResultsShow));
     }
   }, [howManyResultsShow, allUserOrders]);
-  const showHistoryHandler = (e) => {
+  const showHistoryHandler = (e:React.ChangeEvent<HTMLSelectElement>) => {
     setHowManyResultsShow(Number(e.target.value));
   };
-  const showDetails = useCallback((orderIdNumber) => {
+  const showDetails = useCallback((orderIdNumber:string) => {
     if (orderIdNumber === orderID) {
       setShowOrderDetails(false);
       setOrderID('');
