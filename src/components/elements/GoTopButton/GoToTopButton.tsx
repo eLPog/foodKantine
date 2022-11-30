@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 export function GoToTopButton() {
   const [showTopButton, setShowTopButton] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  function handleScroll() {
-    const position = window.scrollY;
+  function handleScroll():void {
+    const position:number = window.scrollY;
     setScrollPosition(position);
   }
   useEffect(() => {

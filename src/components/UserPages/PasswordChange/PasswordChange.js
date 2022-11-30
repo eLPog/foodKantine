@@ -6,7 +6,7 @@ export function PasswordChange() {
   const { userLoginHandler } = useContext(isAuthenticatedContext);
 
   useEffect(() => {
-    userLoginHandler(false);
+    userLoginHandler(true, {email: res.email, localId: res.localId, idToken: res.idToken});
   }, []);
   return (
     <div className="container text-center mt-5">

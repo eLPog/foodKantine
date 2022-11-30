@@ -1,8 +1,16 @@
 import './AllFoodList.css';
 import { memo } from 'react';
 import { OneFoodElement } from '../OneFoodElement/OneFoodElement';
+import { mealInterface } from '../../../interfaces/allMealsInterface';
 
-function AllFoodList(props) {
+interface propsInterface{
+  elements:mealInterface[],
+  searchFoodByCategory:(category:string | boolean)=>{},
+  addMealToOrder:()=>{},
+  mealsFilter:string,
+  category:string,
+}
+function AllFoodList(props:propsInterface) {
   return (
     <main className="container mainSection__container">
       <section className="row d-flex align-items-center  justify-content-center">

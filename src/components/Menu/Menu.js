@@ -69,12 +69,16 @@ export function Menu(props) {
             </li>
           </NavLink>
           <div
-            onClick={() => userLoginHandler(false)}
+            onClick={() => userLoginHandler(true, {email: res.email, localId: res.localId, idToken: res.idToken})}
             role="button"
             tabIndex={0}
             aria-pressed={false}
             onKeyDown={(e) => {
-              if (e.key === 'Enter')userLoginHandler(false);
+              if (e.key === 'Enter')userLoginHandler(true, {
+                email: res.email,
+                localId: res.localId,
+                idToken: res.idToken
+              });
             }}
           >
             <li className="nav__container__menu__list__li" title="Logout">

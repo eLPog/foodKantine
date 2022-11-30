@@ -3,7 +3,16 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 
-export function OneFoodElement(props) {
+interface propsInterface {
+    photo:string,
+    name:string,
+    description:string,
+    dataID:string,
+    key:string,
+    specialOffer:boolean,
+    addMealToOrder:(dataID:string)=>{}
+}
+export function OneFoodElement(props :propsInterface) {
   const { isUserAuthenticated } = useContext(isAuthenticatedContext);
   return (
     <section className={`d-flex flex-sm-column col-sm-4 col-lg-3 oneFoodElement__container ${props.specialOffer && 'specialOffer__select'}`}>

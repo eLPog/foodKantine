@@ -1,6 +1,6 @@
-import React from 'react';
+import { appHistory } from './AppHistory';
 
-export function HistoryElementLeft(props) {
+export function HistoryElementLeft(props:appHistory) {
   return (
     <>
       <div className="timelineComponent timelineComponent--bg">

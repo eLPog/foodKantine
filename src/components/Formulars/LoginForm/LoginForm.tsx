@@ -1,4 +1,4 @@
-import {
+import React, {
   useCallback, useContext, useEffect, useState,
 } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,12 +10,12 @@ import { loginTestUserFetch } from '../../../utils/loginTestUserFetch';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 
 export function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [btnActive, setBtnActive] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState<String>('');
+  const [password, setPassword] = useState<String>('');
+  const [error, setError] = useState<String>('');
+  const [btnActive, setBtnActive] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
   const { userLoginHandler } = useContext(isAuthenticatedContext);
   useEffect(() => {
@@ -37,13 +37,13 @@ export function LoginForm() {
     }
   }, [email, password]);
 
-  const loginHandler = (e) => {
+  const loginHandler = (e:React.ChangeEvent<HTMLInputElement>):void => {
     setEmail(e.target.value);
   };
-  const passwordHandler = (e) => {
+  const passwordHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
-  const loginUser = async (e) => {
+  const loginUser = async (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
@@ -62,7 +62,7 @@ export function LoginForm() {
         setError('Invalid email or password');
         return;
       }
-      userLoginHandler(true, { email: res.email, localId: res.localId, idToken: res.idToken });
+      userLoginHandler(true, { userEmail: res.email, localId: res.localId, idToken: res.idToken });
       navigate('/user');
     } catch (err) {
       setIsLoading(false);
@@ -101,7 +101,7 @@ export function LoginForm() {
     (async () => {
       try {
         const res = await loginTestUserFetch();
-        userLoginHandler(true, { email: res.email, localId: res.localId, idToken: res.idToken });
+        userLoginHandler(true, { userEmail: res.email, localId: res.localId, idToken: res.idToken });
         navigate('/user');
       } catch (err) {
         console.log(err);

@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import { HistoryElementRight } from './HistoryElementRight';
 import { HistoryElementLeft } from './HistoryElementLeft';
 
+export interface appHistory {
+    version:string,
+    content:string,
+    date:string
+}
 export function AppHistory() {
   return (
     <div className="container timeline__container">

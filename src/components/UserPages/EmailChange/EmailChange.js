@@ -55,7 +55,7 @@ export function EmailChange() {
       } else {
         navigate('/error');
       }
-      userLoginHandler(false);
+      userLoginHandler(true, {email: res.email, localId: res.localId, idToken: res.idToken});
     } catch (err) {
       console.log(err);
       navigate('/error');

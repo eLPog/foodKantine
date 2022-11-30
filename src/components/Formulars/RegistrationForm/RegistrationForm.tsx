@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { firebaseAddUser } from '../../../assets/db/firebaseurl';
 import { setButtonActive } from '../../../utils/setButtonActive';
@@ -8,20 +8,20 @@ import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext'
 
 export function RegistrationForm() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmedPassword, setConfirmedPassword] = useState('');
-  const [error, setError] = useState('');
-  const [btnActive, setBtnActive] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState<String>('');
+  const [password, setPassword] = useState<String>('');
+  const [confirmedPassword, setConfirmedPassword] = useState<String>('');
+  const [error, setError] = useState<String>('');
+  const [btnActive, setBtnActive] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userLoginHandler } = useContext(isAuthenticatedContext);
-  const loginHandler = (e) => {
+  const loginHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
-  const passwordHandler = (e) => {
+  const passwordHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
-  const confirmedPasswordHandler = (e) => {
+  const confirmedPasswordHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
     setConfirmedPassword(e.target.value);
   };
   useEffect(() => {
@@ -37,7 +37,7 @@ export function RegistrationForm() {
       setBtnActive(false);
     }
   }, [email, password, confirmedPassword]);
-  const registerUserFetch = async (e) => {
+  const registerUserFetch = async (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsLoading(true);
     try {
@@ -65,7 +65,7 @@ export function RegistrationForm() {
           return;
         }
       }
-      userLoginHandler(true, { email: res.email, localId: res.localId, idToken: res.idToken });
+      userLoginHandler(true, { userEmail: res.email, localId: res.localId, idToken: res.idToken });
       navigate('/user');
     } catch (err) {
       console.log(err);

@@ -1,4 +1,6 @@
-export function HistoryElementRight(props) {
+import { appHistory } from './AppHistory';
+
+export function HistoryElementRight(props:appHistory) {
   return (
     <>
       <div className="timelineComponent">
