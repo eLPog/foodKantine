@@ -5,7 +5,7 @@ export function DeleteAccountSummary() {
   const { userLoginHandler } = useContext(isAuthenticatedContext);
   useEffect(() => {
     const timer = setTimeout(() => {
-      userLoginHandler(true, {email: res.email, localId: res.localId, idToken: res.idToken});
+      userLoginHandler(false);
       return () => clearTimeout(timer);
     }, 5000);
   }, []);

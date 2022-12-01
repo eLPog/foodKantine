@@ -10,9 +10,9 @@ import { loginTestUserFetch } from '../../../utils/loginTestUserFetch';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 
 export function LoginForm() {
-  const [email, setEmail] = useState<String>('');
-  const [password, setPassword] = useState<String>('');
-  const [error, setError] = useState<String>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const [btnActive, setBtnActive] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);

@@ -1,7 +1,7 @@
 import './AllFoodList.css';
 import { memo } from 'react';
 import { OneFoodElement } from '../OneFoodElement/OneFoodElement';
-import { mealInterface } from '../../../interfaces/allMealsInterface';
+import { mealInterface } from '../../../interfaces/mealsInterface';
 
 interface propsInterface{
   elements:mealInterface[],

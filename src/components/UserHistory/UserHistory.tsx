@@ -9,14 +9,14 @@ import { sendNewOrder } from '../../utils/sendOrder';
 import { getActuallyDate } from '../../utils/getActuallyDate';
 import { OrderSummaryModal } from '../elements/OrderSummaryModal/OrderSummaryModal';
 import { useOrdersHistory } from '../../hooks/useOrdersHistory';
-import { orderObjectInterface } from '../../interfaces/orderObjectInterface';
+import { orderFromFetchInterface, orderObjectInterface } from '../../interfaces/orderObjectInterface';
 
 export function UserHistory() {
   const [howManyResultsShow, setHowManyResultsShow] = useState(5);
   const {
     lastOrder, totalValue, isLoading, allUserOrders,
   } = useOrdersHistory();
-  const [showedOrders, setShowedOrders] = useState([]);
+  const [showedOrders, setShowedOrders] = useState<[]|orderFromFetchInterface[]>([]);
   const [showOrderDetails, setShowOrderDetails] = useState<boolean>(false);
   const [orderID, setOrderID] = useState<String>('');
   const [showInfoAfterRepeatedOrder, setShowInfoAfterRepeatedOrder] = useState<boolean>(false);
@@ -65,13 +65,13 @@ export function UserHistory() {
             <div className="flex-sm-row userHistory__container__top">
               <div className="userHistory__container__lastOrder">
                 <span>Last order</span>
-                {lastOrder.meals.map((el) => (
+                {lastOrder?.meals.map((el) => (
                   <p key={Math.random() * 1000}>
                     {el.name}
                   </p>
                 ))}
 
-                <span>{lastOrder.date}</span>
+                <span>{lastOrder?.date}</span>
               </div>
               <div className="userHistory__container__stats">
                 <div>

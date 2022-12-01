@@ -10,10 +10,10 @@ import { Loading } from '../../Loading/Loading';
 
 export function UserPage() {
   const { userState } = useContext(isAuthenticatedContext);
-  const [isDeleteConfirmed, setIsDeleteConfirmed] = useState(false);
-  const [isTestAccountChanged, setIsTestAccountChanged] = useState(false);
-  const [showTestAccountInfo, setShowTestAccountInfo] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isDeleteConfirmed, setIsDeleteConfirmed] = useState<boolean>(false);
+  const [isTestAccountChanged, setIsTestAccountChanged] = useState<boolean>(false);
+  const [showTestAccountInfo, setShowTestAccountInfo] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {

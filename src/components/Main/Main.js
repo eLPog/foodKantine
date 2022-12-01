@@ -25,7 +25,7 @@ import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
 import { GoToTopButton } from '../elements/GoTopButton/GoToTopButton';
 import AllFoodList from '../Foods/AllFoodList/AllFoodList';
 import { useGetAllMeals } from '../../hooks/useGetAllMeals';
-import { isAuthenticatedContext } from '../../context/isAuthenticatedContext'
+import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
 
 export function Main() {
   const { allElements, isLoading } = useGetAllMeals();

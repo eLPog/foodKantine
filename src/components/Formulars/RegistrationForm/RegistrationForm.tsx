@@ -8,10 +8,10 @@ import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext'
 
 export function RegistrationForm() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState<String>('');
-  const [password, setPassword] = useState<String>('');
-  const [confirmedPassword, setConfirmedPassword] = useState<String>('');
-  const [error, setError] = useState<String>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmedPassword, setConfirmedPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const [btnActive, setBtnActive] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userLoginHandler } = useContext(isAuthenticatedContext);

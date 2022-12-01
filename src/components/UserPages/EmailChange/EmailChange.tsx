@@ -1,5 +1,5 @@
 import './EmailChange.css';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { firebaseChangeEmail } from '../../../assets/db/firebaseurl';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
@@ -8,10 +8,10 @@ import { Loading } from '../../Loading/Loading';
 
 export function EmailChange() {
   const [email, setEmail] = useState('');
-  const [emailChangedStatus, setEmailChangedStatus] = useState(false);
-  const [isButtonActive, setIsButtonActive] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isTestAccountChanged, setIsTestAccountChanged] = useState(false);
+  const [emailChangedStatus, setEmailChangedStatus] = useState<boolean>(false);
+  const [isButtonActive, setIsButtonActive] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isTestAccountChanged, setIsTestAccountChanged] = useState<boolean>(false);
   const { userLoginHandler, userState } = useContext(isAuthenticatedContext);
 
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ export function EmailChange() {
       setIsButtonActive(false);
     }
   }, [email]);
-  const emailInputHandler = (e) => {
+  const emailInputHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
   const setNewEmail = async () => {
@@ -55,7 +55,7 @@ export function EmailChange() {
       } else {
         navigate('/error');
       }
-      userLoginHandler(true, {email: res.email, localId: res.localId, idToken: res.idToken});
+      userLoginHandler(false);
     } catch (err) {
       console.log(err);
       navigate('/error');

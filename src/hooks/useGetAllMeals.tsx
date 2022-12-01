@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getProducts } from '../utils/fetchMeals';
+import { mealInterface } from '../interfaces/mealsInterface';
 
+interface stateObject {
+  isLoading:boolean,
+  allElements:[] | mealInterface[]
+}
 export function useGetAllMeals() {
   const navigate = useNavigate();
-  const [allMeals, setAllMeals] = useState({ isLoading: true, allElements: [] });
+  const [allMeals, setAllMeals] = useState<stateObject>({ isLoading: true, allElements: [] });
   useEffect(() => {
     (async () => {
       try {
