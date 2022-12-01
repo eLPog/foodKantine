@@ -2,11 +2,11 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import './DetailsFoodElement.css';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
-import { mealInterface } from '../../../interfaces/mealsInterface';
+import { mealInterface } from '../../../interfaces/mealInterface';
 
 interface propsInterface {
     db:mealInterface[],
-    addMealToOrder:(mealID: string | undefined)=>{}
+    addMealToOrder:(mealID: string | undefined)=>void
 }
 export function DetailsFoodElement(props:propsInterface) {
   const { isUserAuthenticated } = useContext(isAuthenticatedContext);

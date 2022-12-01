@@ -7,13 +7,12 @@ import { Loading } from '../Loading/Loading';
 import { sendNewOrder } from '../../utils/sendOrder';
 import { OrderSummaryModal } from '../elements/OrderSummaryModal/OrderSummaryModal';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
-import { orderObjectInterface } from '../../interfaces/orderObjectInterface';
+import { orderCartInterface, orderObjectInterface } from '../../interfaces/orderObjectInterface';
 
 interface propsInterface {
-  orderCart:{mealID:string,
-  name:string, price:number, quantity:number}[],
-  removeMeal:(mealID:string)=>{},
-  clearOrder:()=>{},
+  orderCart:orderCartInterface[],
+  removeMeal:(mealID:string)=>void,
+  clearOrder:()=>void,
 }
 export function Order(props:propsInterface) {
   const [totalPrice, setTotalPrice] = useState<number>(0);

@@ -1,7 +1,7 @@
 import './Header.js.css';
 import React, { useEffect, useRef, useState } from 'react';
 
-export function Header(props:{searchDish:(value:String)=>{}}) {
+export function Header(props:{searchDish:(value:string)=>void}) {
   const [term, setTerm] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
 

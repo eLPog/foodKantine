@@ -10,7 +10,7 @@ interface propsInterface {
     dataID:string,
     key:string,
     specialOffer:boolean,
-    addMealToOrder:(dataID:string)=>{}
+    addMealToOrder:(dataID:string)=>void
 }
 export function OneFoodElement(props :propsInterface) {
   const { isUserAuthenticated } = useContext(isAuthenticatedContext);

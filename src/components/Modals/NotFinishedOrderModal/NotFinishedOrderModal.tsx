@@ -1,7 +1,7 @@
 import './NotFinishedOrderModal.css';
 
 export function NotFinishedOrderModal(props:{
-    closeModal:()=>{}
+    closeModal:()=>void
 }) {
   return (
     <div className="container text-center oldOrderInfoContainer">

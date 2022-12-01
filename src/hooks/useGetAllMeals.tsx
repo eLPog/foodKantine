@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getProducts } from '../utils/fetchMeals';
-import { mealInterface } from '../interfaces/mealsInterface';
+import { mealInterface } from '../interfaces/mealInterface';
 
 interface stateObject {
   isLoading:boolean,

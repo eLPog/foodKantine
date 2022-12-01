@@ -1,7 +1,7 @@
 import './FirstVisitPage.css';
 import { Link } from 'react-router-dom';
 
-export function FirstVisitPage(props:{closeModal:()=>{}}) {
+export function FirstVisitPage(props:{closeModal:()=>void}) {
   return (
     <section className="firstVisit__container">
       <h3>Welcome</h3>

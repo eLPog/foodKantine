@@ -1,14 +1,13 @@
 import './AllFoodList.css';
 import { memo } from 'react';
 import { OneFoodElement } from '../OneFoodElement/OneFoodElement';
-import { mealInterface } from '../../../interfaces/mealsInterface';
+import { mealInterface } from '../../../interfaces/mealInterface';
 
 interface propsInterface{
   elements:mealInterface[],
-  searchFoodByCategory:(category:string | boolean)=>{},
-  addMealToOrder:()=>{},
+  searchFoodByCategory:(category:string | boolean)=>void,
+  addMealToOrder:(dataID:string)=>void,
   mealsFilter:string,
-  category:string,
 }
 function AllFoodList(props:propsInterface) {
   return (

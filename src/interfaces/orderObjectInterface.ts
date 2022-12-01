@@ -16,3 +16,10 @@ export interface orderFromFetchInterface {
     totalPrice:number,
     userID:string
 }
+
+export interface orderCartInterface {
+    mealID:string,
+    name:string,
+    price:number,
+    quantity:number,
+}

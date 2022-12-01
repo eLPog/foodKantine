@@ -26,16 +26,19 @@ import { GoToTopButton } from '../elements/GoTopButton/GoToTopButton';
 import AllFoodList from '../Foods/AllFoodList/AllFoodList';
 import { useGetAllMeals } from '../../hooks/useGetAllMeals';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
+import { mealInterface } from '../../interfaces/mealInterface';
+import { orderCartInterface } from '../../interfaces/orderObjectInterface';
+import { userDataInterface } from '../../interfaces/userDataInterface';
 
 export function Main() {
   const { allElements, isLoading } = useGetAllMeals();
-  const [elements, setElements] = useState([]);
-  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
-  const [orderCart, setOrderCart] = useState([]);
-  const [mealsFilter, setMealsFilter] = useState('');
-  const [showNotFinishedOrderModal, setNotFinishedOrderModal] = useState(false);
-  const [isFirstVisit, setIsFirstVisit] = useState(false);
-  const [userState, setUserState] = useState({
+  const [elements, setElements] = useState<[] | mealInterface[]>([]);
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean>(false);
+  const [orderCart, setOrderCart] = useState<[] | orderCartInterface[]>([]);
+  const [mealsFilter, setMealsFilter] = useState<string>('');
+  const [showNotFinishedOrderModal, setNotFinishedOrderModal] = useState<boolean>(false);
+  const [isFirstVisit, setIsFirstVisit] = useState<boolean>(false);
+  const [userState, setUserState] = useState<userDataInterface>({
     userEmail: '',
     idToken: '',
     localId: '',
@@ -65,7 +68,7 @@ export function Main() {
   }, []);
 
   // handling on user login
-  const userLoginHandler = (isAuth, userData) => {
+  const userLoginHandler = (isAuth:boolean, userData:userDataInterface) => {
     if (!isAuth) {
       setMainState({ ...mainState, showLogoutModal: true });
       setIsUserAuthenticated(false);
@@ -76,7 +79,7 @@ export function Main() {
       navigate('/');
     } else {
       setIsUserAuthenticated(true);
-      setUserState({ userEmail: userData.email, idToken: userData.idToken, localId: userData.localId });
+      setUserState({ userEmail: userData.userEmail, idToken: userData.idToken, localId: userData.localId });
       localStorage.setItem('user-data', JSON.stringify(userData));
     }
   };
@@ -85,6 +88,7 @@ export function Main() {
     setNotFinishedOrderModal(false);
   }, []);
   const setOldOrder = useCallback(() => {
+    // @ts-ignore
     const oldOrder = JSON.parse(localStorage.getItem('oldOrder'));
     if (oldOrder) {
       setOrderCart([...oldOrder]);
@@ -96,6 +100,7 @@ export function Main() {
 
   // check if user was already logged and if he has unfinished order
   useEffect(() => {
+    // @ts-ignore
     const userDataFromLocalStorage = JSON.parse(localStorage.getItem('user-data'));
     if (userDataFromLocalStorage) {
       userLoginHandler(true, userDataFromLocalStorage);
@@ -104,56 +109,62 @@ export function Main() {
   }, []);
 
   // add element to order
-  const addMealToOrder = (mealID) => {
+  const addMealToOrder = (mealID:string) => {
     if (!isUserAuthenticated) return;
     const meal = allElements.find((el) => el.dataID === mealID);
-    let { price } = meal;
-    if (meal.specialOffer) {
-      price *= 0.8;
+    if (meal !== undefined) {
+      let { price } = meal;
+      if (meal?.specialOffer) {
+        price *= 0.8;
+      }
+      // @ts-ignore
+      let oldOrder = JSON.parse(localStorage.getItem('oldOrder'));
+      const isItemAlreadyAdded = orderCart.find((el) => el.mealID === mealID);
+      if (isItemAlreadyAdded) {
+        isItemAlreadyAdded.quantity++;
+        const allItems = orderCart.filter((el) => el.mealID !== mealID);
+        setOrderCart([...allItems, isItemAlreadyAdded]);
+        oldOrder = oldOrder.filter((el:orderCartInterface) => el.mealID !== mealID);
+        oldOrder.unshift(isItemAlreadyAdded);
+        localStorage.setItem('oldOrder', JSON.stringify(oldOrder));
+      } else {
+        const mealObj = {
+          mealID, name: meal?.name, price, quantity: 1,
+        };
+        oldOrder.unshift(mealObj);
+        localStorage.setItem('oldOrder', JSON.stringify(oldOrder));
+        setOrderCart((prevState) => [...prevState, mealObj]);
+      }
+      setMainState({ ...mainState, addProductToCart: true });
+      setTimeout(() => {
+        setMainState({ ...mainState, addProductToCart: false });
+      }, 1000);
     }
-    let oldOrder = JSON.parse(localStorage.getItem('oldOrder'));
-    const isItemAlreadyAdded = orderCart.find((el) => el.mealID === mealID);
-    if (isItemAlreadyAdded) {
-      isItemAlreadyAdded.quantity++;
-      const allItems = orderCart.filter((el) => el.mealID !== mealID);
-      setOrderCart([...allItems, isItemAlreadyAdded]);
-      oldOrder = oldOrder.filter((el) => el.mealID !== mealID);
-      oldOrder.unshift(isItemAlreadyAdded);
-      localStorage.setItem('oldOrder', JSON.stringify(oldOrder));
-    } else {
-      const mealObj = {
-        mealID, name: meal.name, price, quantity: 1,
-      };
-      oldOrder.unshift(mealObj);
-      localStorage.setItem('oldOrder', JSON.stringify(oldOrder));
-      setOrderCart((prevState) => [...prevState, mealObj]);
-    }
-    setMainState({ ...mainState, addProductToCart: true });
-    setTimeout(() => {
-      setMainState({ ...mainState, addProductToCart: false });
-    }, 1000);
   };
 
   // remove element from order
-  const removeMealFromOrder = (mealID) => {
+  const removeMealFromOrder = (mealID:string) => {
     const itemToRemove = orderCart.find((el) => el.mealID === mealID);
-    const itemIndex = orderCart.indexOf(itemToRemove);
-    const meals = orderCart.filter((el) => el.mealID !== mealID);
-    if (itemToRemove.quantity > 1) {
-      itemToRemove.quantity--;
-      meals.splice(itemIndex, 0, itemToRemove);
-      setOrderCart(meals);
-    } else {
-      setOrderCart(meals);
+    if (itemToRemove !== undefined) {
+      // @ts-ignore
+      const itemIndex:number = orderCart.indexOf(itemToRemove);
+      const meals = orderCart.filter((el) => el.mealID !== mealID);
+      if (itemToRemove.quantity > 1) {
+        itemToRemove.quantity--;
+        meals.splice(itemIndex, 0, itemToRemove);
+        setOrderCart(meals);
+      } else {
+        setOrderCart(meals);
+      }
+      localStorage.setItem('oldOrder', JSON.stringify(meals));
     }
-    localStorage.setItem('oldOrder', JSON.stringify(meals));
   };
   const clearOrder = useCallback(() => {
     setOrderCart([]);
   }, []);
 
   // search element from all meals
-  const searchElement = (value) => {
+  const searchElement = (value:string) => {
     setMealsFilter(value);
     const filteredElements = allElements.filter((el) => el.name.toLowerCase().includes(value.toLowerCase())
             || el.description.toLowerCase().includes(value.toLowerCase()));
@@ -161,7 +172,7 @@ export function Main() {
   };
 
   // set search category
-  const searchFoodByCategory = (category) => {
+  const searchFoodByCategory = (category:string | boolean) => {
     if (!category) {
       setMealsFilter('All');
       setElements(allElements);
@@ -174,7 +185,9 @@ export function Main() {
       return;
     }
     const filteredElements = allElements.filter((el) => el.category === category);
-    setMealsFilter(category[0].toUpperCase().concat(category.slice(1)));
+    if (typeof category === 'string') {
+      setMealsFilter(category[0].toUpperCase().concat(category.slice(1)));
+    }
     setElements(filteredElements);
   };
   return (
