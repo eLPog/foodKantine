@@ -30,13 +30,17 @@
 <img src="https://user-images.githubusercontent.com/89840843/200545171-f4182542-1374-4ef9-a008-f17ddd8c9269.png"><hr>
 <ul>
 </ul><h2>Technologies Used</h2>
-<hr><ul>
+<hr>
+<ul>
+<li>TypeScript</li>
+</ul>
+<ul>
+<li>React</li>
+</ul><ul>
 <li>HTML</li>
 </ul><ul>
 <li>CSS</li>
 <li>Firebase</li>
-</ul><ul>
-<li>React</li>
 </ul><h2>Setup</h2>
 <hr><h5>Steps</h5><ul>
 <li>use git clone https://github.com/eLPog/foodKantine</li>
