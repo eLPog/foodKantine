@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  act, render, screen, waitFor,
+  act, fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import AllFoodList from './AllFoodList';
@@ -37,6 +37,24 @@ describe('AllFoodList component', () => {
       expect(div).toHaveClass('oneFoodElement__container');
     });
   });
+  test('should trigger filter function after click on categories buttons', () => {
+    const testFunction = jest.fn();
+    const { queryAllByRole } = render(
+      <BrowserRouter>
+        <AllFoodList elements={meals} searchFoodByCategory={testFunction} addMealToOrder={() => {}} mealsFilter="sale" />
+      </BrowserRouter>,
+    );
+    // @ts-ignore only to use regexp
+    const categoryButtons = queryAllByRole('button').filter((el) => el.className === /food/i || el.className === /sale/);
+    (async () => {
+      await categoryButtons.forEach((el) => {
+        fireEvent.click(el);
+      });
+    })();
+    expect(testFunction).toBeCalledTimes(categoryButtons.length);
+  });
+
+  // should be moved to main component
   test('should render error page component if promise is rejected', async () => {
     // @ts-ignore
     jest.spyOn(global, 'fetch').mockImplementationOnce(() => Promise.reject());

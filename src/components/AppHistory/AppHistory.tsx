@@ -11,7 +11,7 @@ export interface appHistory {
 export function AppHistory() {
   return (
     <div className="container timeline__container">
-      <div className="timeline">
+      <div className="timeline" data-testid="timelineContainer">
         <HistoryElementRight
           date="September 2022"
           version="version 1.0.0"
