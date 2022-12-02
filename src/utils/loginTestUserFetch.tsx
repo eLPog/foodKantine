@@ -1,6 +1,6 @@
 import { firebaseLoginWithEmail } from '../assets/db/firebaseurl';
 
-export async function loginTestUserFetch() {
+export async function loginTestUserFetch():Promise<any> {
   try {
     const data = await fetch(firebaseLoginWithEmail, {
       method: 'POST',

@@ -4,9 +4,7 @@ import {
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import AllFoodList from './AllFoodList';
-import { ErrorPage } from '../../ErrorPage/ErrorPage';
-
-// global.fetch = require('jest-fetch-mock');
+import { Main } from '../../Main/Main';
 
 const meals = [
   {
@@ -45,7 +43,7 @@ describe('AllFoodList component', () => {
     act(() => {
       render(
         <BrowserRouter>
-          <ErrorPage />
+          <Main />
         </BrowserRouter>,
       );
     });
