@@ -86,7 +86,7 @@ export function RegistrationForm() {
         </label>
         <input type="password" id="registerPassword1" className="register__container__form__input--password" onChange={passwordHandler} />
         <label htmlFor="registerPassword2">
-          Confirm Password
+          Repeat
         </label>
         <input type="password" id="registerPassword2" className="register__container__form__input--password" onChange={confirmedPasswordHandler} />
         <button className="btn-primary" onClick={registerUserFetch} disabled={!btnActive}>Register</button>

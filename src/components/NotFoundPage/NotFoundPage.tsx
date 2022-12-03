@@ -15,7 +15,7 @@ export function NotFoundPage() {
   return (
     <div className="container notfound__container">
       <img src="https://foodorder.networkmanager.pl/img/imgnotfound.svg" alt="errorGraphic" className="notfound__container__image" />
-      <p className="notfound__container__information">
+      <p className="notfound__container__information" data-testid="notFoundPageTest">
         Sorry, page not found.
         <br />
         Maybe a typo in the address?
