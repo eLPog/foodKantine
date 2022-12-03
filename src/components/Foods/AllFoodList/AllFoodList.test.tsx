@@ -35,6 +35,7 @@ describe('AllFoodList component', () => {
       const div = screen.getByTestId('allFoodsContainerTest');
       expect(div).toBeTruthy();
       expect(div).toHaveClass('oneFoodElement__container');
+      expect(div.tagName.toLowerCase()).toBe('section');
     });
   });
   test('should trigger filter function after click on categories buttons', () => {
@@ -71,5 +72,18 @@ describe('AllFoodList component', () => {
       expect(div).toBeTruthy();
       expect(div).toHaveClass('errorPage__container');
     });
+  });
+  test('should show links to another pages in footer', () => {
+    const { queryByTestId } = render(
+      <BrowserRouter>
+        <AllFoodList elements={meals} searchFoodByCategory={() => {}} addMealToOrder={() => {}} mealsFilter="sale" />
+      </BrowserRouter>,
+    );
+    const footerContainer = queryByTestId('footerTest');
+    const links = footerContainer.getElementsByTagName('a');
+    for (let i = 0; i < links.length; i++) {
+      expect(links[i]).toHaveAttribute('href');
+      expect(links[i]).toHaveAttribute('target');
+    }
   });
 });

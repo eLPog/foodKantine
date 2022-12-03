@@ -13,6 +13,5 @@ export const isAuthenticatedContext = createContext<isAuthenticatedContextInterf
     localId: '',
     idToken: '',
   },
-  // userLoginHandler: (isLogged:boolean, userData?:userDataInterface):void => {},
   userLoginHandler: () => {},
 });

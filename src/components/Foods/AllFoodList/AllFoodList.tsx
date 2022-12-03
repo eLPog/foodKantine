@@ -48,7 +48,7 @@ function AllFoodList(props:propsInterface) {
           />
         ))}
       </section>
-      <div className="mainSection__container__footer">
+      <div className="mainSection__container__footer" data-testid="footerTest">
         <a href="https://github.com/eLPog" target="_blank" rel="noreferrer">
           Created by
           eLPog
