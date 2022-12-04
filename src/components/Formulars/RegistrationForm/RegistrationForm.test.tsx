@@ -1,8 +1,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import exp from 'constants';
-import { log } from 'util';
+
 import { RegistrationForm } from './RegistrationForm';
 
 describe('Login form component', () => {

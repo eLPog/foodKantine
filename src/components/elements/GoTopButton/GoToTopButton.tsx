@@ -28,6 +28,7 @@ export function GoToTopButton() {
           fill="currentColor"
           className="bi bi-arrow-up-circle"
           viewBox="0 0 16 16"
+          data-testid="svgTestElement"
         >
           <path
             fillRule="evenodd"
