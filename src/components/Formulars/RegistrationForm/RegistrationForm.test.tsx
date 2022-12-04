@@ -60,7 +60,6 @@ describe('Login form component', () => {
     fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
     fireEvent.change(passwordRepeatInput, { target: { value: 'testpasswordAnother' } });
     expect(button).toHaveAttribute('disabled');
-    debug();
     fireEvent.change(passwordRepeatInput, { target: { value: 'testpassword' } });
     expect(button).not.toHaveAttribute('disabled');
   });
