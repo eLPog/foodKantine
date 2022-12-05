@@ -1,25 +1,27 @@
-import { NavLink } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 
 export function PasswordChange() {
   const { userLoginHandler } = useContext(isAuthenticatedContext);
-
   useEffect(() => {
-    userLoginHandler(false);
+    const timer = setTimeout(() => {
+      userLoginHandler(false);
+    }, 5000);
+    return () => clearTimeout(timer);
   }, []);
+
   return (
     <div className="container text-center mt-5">
       <section>
         <p>
-          An email was sent with a link to reset the password.
+          We will send You email with a link to set the new password.
         </p>
         <p>
-          If you havent received your email please check spam
+          If you have not received email, please check spam folder.
         </p>
-        <NavLink to="/login">
-          <button className="btn-primary">Login</button>
-        </NavLink>
+        <p>
+          You will move to Main Page in a second
+        </p>
       </section>
     </div>
   );

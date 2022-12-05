@@ -113,12 +113,12 @@ export function UserPage() {
         {isDeleteConfirmed && (
         <>
           <p>Do You really want to delete Your account?</p>
-          <button className="btn-primary userPage__container__actions--confirmDELETE" onClick={deleteAccount}>Delete</button>
+          <button className="btn-primary userPage__container__actions--confirmDELETE" onClick={deleteAccount} data-testid="deleteBtnTest">Delete</button>
           <button className="btn-primary userPage__container__actions--cancel" onClick={isDeleteConfirmedHandler}>Cancel</button>
         </>
         )}
         {isTestAccountChanged && (
-        <div className="testAccountError">
+        <div className="testAccountError" data-testid="testAccountInfo">
           <p>Im sorry. You cannot make this changes on test account.</p>
           <p> If you want to check this functionality please create a own account.</p>
         </div>
