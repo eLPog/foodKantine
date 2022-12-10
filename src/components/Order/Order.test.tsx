@@ -63,4 +63,24 @@ describe('Order component', () => {
     expect(removeMealMock).lastCalledWith('123');
     expect(removeMealMock).not.lastCalledWith('543');
   });
+  test('should call clear order function if order is finished', async () => {
+    const clearOrderMock = jest.fn();
+    // @ts-ignore
+
+    jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
+      json: () => Promise.resolve('ok'),
+    }));
+    act(() => {
+      render(
+        <BrowserRouter>
+          <Order orderCart={orderedMeals} removeMeal={() => {}} clearOrder={clearOrderMock} />
+        </BrowserRouter>,
+      );
+    });
+    const sendOrderButton = screen.getByTestId('buyButtonTest');
+    await waitFor(() => {
+      fireEvent.click(sendOrderButton);
+      expect(clearOrderMock).toBeCalledTimes(1);
+    });
+  });
 });
