@@ -90,7 +90,7 @@ export function Order(props:propsInterface) {
                     {totalPrice}
                     $
                     <br />
-                    <button className="btn-primary --confirmOK" onClick={sendOrder}>Buy</button>
+                    <button className="btn-primary --confirmOK" onClick={sendOrder} data-testid="buyButtonTest">Buy</button>
                     <NavLink to="/">
                       <button className="btn-primary">Add more</button>
                     </NavLink>

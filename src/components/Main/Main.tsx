@@ -17,7 +17,7 @@ import { UserPage } from '../UserPages/UserPage/UserPage';
 import { PasswordChange } from '../UserPages/PasswordChange/PasswordChange';
 import { EmailChange } from '../UserPages/EmailChange/EmailChange';
 import { DeleteAccountSummary } from '../UserPages/DeleteAccountSummary/DeleteAccountSummary';
-import { UserHistory } from '../UserHistory/UserHistory';
+import { OrdersHistory } from '../OrdersHistory/OrdersHistory';
 import { AboutApp } from '../AboutApp/AboutApp';
 import { AppHistory } from '../AppHistory/AppHistory';
 import { ErrorPage } from '../ErrorPage/ErrorPage';
@@ -233,7 +233,7 @@ export function Main() {
             <Route path="/user/passwordReset" element={<PasswordChange />} />
             <Route path="/user/emailChange" element={<EmailChange />} />
             <Route path="/user/delete" element={isUserAuthenticated ? <DeleteAccountSummary /> : <Navigate to="/" />} />
-            <Route path="/history" element={isUserAuthenticated ? <UserHistory /> : <Navigate to="/" />} />
+            <Route path="/history" element={isUserAuthenticated ? <OrdersHistory /> : <Navigate to="/" />} />
             <Route path="/aboutApp" element={<AboutApp />} />
             <Route path="/appHistory" element={<AppHistory />} />
             <Route path="/error" element={<ErrorPage />} />

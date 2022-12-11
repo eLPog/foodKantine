@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import {
   act, fireEvent, render, waitFor,
 } from '@testing-library/react';
+import { Simulate } from 'react-dom/test-utils';
 import { UserPage } from './UserPage';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 
@@ -86,19 +87,22 @@ describe('User Page component on test account', () => {
     expect(info.tagName.toLowerCase()).toBe('p');
     expect(info.parentElement).toHaveClass('testAccountError');
   });
+  /* @TODO tests in this component are not finished */
   test('should call reset password function after click on button', async () => {
-    // @ts-ignore
-    jest.spyOn(global, 'fetch').mockImplementationOnce(() => Promise.resolve({
-      json: () => Promise.resolve([]),
-    }));
+    const { queryByRole, queryByText } = render(
+      <BrowserRouter>
+        <isAuthenticatedContext.Provider value={mockContext}>
+          <UserPage />
+        </isAuthenticatedContext.Provider>
+      </BrowserRouter>,
+    );
+    const button = queryByRole('button', { name: 'Change password' });
     act(() => {
-      render(
-        <BrowserRouter>
-          <isAuthenticatedContext.Provider value={mockContext}>
-            <UserPage />
-          </isAuthenticatedContext.Provider>
-        </BrowserRouter>,
-      );
+      Simulate.click(button);
+    });
+    await waitFor(() => {
+      const text = queryByText('We will send You email with a link to set the new password.');
+      console.log(text);
     });
   });
 });

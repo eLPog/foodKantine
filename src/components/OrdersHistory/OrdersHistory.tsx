@@ -1,7 +1,7 @@
 import React, {
   useCallback, useEffect, useState,
 } from 'react';
-import './UserHistory.css';
+import './OrdersHistory.css';
 import { useNavigate } from 'react-router-dom';
 import { v4 } from 'uuid';
 import { Loading } from '../Loading/Loading';
@@ -11,7 +11,7 @@ import { OrderSummaryModal } from '../elements/OrderSummaryModal/OrderSummaryMod
 import { useOrdersHistory } from '../../hooks/useOrdersHistory';
 import { orderFromFetchInterface, orderObjectInterface } from '../../interfaces/orderObjectInterface';
 
-export function UserHistory() {
+export function OrdersHistory() {
   const [howManyResultsShow, setHowManyResultsShow] = useState(5);
   const {
     lastOrder, totalValue, isLoading, allUserOrders,

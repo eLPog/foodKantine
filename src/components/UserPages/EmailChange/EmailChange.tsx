@@ -13,10 +13,11 @@ export function EmailChange() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isTestAccountChanged, setIsTestAccountChanged] = useState<boolean>(false);
   const { userLoginHandler, userState } = useContext(isAuthenticatedContext);
+  const [errorInfo, setErrorInfo] = useState<string>('');
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (email.trim().length > 1 && email.includes('@')) {
+    if (email.trim().length > 4 && email.includes('@') && email.includes('.') && email.charAt(email.length - 1) !== '@') {
       setIsButtonActive(true);
     } else {
       setIsButtonActive(false);
@@ -46,24 +47,35 @@ export function EmailChange() {
           idToken: userState.idToken,
         }),
       });
+      const res = await data.json();
+      setIsLoading(false);
       if (data.status === 200) {
+        setIsLoading(false);
         setEmailChangedStatus(true);
         setTimeout(() => {
+          userLoginHandler(false);
           navigate('/login');
         }, 5000);
-        setIsLoading(false);
       } else {
+        if (res.error.message === 'EMAIL_EXISTS') {
+          setErrorInfo('Email already exist');
+          setEmail('');
+          return;
+        }
+        if (res.error.message === 'INVALID_ID_TOKEN') {
+          setErrorInfo('Your login session is expired. Please log in again and after that you can change your email again.');
+          setEmail('');
+          return;
+        }
         navigate('/error');
       }
-      userLoginHandler(false);
     } catch (err) {
-      console.log(err);
       navigate('/error');
     }
   };
   const emailSuccessfulChanged = (
     <>
-      <p>Successful email change</p>
+      <span className="--success">Successful email change</span>
       <p>
         Your new email:
         {email}
@@ -83,6 +95,9 @@ export function EmailChange() {
           <Link to="/user">
             <button className="btn-primary">Cancel</button>
           </Link>
+          <span className="emailChange__container--error">
+            {errorInfo}
+          </span>
         </>
       )}
       {isTestAccountChanged && (

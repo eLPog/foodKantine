@@ -47,5 +47,6 @@
         "no-use-before-define": "off",
         "react/function-component-definition": "off",
         "react/require-default-props": "off",
+        "default-case":"off"
     }
   }
