@@ -47,15 +47,15 @@ export function EmailChange() {
         }),
       });
       if (data.status === 200) {
+        setIsLoading(false);
         setEmailChangedStatus(true);
         setTimeout(() => {
+          userLoginHandler(false);
           navigate('/login');
         }, 5000);
-        setIsLoading(false);
       } else {
         navigate('/error');
       }
-      userLoginHandler(false);
     } catch (err) {
       console.log(err);
       navigate('/error');
