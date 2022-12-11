@@ -16,7 +16,7 @@ export function EmailChange() {
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (email.trim().length > 1 && email.includes('@')) {
+    if (email.trim().length > 4 && email.includes('@') && email.includes('.') && email.charAt(email.length - 1) !== '@') {
       setIsButtonActive(true);
     } else {
       setIsButtonActive(false);
