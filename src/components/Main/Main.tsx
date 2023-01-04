@@ -29,6 +29,7 @@ import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
 import { mealInterface } from '../../interfaces/mealInterface';
 import { orderCartInterface } from '../../interfaces/orderObjectInterface';
 import { userDataInterface } from '../../interfaces/userDataInterface';
+import { ChangePageColor } from '../elements/ChangePageColor/ChangePageColor';
 
 export function Main() {
   const { allElements, isLoading } = useGetAllMeals();
@@ -47,6 +48,7 @@ export function Main() {
     showLogoutModal: false,
     addProductToCart: false,
   });
+  const [colorStyle, setColorStyle] = useState<boolean>(false);
   const navigate = useNavigate();
   useEffect(() => {
     setElements(allElements);
@@ -190,10 +192,14 @@ export function Main() {
     }
     setElements(filteredElements);
   };
-  return (
-    <>
-      <GoToTopButton />
+  function changePageColors():void {
+    colorStyle ? setColorStyle(false) : setColorStyle(true);
+  }
 
+  return (
+    <section className={`mainSection__container ${colorStyle ? 'secondColorStyle' : ''}`}>
+      <GoToTopButton />
+      <ChangePageColor changeColorHandler={changePageColors} />
       {showNotFinishedOrderModal && (
         <>
           <Backdrop />
@@ -241,6 +247,6 @@ export function Main() {
           </Routes>
         )}
       </isAuthenticatedContext.Provider>
-    </>
+    </section>
   );
 }

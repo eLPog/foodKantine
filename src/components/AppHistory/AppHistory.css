@@ -23,7 +23,7 @@
 }
 .timelineComponent--bg {
     padding:1rem;
-    background-color:var(--third-color);
+    background-color:var(--second-bgcolor);
     box-shadow: 0 1px 15px 8px var(--first-color);
     border-radius: 1rem;
 }

@@ -32,6 +32,11 @@ export function AppHistory() {
           version="version 1.0.3"
           content="User can now repeat the order from the orders history list"
         />
+        <HistoryElementRight
+          date="January 2023"
+          version="version 1.0.4"
+          content="Added the ability to change colors on the page. To change the color palette, use the button on the left side of the screen."
+        />
       </div>
       <div className="button__bottom">
         <Link to="/">

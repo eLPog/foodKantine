@@ -6,7 +6,6 @@
     background-position: center;
     height: 9em;
     margin-bottom: 1rem;
-    margin-top:1rem;
     border-radius: 0 0 40px 40px;
     filter: grayscale(10%) sepia(10%);
 }
@@ -15,7 +14,7 @@
     padding: 0.1rem;
 }
 .header__container--searchBtn {
-    background-color: white;
+    background-color: var(--third-bgcolor);
     opacity: 0.8;
 }
 .header__container--searchBtn:hover {
