@@ -30,6 +30,7 @@ import { mealInterface } from '../../interfaces/mealInterface';
 import { orderCartInterface } from '../../interfaces/orderObjectInterface';
 import { userDataInterface } from '../../interfaces/userDataInterface';
 import { ChangePageColor } from '../elements/ChangePageColor/ChangePageColor';
+import { Slider } from '../Slider/Slider';
 
 export function Main() {
   const { allElements, isLoading } = useGetAllMeals();
@@ -243,6 +244,7 @@ export function Main() {
             <Route path="/aboutApp" element={<AboutApp />} />
             <Route path="/appHistory" element={<AppHistory />} />
             <Route path="/error" element={<ErrorPage />} />
+            <Route path="/a" element={<Slider />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         )}
