@@ -1,14 +1,12 @@
 import './Slider.css';
 import { useState } from 'react';
 
-const photo1 = 'https://www.moviestudio.networkmanager.pl/img/Foods/dinner1.jpg';
-const photo2 = 'https://www.moviestudio.networkmanager.pl/img/Foods/dinner2.jpg';
-const photo3 = 'https://www.moviestudio.networkmanager.pl/img/Foods/dinner3.jpg';
-const photo4 = 'https://www.moviestudio.networkmanager.pl/img/Foods/dinner4.jpg';
-const photo5 = 'https://www.moviestudio.networkmanager.pl/img/Foods/dinner5.jpg';
-const photos = [photo1, photo2, photo3, photo4, photo5];
-export function Slider() {
-  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+interface sliderPorps {
+  photos:string[]
+}
+export function Slider(props:sliderPorps) {
+  const { photos } = props;
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState<number>(0);
   function movePhotoRight() {
     setCurrentPhotoIndex((prevState) => prevState + 1);
     if (currentPhotoIndex === photos.length - 1) {
@@ -31,7 +29,7 @@ export function Slider() {
         <button className="slider__btn btn--right" onClick={movePhotoRight}><span>&gt;</span></button>
       </div>
       <div className="slider__container__miniatures">
-        {photos.map((el, i) => {
+        {photos.map((el:string, i:number) => {
           let activePhoto = false;
           if (i === currentPhotoIndex) {
             activePhoto = true;
