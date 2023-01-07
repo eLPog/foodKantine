@@ -40,11 +40,11 @@ font-size: 15px;
     flex-direction: column;
 }
 .nav__container__menu__list__li:hover, .nav__container__menu__list__li__shopCard:hover {
-    background: rgb(114,144,242);
-    background: linear-gradient(90deg, rgba(114,144,242,1) 0%, rgba(25,81,138,0) 100%);
-    color:white;
+    background: rgb(114,144,242,0.3);
+    color:var(--first-bgcolor);
     border-radius: 10px;
 }
+
 .toggle--button {
     position: absolute;
     top:10px;
