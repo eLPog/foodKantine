@@ -6,5 +6,5 @@
     height: 100vh;
     z-index: 10000;
     background-color: rgba(0,0,0,0.75);
-    animation: brightElementUp 1000ms ease-in-out;
+    animation: brightElementUp 700ms ease-in-out;
 }

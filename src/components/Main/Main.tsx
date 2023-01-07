@@ -30,6 +30,7 @@ import { mealInterface } from '../../interfaces/mealInterface';
 import { orderCartInterface } from '../../interfaces/orderObjectInterface';
 import { userDataInterface } from '../../interfaces/userDataInterface';
 import { ChangePageColor } from '../elements/ChangePageColor/ChangePageColor';
+import { CodeExamples } from '../CodeExamples/Code';
 
 export function Main() {
   const { allElements, isLoading } = useGetAllMeals();
@@ -90,7 +91,6 @@ export function Main() {
     setNotFinishedOrderModal(false);
   }, []);
   const setOldOrder = useCallback(() => {
-    // @ts-ignore
     const oldOrder = JSON.parse(localStorage.getItem('oldOrder'));
     if (oldOrder) {
       setOrderCart([...oldOrder]);
@@ -243,6 +243,7 @@ export function Main() {
             <Route path="/aboutApp" element={<AboutApp />} />
             <Route path="/appHistory" element={<AppHistory />} />
             <Route path="/error" element={<ErrorPage />} />
+            <Route path="/code" element={<CodeExamples />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         )}
