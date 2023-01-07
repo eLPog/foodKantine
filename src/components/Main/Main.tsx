@@ -91,7 +91,6 @@ export function Main() {
     setNotFinishedOrderModal(false);
   }, []);
   const setOldOrder = useCallback(() => {
-    // @ts-ignore
     const oldOrder = JSON.parse(localStorage.getItem('oldOrder'));
     if (oldOrder) {
       setOrderCart([...oldOrder]);

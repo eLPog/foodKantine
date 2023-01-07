@@ -5,11 +5,12 @@
     transform: translate(-50%, -50%);
     z-index: 10001;
     overflow: hidden;
-    width:80%;
-    height: 80%;
+    width:auto;
+    height: auto;
     border:2px solid var(--second-bgcolor);
     box-shadow: 10px 10px 10px rgba(0,0,0,0.8);
     animation: brightElementUp 600ms ease-in-out;
+
 }
 .photoModal__container__main {
     width: 100%;
@@ -23,7 +24,7 @@
 .photoModal__container__main__img {
     width: 100%;
     height: 100%;
-    object-fit:fill;
+    object-fit:scale-down;
 }
 .photoModal__container__main__button {
     top:2em;
@@ -32,5 +33,29 @@
     background-color: rgba(0,0,0,0.4);
     color:#ffffff;
     border:none;
+    padding: 0.2em 1em;
+}
+.photoModal__container__main__button:hover {
+    transition: scale 500ms;
+    transform: scale(1.1);
+}
+.photoModal__container__main__description {
+    background-color: rgba(0,0,0,0.4);
+    color:#ffffff;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    min-height: 5em;
+}
+.photoModal__container__main__description:hover {
+    opacity: 0.1;
+}
+@media only screen and (max-width: 576px){
+    .photoModal__container{
+     width: 100%;
+        height: 100%;
+        background-color: #000000;
 
+    }
 }

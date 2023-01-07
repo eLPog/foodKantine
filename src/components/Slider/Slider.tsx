@@ -2,9 +2,10 @@ import './Slider.css';
 import { useState } from 'react';
 import { PhotoModal } from '../Modals/PhotoModal/PhotoModal';
 import { Backdrop } from '../Modals/Backdrop/Backdrop';
+import { photoObjectInterface } from '../CodeExamples/Code';
 
 interface sliderProps {
-  photos:string[]
+  photos:photoObjectInterface[],
 }
 export function Slider(props:sliderProps) {
   const { photos } = props;
@@ -43,19 +44,22 @@ export function Slider(props:sliderProps) {
       {showBigPhoto ? (
         <>
           <Backdrop />
-          <PhotoModal photoPath={photos[currentPhotoIndex]} closeModal={showBigPhotoHandler} />
+          <PhotoModal photoPath={photos[currentPhotoIndex].path} description={photos[currentPhotoIndex].description} closeModal={showBigPhotoHandler} />
         </>
       ) : (
         <div className="container slider__container">
           <div className="slider">
             <div className="sliderBox" role="button" tabIndex={0} onKeyDown={mainPhotoKeyDownHandler} onClick={showBigPhotoHandler}>
-              <img src={photos[currentPhotoIndex]} alt="code" className="slider-img" />
+              <img src={photos[currentPhotoIndex].path} alt="code" className="slider-img" />
+              <section className="slider__description">
+                {photos[currentPhotoIndex].shortDescription}
+              </section>
             </div>
             <button className="slider__btn btn--left" onClick={movePhotoLeft}><span>&lt;</span></button>
             <button className="slider__btn btn--right" onClick={movePhotoRight}><span>&gt;</span></button>
           </div>
           <div className="slider__container__miniatures">
-            {photos.map((el:string, i:number) => {
+            {photos.map((el:photoObjectInterface, i:number) => {
               let activePhoto = false;
               if (i === currentPhotoIndex) {
                 activePhoto = true;
@@ -63,7 +67,7 @@ export function Slider(props:sliderProps) {
               return (
               // eslint-disable-next-line no-restricted-globals
                 <section role="button" className="slider__container__miniatures__photoContainer" tabIndex={0} onKeyDown={() => { smallPhotoKeyDownHandler(event, i); }} onClick={() => selectPhotoFromMiniatures(i)} key={Math.random() * 100}>
-                  <img src={el} alt="code" className={`slider__container__miniatures__photo ${activePhoto ? 'activePhoto' : ''}`} />
+                  <img src={el.path} alt="code" className={`slider__container__miniatures__photo ${activePhoto ? 'activePhoto' : ''}`} />
                 </section>
               );
             })}
