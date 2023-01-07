@@ -97,7 +97,7 @@ body {
 }
 .active{
     animation:rotateElement 500ms ease-in ;
-    transform: scale(1.3);
+    transform: scale(1.25) translateY(-0.3em);
 }
 span[class$="--element"]{
     font-family: Alegreya;
@@ -150,11 +150,18 @@ button[class$="--confirmOK"]:hover {
     }
 }
 @keyframes rotateElement {
-    from {
-        transform: rotate(0) scale(1);
+    0% {
+        transform: skew(0) scale(1);
     }
-    to {
-        transform: rotate(360deg) scale(1.3);
+    25% {
+        transform: skew(10deg) scale(1.2);
+    }
+    50% {
+        transform: skew(0) scale(1.2);
+    }
+    75%{
+        transform: skew(-10deg) scale(1.2);
+
     }
 }
 @media only screen and (max-width: 576px){
