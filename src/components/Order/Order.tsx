@@ -5,7 +5,7 @@ import './Order.css';
 import { getActuallyDate } from '../../utils/getActuallyDate';
 import { Loading } from '../Loading/Loading';
 import { sendNewOrder } from '../../utils/sendOrder';
-import { OrderSummaryModal } from '../elements/OrderSummaryModal/OrderSummaryModal';
+import { OrderSummaryModal } from '../Modals/OrderSummaryModal/OrderSummaryModal';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
 import { orderCartInterface, orderObjectInterface } from '../../interfaces/orderObjectInterface';
 import { routes } from '../../routes/routes';

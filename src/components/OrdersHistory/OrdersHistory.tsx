@@ -7,7 +7,7 @@ import { v4 } from 'uuid';
 import { Loading } from '../Loading/Loading';
 import { sendNewOrder } from '../../utils/sendOrder';
 import { getActuallyDate } from '../../utils/getActuallyDate';
-import { OrderSummaryModal } from '../elements/OrderSummaryModal/OrderSummaryModal';
+import { OrderSummaryModal } from '../Modals/OrderSummaryModal/OrderSummaryModal';
 import { useOrdersHistory } from '../../hooks/useOrdersHistory';
 import { orderFromFetchInterface, orderObjectInterface } from '../../interfaces/orderObjectInterface';
 import { routes } from '../../routes/routes';
