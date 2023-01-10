@@ -4,7 +4,7 @@ import React, {
 import { Link, useNavigate } from 'react-router-dom';
 import { firebaseLoginWithEmail, firebasePasswordReset } from '../../../assets/db/firebaseurl';
 import './LoginForm.css';
-import { setButtonActive } from '../../../utils/setButtonActive';
+import { checkIfRegistrationButtonShouldBeActive } from '../../../utils/checkIfRegistrationButtonShouldBeActive';
 import { Loading } from '../../Loading/Loading';
 import { loginTestUserFetch } from '../../../utils/loginTestUserFetch';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
@@ -30,7 +30,7 @@ export function LoginForm() {
     setError('');
   }, [email, password]);
   useEffect(() => {
-    if (setButtonActive(email, password)) {
+    if (checkIfRegistrationButtonShouldBeActive(email, password)) {
       setBtnActive(true);
     } else {
       setBtnActive(false);

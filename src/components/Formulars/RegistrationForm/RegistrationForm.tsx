@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { firebaseAddUser } from '../../../assets/db/firebaseurl';
-import { setButtonActive } from '../../../utils/setButtonActive';
+import { checkIfRegistrationButtonShouldBeActive } from '../../../utils/checkIfRegistrationButtonShouldBeActive';
 import './RegistrationForm.css';
 import { Loading } from '../../Loading/Loading';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
@@ -32,7 +32,7 @@ export function RegistrationForm() {
     return () => clearTimeout(arePasswordsTheSame);
   }, [password, confirmedPassword]);
   useEffect(() => {
-    if (setButtonActive(email, password) && password === confirmedPassword) {
+    if (checkIfRegistrationButtonShouldBeActive(email, password) && password === confirmedPassword) {
       setBtnActive(true);
     } else {
       setBtnActive(false);
@@ -87,9 +87,10 @@ export function RegistrationForm() {
         </label>
         <input type="password" id="registerPassword1" className="register__container__form__input--password" onChange={passwordHandler} />
         <label htmlFor="registerPassword2">
-          Repeat
+          Confirm password
         </label>
         <input type="password" id="registerPassword2" className="register__container__form__input--password" onChange={confirmedPasswordHandler} />
+        Please note that the password should be at least 6 characters long
         <button className="btn-primary" onClick={registerUserFetch} disabled={!btnActive}>Register</button>
       </form>
       <RegisterProgress email={email} password1={password} password2={confirmedPassword} isButtonActive={btnActive} />

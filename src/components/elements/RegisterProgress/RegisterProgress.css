@@ -5,12 +5,15 @@
     align-items: center;
 }
 .registerProgress__container__section {
+    background-color: #ad3e5c;
     border:2px solid red;
     padding:1px 1em;
     font-family: 'Alegreya';
+    transition: background-color 0.3s;
 }
 .--email {
     border-right: none;
+    border-radius: 45px 0 0 20%;
 }
 .--password1 {
     border-right: none;
@@ -18,12 +21,25 @@
 }
 .--password2 {
     border-left: none;
+    border-radius: 0 20% 45px 0;
 }
 .incorrect {
     border-color: indianred;
-    background-color: #fff544;
+    background-color: #adab47;
 }
 .correct {
     border-color: #0c4128;
-    background-color: #c9ffaf;
+    background-color: #3cad31;
+}
+
+@media only screen and (max-width: 576px){
+    .registerProgress__container {
+    flex-direction: column;
+        align-items: center;
+    }
+    .registerProgress__container__section {
+        border-radius: 5px 5px 0 0;
+        border:none;
+    }
+
 }

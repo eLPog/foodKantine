@@ -1,5 +1,6 @@
 import './RegisterProgress.css';
 import { useEffect, useState } from 'react';
+import { validationEmail } from '../../../utils/validationEmail';
 
 interface propsInterface {
     email:string,
@@ -13,7 +14,7 @@ export function RegisterProgress(props:propsInterface) {
   const [isPass1Valid, setIsPass1Valid] = useState<boolean>(false);
   const [isPass2Valid, setIsPass2Valid] = useState<boolean>(false);
   useEffect(() => {
-    if (props.email.trim().length > 5 && props.email.includes('@') && props.email.includes('.')) {
+    if (validationEmail(props.email)) {
       setIsEmailValid(true);
     } else {
       setIsEmailValid(false);
@@ -25,14 +26,12 @@ export function RegisterProgress(props:propsInterface) {
     } else {
       setIsPass1Valid(false);
     }
-  }, [props.password1]);
-  useEffect(() => {
     if (props.password2.trim().length > 5 && props.password1 === props.password2) {
       setIsPass2Valid(true);
     } else {
       setIsPass2Valid(false);
     }
-  }, [props.password2]);
+  }, [props.password1, props.password2]);
 
   return (
     <div className="container">
