@@ -9,6 +9,7 @@ import { Loading } from '../../Loading/Loading';
 import { loginTestUserFetch } from '../../../utils/loginTestUserFetch';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 import { routes } from '../../../routes/routes';
+import { validationEmail } from '../../../utils/validationEmail';
 
 export function LoginForm() {
   const [email, setEmail] = useState<string>('');
@@ -46,6 +47,10 @@ export function LoginForm() {
   };
   const loginUser = async (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (!validationEmail(email)) {
+      setError('Provide valid email format');
+      return;
+    }
     setIsLoading(true);
     setError('');
     try {
@@ -73,7 +78,7 @@ export function LoginForm() {
   };
 
   const passwordReset = async () => {
-    if (email.trim().length < 5 || !email.includes('@')) {
+    if (!validationEmail(email)) {
       setError('Provide valid email format');
       return;
     }
