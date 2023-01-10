@@ -1,6 +1,7 @@
 import React from 'react';
 import './ErrorPage.css';
 import { NavLink } from 'react-router-dom';
+import { routes } from '../../routes/routes';
 
 export const ErrorPage: React.MemoExoticComponent<() => JSX.Element> = React.memo(() => (
   <div className="container errorPage__container" data-testid="errorPageContainer">
@@ -10,7 +11,7 @@ export const ErrorPage: React.MemoExoticComponent<() => JSX.Element> = React.mem
       <br />
       Please try again.
     </p>
-    <NavLink to="/">
+    <NavLink to={routes.mainPage}>
       <button className="btn-primary">Main Page</button>
     </NavLink>
   </div>

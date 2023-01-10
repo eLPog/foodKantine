@@ -1,5 +1,6 @@
 import './FirstVisitPage.css';
 import { Link } from 'react-router-dom';
+import { routes } from '../../routes/routes';
 
 export function FirstVisitPage(props:{closeModal:()=>void}) {
   return (
@@ -23,7 +24,7 @@ export function FirstVisitPage(props:{closeModal:()=>void}) {
           </p>
         </li>
         <li>
-          <Link to="/aboutApp" onClick={props.closeModal} className="firstVisit__container__list__link">
+          <Link to={routes.aboutApp} onClick={props.closeModal} className="firstVisit__container__list__link">
             Click here for more information about app
           </Link>
         </li>

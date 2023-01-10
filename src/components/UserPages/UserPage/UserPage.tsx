@@ -7,6 +7,7 @@ import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext'
 import { firebaseDeleteAccount, firebasePasswordReset } from '../../../assets/db/firebaseurl';
 import { isTestAccount } from '../../../utils/isTestAccount';
 import { Loading } from '../../Loading/Loading';
+import { routes } from '../../../routes/routes';
 
 export function UserPage() {
   const { userState } = useContext(isAuthenticatedContext);
@@ -45,13 +46,13 @@ export function UserPage() {
       });
       setIsLoading(false);
       if (res.ok) {
-        navigate('/user/passwordReset');
+        navigate(routes.userPasswordReset);
       } else {
-        navigate('/error');
+        navigate(routes.errorPage);
       }
     } catch (err) {
       console.log(err);
-      navigate('/error');
+      navigate(routes.errorPage);
     }
   };
 
@@ -82,13 +83,13 @@ export function UserPage() {
       setIsLoading(false);
       if (res.ok) {
         localStorage.removeItem('user-data');
-        navigate('/user/delete');
+        navigate(routes.userAccountDelete);
       } else {
-        navigate('/error');
+        navigate(routes.errorPage);
       }
     } catch (err) {
       console.log(err);
-      navigate('/error');
+      navigate(routes.errorPage);
     }
   };
   return (
@@ -105,7 +106,7 @@ export function UserPage() {
         </span>
       </div>
       <div className="userPage__container__actions">
-        <NavLink to="/user/emailChange" className="userPage__container__actions--button">
+        <NavLink to={routes.userEmailChange} className="userPage__container__actions--button">
           Change email
         </NavLink>
         <button className="userPage__container__actions--button" onClick={setNewPassword}>Change password</button>

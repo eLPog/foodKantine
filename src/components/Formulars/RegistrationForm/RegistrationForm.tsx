@@ -6,6 +6,7 @@ import './RegistrationForm.css';
 import { Loading } from '../../Loading/Loading';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 import { RegisterProgress } from '../../elements/RegisterProgress/RegisterProgress';
+import { routes } from '../../../routes/routes';
 
 export function RegistrationForm() {
   const navigate = useNavigate();
@@ -67,10 +68,10 @@ export function RegistrationForm() {
         }
       }
       userLoginHandler(true, { userEmail: res.email, localId: res.localId, idToken: res.idToken });
-      navigate('/user');
+      navigate(routes.user);
     } catch (err) {
       console.log(err);
-      navigate('/error');
+      navigate(routes.errorPage);
     }
   };
   return (

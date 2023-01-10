@@ -43,4 +43,3 @@ export function RegisterProgress(props:propsInterface) {
     </div>
   );
 }
-// @TODO zrobić osobną funkcję walidowania rejestracji - poprawność email, czy hasło ma min 6 znaków
