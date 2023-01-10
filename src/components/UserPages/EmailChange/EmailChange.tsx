@@ -5,6 +5,7 @@ import { firebaseChangeEmail } from '../../../assets/db/firebaseurl';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 import { isTestAccount } from '../../../utils/isTestAccount';
 import { Loading } from '../../Loading/Loading';
+import { routes } from '../../../routes/routes';
 
 export function EmailChange() {
   const [email, setEmail] = useState('');
@@ -31,7 +32,7 @@ export function EmailChange() {
       setIsTestAccountChanged(true);
       setTimeout(() => {
         setIsTestAccountChanged(false);
-        navigate('/user');
+        navigate(routes.user);
       }, 5000);
       return;
     }
@@ -54,7 +55,7 @@ export function EmailChange() {
         setEmailChangedStatus(true);
         setTimeout(() => {
           userLoginHandler(false);
-          navigate('/login');
+          navigate(routes.login);
         }, 5000);
       } else {
         if (res.error.message === 'EMAIL_EXISTS') {
@@ -67,10 +68,10 @@ export function EmailChange() {
           setEmail('');
           return;
         }
-        navigate('/error');
+        navigate(routes.errorPage);
       }
     } catch (err) {
-      navigate('/error');
+      navigate(routes.errorPage);
     }
   };
   const emailSuccessfulChanged = (
@@ -92,7 +93,7 @@ export function EmailChange() {
           </label>
           <input onChange={emailInputHandler} type="email" className="emailChange__container__input" />
           <button className="btn-primary" onClick={setNewEmail} disabled={!isButtonActive}>Save</button>
-          <Link to="/user">
+          <Link to={routes.user}>
             <button className="btn-primary">Cancel</button>
           </Link>
           <span className="emailChange__container--error">

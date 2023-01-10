@@ -1,5 +1,6 @@
 import './AboutApp.css';
 import { Link } from 'react-router-dom';
+import { routes } from '../../routes/routes';
 
 export function AboutApp() {
   return (
@@ -69,7 +70,7 @@ export function AboutApp() {
           </div>
         </div>
       </div>
-      <Link to="/">
+      <Link to={routes.mainPage}>
         <button className="btn-primary">Main Page</button>
       </Link>
     </section>

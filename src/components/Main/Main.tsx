@@ -31,6 +31,7 @@ import { orderCartInterface } from '../../interfaces/orderObjectInterface';
 import { userDataInterface } from '../../interfaces/userDataInterface';
 import { ChangePageColor } from '../elements/ChangePageColor/ChangePageColor';
 import { CodeExamples } from '../CodeExamples/Code';
+import { routes } from '../../routes/routes';
 
 export function Main() {
   const { allElements, isLoading } = useGetAllMeals();
@@ -79,7 +80,7 @@ export function Main() {
       setOrderCart([]);
       localStorage.removeItem('user-data');
       localStorage.setItem('oldOrder', JSON.stringify([]));
-      navigate('/');
+      navigate(routes.mainPage);
     } else {
       setIsUserAuthenticated(true);
       setUserState({ userEmail: userData.userEmail, idToken: userData.idToken, localId: userData.localId });
@@ -230,20 +231,21 @@ export function Main() {
           </section>
         ) : (
           <Routes>
-            <Route path="/" element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} mealsFilter={mealsFilter} />} />
-            <Route path="/products/:dataID" element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/signIn" element={<RegistrationForm />} />
-            <Route path="/order" element={isUserAuthenticated ? <Order orderCart={orderCart} removeMeal={removeMealFromOrder} clearOrder={clearOrder} /> : <Navigate to="/" />} />
-            <Route path="/user" element={isUserAuthenticated ? <UserPage /> : <Navigate to="/" />} />
-            <Route path="/user/passwordReset" element={<PasswordChange />} />
-            <Route path="/user/emailChange" element={<EmailChange />} />
-            <Route path="/user/delete" element={isUserAuthenticated ? <DeleteAccountSummary /> : <Navigate to="/" />} />
-            <Route path="/history" element={isUserAuthenticated ? <OrdersHistory /> : <Navigate to="/" />} />
-            <Route path="/aboutApp" element={<AboutApp />} />
-            <Route path="/appHistory" element={<AppHistory />} />
-            <Route path="/error" element={<ErrorPage />} />
-            <Route path="/code" element={<CodeExamples />} />
+
+            <Route path={routes.mainPage} element={<AllFoodList elements={elements} searchFoodByCategory={searchFoodByCategory} addMealToOrder={addMealToOrder} mealsFilter={mealsFilter} />} />
+            <Route path={`${routes.products}:dataID`} element={<DetailsFoodElement db={elements} addMealToOrder={addMealToOrder} />} />
+            <Route path={routes.login} element={<LoginForm />} />
+            <Route path={routes.signIn} element={<RegistrationForm />} />
+            <Route path={routes.order} element={isUserAuthenticated ? <Order orderCart={orderCart} removeMeal={removeMealFromOrder} clearOrder={clearOrder} /> : <Navigate to={routes.mainPage} />} />
+            <Route path={routes.user} element={isUserAuthenticated ? <UserPage /> : <Navigate to={routes.mainPage} />} />
+            <Route path={routes.userPasswordReset} element={<PasswordChange />} />
+            <Route path={routes.userEmailChange} element={<EmailChange />} />
+            <Route path={routes.userAccountDelete} element={isUserAuthenticated ? <DeleteAccountSummary /> : <Navigate to={routes.mainPage} />} />
+            <Route path={routes.ordersHistory} element={isUserAuthenticated ? <OrdersHistory /> : <Navigate to={routes.mainPage} />} />
+            <Route path={routes.aboutApp} element={<AboutApp />} />
+            <Route path={routes.appHistory} element={<AppHistory />} />
+            <Route path={routes.errorPage} element={<ErrorPage />} />
+            <Route path={routes.codesExamples} element={<CodeExamples />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         )}

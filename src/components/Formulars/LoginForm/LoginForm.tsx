@@ -8,6 +8,7 @@ import { checkIfRegistrationButtonShouldBeActive } from '../../../utils/checkIfR
 import { Loading } from '../../Loading/Loading';
 import { loginTestUserFetch } from '../../../utils/loginTestUserFetch';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
+import { routes } from '../../../routes/routes';
 
 export function LoginForm() {
   const [email, setEmail] = useState<string>('');
@@ -63,11 +64,11 @@ export function LoginForm() {
         return;
       }
       userLoginHandler(true, { userEmail: res.email, localId: res.localId, idToken: res.idToken });
-      navigate('/user');
+      navigate(routes.user);
     } catch (err) {
       setIsLoading(false);
       console.log(err);
-      navigate('/error');
+      navigate(routes.errorPage);
     }
   };
 
@@ -90,10 +91,10 @@ export function LoginForm() {
         }),
       });
       setIsLoading(false);
-      navigate('/user/passwordReset');
+      navigate(routes.userPasswordReset);
     } catch (err) {
       console.log(err);
-      navigate('/error');
+      navigate(routes.errorPage);
     }
   };
   const loginOnTestAccount = useCallback(() => {
@@ -102,10 +103,10 @@ export function LoginForm() {
       try {
         const res = await loginTestUserFetch();
         userLoginHandler(true, { userEmail: res.email, localId: res.localId, idToken: res.idToken });
-        navigate('/user');
+        navigate(routes.user);
       } catch (err) {
         console.log(err);
-        navigate('/error');
+        navigate(routes.errorPage);
       } finally {
         setIsLoading(false);
       }

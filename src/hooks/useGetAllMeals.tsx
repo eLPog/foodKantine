@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getProducts } from '../utils/fetchMeals';
 import { mealInterface } from '../interfaces/mealInterface';
+import { routes } from '../routes/routes';
 
 interface stateObject {
   isLoading:boolean,
@@ -18,7 +19,7 @@ export function useGetAllMeals() {
       } catch (err) {
         console.log(err);
         setAllMeals({ isLoading: false, allElements: [] });
-        navigate('/error');
+        navigate(routes.errorPage);
       }
     })();
   }, [setAllMeals]);

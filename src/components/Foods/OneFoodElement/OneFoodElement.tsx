@@ -2,6 +2,7 @@ import './OneFoodElement.css';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
+import { routes } from '../../../routes/routes';
 
 interface propsInterface {
     photo:string,
@@ -24,7 +25,8 @@ export function OneFoodElement(props :propsInterface) {
           {props.name}
         </h2>
         <section className="oneFoodElement__container__card__description--actions">
-          <Link to={`/products/${props.dataID}`}>
+          {/* <Link to={`/products/${props.dataID}`}> */}
+          <Link to={routes.products.concat(props.dataID)}>
             <button className="btn-primary">
               Details
             </button>
@@ -34,7 +36,7 @@ export function OneFoodElement(props :propsInterface) {
               Add
             </button>
           ) : (
-            <Link to="/login">
+            <Link to={routes.login}>
               <button className="btn-primary">
                 Add
               </button>
@@ -44,7 +46,7 @@ export function OneFoodElement(props :propsInterface) {
         </section>
 
       </div>
-      <Link to={`/products/${props.dataID}`}>
+      <Link to={routes.products.concat(props.dataID)}>
         <div className="oneFoodElement__container__card__photo">
           <img
             src={props.photo}

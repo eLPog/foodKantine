@@ -8,6 +8,7 @@ import { sendNewOrder } from '../../utils/sendOrder';
 import { OrderSummaryModal } from '../elements/OrderSummaryModal/OrderSummaryModal';
 import { isAuthenticatedContext } from '../../context/isAuthenticatedContext';
 import { orderCartInterface, orderObjectInterface } from '../../interfaces/orderObjectInterface';
+import { routes } from '../../routes/routes';
 
 interface propsInterface {
   orderCart:orderCartInterface[],
@@ -48,7 +49,7 @@ export function Order(props:propsInterface) {
       }, 3000);
     } catch (err) {
       console.log(err);
-      navigate('/error');
+      navigate(routes.errorPage);
     }
   }
   return (
@@ -82,7 +83,7 @@ export function Order(props:propsInterface) {
                 {props.orderCart.length < 1 ? (
                   <>
                     <span className="order__container__summary--element">List is empty</span>
-                    <NavLink to="/"><button className="btn-primary">Meals</button></NavLink>
+                    <NavLink to={routes.mainPage}><button className="btn-primary">Meals</button></NavLink>
                   </>
                 ) : (
                   <>
@@ -91,7 +92,7 @@ export function Order(props:propsInterface) {
                     $
                     <br />
                     <button className="btn-primary --confirmOK" onClick={sendOrder} data-testid="buyButtonTest">Buy</button>
-                    <NavLink to="/">
+                    <NavLink to={routes.mainPage}>
                       <button className="btn-primary">Add more</button>
                     </NavLink>
 

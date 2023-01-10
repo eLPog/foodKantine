@@ -35,7 +35,6 @@ export function Header(props:{searchDish:(value:string)=>void}) {
           onClick={searchHandler}
           className="btn-primary header__container--searchBtn"
         >
-          {' '}
           Search
         </button>
       </div>

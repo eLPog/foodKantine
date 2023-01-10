@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { firebaseURL } from '../assets/db/firebaseurl';
 import { isAuthenticatedContext } from '../context/isAuthenticatedContext';
 import { orderFromFetchInterface, orderObjectInterface } from '../interfaces/orderObjectInterface';
+import { routes } from '../routes/routes';
 
 interface stateObject {
   allUserOrders:[] | orderFromFetchInterface[],
@@ -34,7 +35,7 @@ export function useOrdersHistory() {
         });
       } catch (err) {
         console.log(err);
-        navigate('/error');
+        navigate(routes.errorPage);
       }
     }());
   }, [setOrdersHistory, userState]);

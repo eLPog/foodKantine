@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import './DetailsFoodElement.css';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
 import { mealInterface } from '../../../interfaces/mealInterface';
+import { routes } from '../../../routes/routes';
 
 interface propsInterface {
     db:mealInterface[],
@@ -67,7 +68,7 @@ export function DetailsFoodElement(props:propsInterface) {
           Add
         </button>
       ) : (
-        <Link to="/login">
+        <Link to={routes.login}>
           <button className="btn-primary">
             Add
           </button>

@@ -1,12 +1,13 @@
 import './NotFoundPage.css';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { routes } from '../../routes/routes';
 
 export function NotFoundPage() {
   const navigate = useNavigate();
   useEffect(() => {
     const navigateDelay = setTimeout(() => {
-      navigate('/');
+      navigate(routes.mainPage);
     }, 5000);
     return () => {
       clearTimeout(navigateDelay);

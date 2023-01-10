@@ -10,6 +10,7 @@ import { getActuallyDate } from '../../utils/getActuallyDate';
 import { OrderSummaryModal } from '../elements/OrderSummaryModal/OrderSummaryModal';
 import { useOrdersHistory } from '../../hooks/useOrdersHistory';
 import { orderFromFetchInterface, orderObjectInterface } from '../../interfaces/orderObjectInterface';
+import { routes } from '../../routes/routes';
 
 export function OrdersHistory() {
   const [howManyResultsShow, setHowManyResultsShow] = useState(5);
@@ -27,7 +28,7 @@ export function OrdersHistory() {
       setShowInfoAfterRepeatedOrder(true);
       setTimeout(() => {
         setShowInfoAfterRepeatedOrder(false);
-        navigate('/');
+        navigate(routes.mainPage);
       }, 2000);
     } catch (err) {
       console.log(err);

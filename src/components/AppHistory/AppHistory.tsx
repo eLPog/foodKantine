@@ -2,6 +2,7 @@ import './AppHistory.css';
 import { Link } from 'react-router-dom';
 import { HistoryElementRight } from './HistoryElementRight';
 import { HistoryElementLeft } from './HistoryElementLeft';
+import { routes } from '../../routes/routes';
 
 export interface appHistory {
     version:string,
@@ -39,7 +40,7 @@ export function AppHistory() {
         />
       </div>
       <div className="button__bottom">
-        <Link to="/">
+        <Link to={routes.mainPage}>
           <button className="btn-primary">Home</button>
         </Link>
       </div>
