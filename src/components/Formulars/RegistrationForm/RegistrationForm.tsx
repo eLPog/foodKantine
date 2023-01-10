@@ -5,6 +5,7 @@ import { setButtonActive } from '../../../utils/setButtonActive';
 import './RegistrationForm.css';
 import { Loading } from '../../Loading/Loading';
 import { isAuthenticatedContext } from '../../../context/isAuthenticatedContext';
+import { RegisterProgress } from '../../elements/RegisterProgress/RegisterProgress';
 
 export function RegistrationForm() {
   const navigate = useNavigate();
@@ -91,6 +92,7 @@ export function RegistrationForm() {
         <input type="password" id="registerPassword2" className="register__container__form__input--password" onChange={confirmedPasswordHandler} />
         <button className="btn-primary" onClick={registerUserFetch} disabled={!btnActive}>Register</button>
       </form>
+      <RegisterProgress email={email} password1={password} password2={confirmedPassword} isButtonActive={btnActive} />
       {isLoading && <Loading />}
       {error && <span className="container login__container__form--error">{error}</span>}
       <span className="--information">
